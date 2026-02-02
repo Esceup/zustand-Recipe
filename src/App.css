@@ -48,6 +48,8 @@
   max-width: 1200px;
   width: 90%;
   margin: 0 auto;
+  padding: 35px;
+  padding-top: 100px;
   background-color: white;
 }
 
@@ -69,13 +71,22 @@
 }
 .descItem {
   font-weight: bold;
+  text-align: left;
+}
+.flexBlock {
+  display: flex;
+  margin-bottom: 15px;
 }
 .labelModal {
-  display: block;
+  text-wrap: nowrap;
+  margin-right: 10px;
 }
 .inputModal {
+  padding: 5px;
   width: 100%;
-  display: block;
+}
+.inputModal.first {
+  margin-right: 10px;
 }
 .backModal {
   display: none;
@@ -92,3 +103,38 @@
   display: block;
 }
 
+.ingredientsList {
+  list-style-type: none;
+  font-size: 15px;
+}
+.ingredientsList span {
+  font-weight: 600;
+}
+
+.btnEdit {
+  margin-right: 15px;
+}
+.btn {
+  background-color: #606060;
+  color: white;
+}
+
+.searchInput {
+  margin-right: 15px;
+  padding: 5px;
+}
+.searchLabel {
+  margin-right: 10px;
+}
+.btnClose {
+  position: absolute;
+  right: 35px;
+  top: 35px;
+  padding-bottom: 12px;
+}
+
+@media(max-width: 600px) {
+  .recipeList {
+    grid-template-columns: 1fr;
+  }
+}

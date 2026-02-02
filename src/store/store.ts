@@ -5,13 +5,13 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 
 
 
+
 interface RecipeStore {
     recipesList: IRecipe[],
     createRecipe: (recipeData: Omit<IRecipe, "id">) => void,
     updateRecipe: (id: string, recipeData: Partial<Omit<IRecipe, 'id'>>) => void,
     removeRecipe: (id: string) => void
 }
-
 
 export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
 
@@ -20,14 +20,14 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
             id: generatedId(),
             title: "Голубцы",
             desc: 'Нежные голубцы в капусте, Нежные голубцы в капусте, Нежные голубцы в капусте', 
-            ingredients: [{title: 'Фарш', weight: '500 грамм'}, {title: 'Лук', count: '2 шт.'} ],
+            ingredients: [{id: generatedId(), title: 'Фарш', unit: '500 грамм'}, {id: generatedId(),title: 'Лук', unit: '2 шт.'} ],
             steps: [{id: generatedId(), title: 'К фаршу добавить мелкопорезанный лук, муку и перемешать'},]
         },
         {
             id: generatedId(),
             title: "Котлеты",
-            desc: '123',      
-            ingredients: [{title: 'Фарш', weight: "500 грамм"}],
+            desc: '',      
+            ingredients: [{id: generatedId(), title: 'Фарш', unit: '500 грамм'}],
             steps: [{id: generatedId(), title: 'К фаршу добавить мелкопорезанный лук, муку и перемешать'},]
         },
     ],

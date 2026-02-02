@@ -3,9 +3,9 @@ export interface IStep {
     title: string;
 }
 export interface IIngredient {
+    id: string;
     title: string;
-    count?: string;
-    weight?: string;
+    unit?: string;
 }
 
 export interface IRecipe {
