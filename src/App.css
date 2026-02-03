@@ -5,7 +5,11 @@
   padding: 2rem;
   text-align: center;
 }
-
+.listReset {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -18,7 +22,6 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,32 +30,29 @@
     transform: rotate(360deg);
   }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
-
 .card {
   padding: 2em;
 }
-
 .read-the-docs {
   color: #888;
 }
-
 .modalRecipe {
   position: relative;
   z-index: 11;
-  max-width: 1200px;
+  max-width: 700px;
   width: 90%;
   margin: 0 auto;
-  padding: 35px;
-  padding-top: 100px;
+  padding: 35px 35px 60px 35px;
+  padding-top: 65px;
   background-color: white;
+  top: 50%;
+  transform: translate(0, -50%);
 }
-
 .recipeList {
   padding: 0;
   display: grid;
@@ -60,8 +60,6 @@
   grid-template-columns: repeat(3, 1fr);
   list-style-type: none;
 }
-
-
 .recipeItem {
   padding: 20px;
 
@@ -75,7 +73,26 @@
 }
 .flexBlock {
   display: flex;
+  align-items: baseline;
   margin-bottom: 15px;
+}
+.spanUnit {
+  margin: 0 10px;
+  text-wrap: nowrap;
+}
+.btndelete {
+  padding: 0px 7px 4px 7px;
+  margin-left: 10px;
+}
+.btnUpdate {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 15px;
+}
+.btnadd {
+  padding: 0px 7px 4px 7px;
+  margin-left: 10px;
 }
 .labelModal {
   text-wrap: nowrap;
@@ -98,11 +115,9 @@
   background-color: rgb(0 0 0 / 0.2);
   z-index: 10;
 }
-
 .backModal.active {
   display: block;
 }
-
 .ingredientsList {
   list-style-type: none;
   font-size: 15px;
@@ -110,7 +125,6 @@
 .ingredientsList span {
   font-weight: 600;
 }
-
 .btnEdit {
   margin-right: 15px;
 }
@@ -118,7 +132,6 @@
   background-color: #606060;
   color: white;
 }
-
 .searchInput {
   margin-right: 15px;
   padding: 5px;
@@ -130,11 +143,59 @@
   position: absolute;
   right: 35px;
   top: 35px;
-  padding-bottom: 12px;
+  padding: 0px 7px 4px 7px;
+}
+.ingredientsItem {
+  display: flex;
+  margin-bottom: 10px;
+}
+.ingredientsList {
+  width: 100%;
+}
+.ingredientsList .ingredientsItem input:last-child {
+  width: 45%;
+}
+.ingredientsList .ingredientsItem span {
+  white-space: nowrap;
+  margin: 0 10px;
+}
+.inputNewIngredient {
+  display: none;
+}
+.inputNewIngredient.active {
+  display: block;
+}
+.popularIngredientsList{
+  position: absolute;
+}
+.popularIngredientsToggle {
+
+}
+
+.popularIngredientsList {
+  display: none
+}
+.popularIngredientsList.active {
+  display: block;
 }
 
 @media(max-width: 600px) {
   .recipeList {
     grid-template-columns: 1fr;
+  }
+  .flexBlock {
+    display: block;
+  }
+  .labelModal {
+    margin-right: 0;
+  }
+  .spanUnit {
+    display: none;
+  }
+  .modalRecipe {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    transform: translate(0px, 0px);
   }
 }

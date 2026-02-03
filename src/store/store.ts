@@ -20,7 +20,7 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
             id: generatedId(),
             title: "Голубцы",
             desc: 'Нежные голубцы в капусте, Нежные голубцы в капусте, Нежные голубцы в капусте', 
-            ingredients: [{id: generatedId(), title: 'Фарш', unit: '500 грамм'}, {id: generatedId(),title: 'Лук', unit: '2 шт.'} ],
+            ingredients: [{id: generatedId(), title: 'Фарш', unit: '500 гр'}, {id: generatedId(),title: 'Лук', unit: '2 шт.'} ],
             steps: [{id: generatedId(), title: 'К фаршу добавить мелкопорезанный лук, муку и перемешать'},]
         },
         {

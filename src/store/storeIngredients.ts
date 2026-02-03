@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { generatedId } from "../function/generatedId";
 import type { IIngredient } from "../types/types";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 
 
@@ -10,7 +11,7 @@ interface IngredientsStore {
     searchIngredient: (title: string) => IIngredient[];
 }
 
-export const storeIngredients = create<IngredientsStore>((set, get) => ({
+export const storeIngredients = create<IngredientsStore>()(persist((set, get) => ({
 
     Ingredients: [
         { id: generatedId(), title: 'Картофель'},
@@ -29,10 +30,11 @@ export const storeIngredients = create<IngredientsStore>((set, get) => ({
         { id: generatedId(), title: 'Сметана'},
     ],
 
-    addNewIngredient: (title) => {
+    addNewIngredient: (title, unit) => {
         const newIngredient:IIngredient = {
             id: generatedId(),
-            title: title
+            title: title,
+            unit: unit
         }
         set(state => ({
             Ingredients: [...state.Ingredients, newIngredient]
@@ -45,4 +47,10 @@ export const storeIngredients = create<IngredientsStore>((set, get) => ({
 
         return Ingredients.filter(item => item.title.toLowerCase().includes(lowerTitle))
     }
-}))
+}),
+{
+    name: "ingredient-storage",
+    storage: createJSONStorage(() => localStorage)
+}
+
+))

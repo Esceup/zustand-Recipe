@@ -65,13 +65,14 @@ export const ModalCreateRecipe: FC = () => {
 if(!isModalOpen) return null
 
     return (
-        <div className={`backModal ${isModalOpen ? 'active' : ''}`}>
+        <div>
+            <div onClick={closeModal} className={`backModal ${isModalOpen ? 'active' : ''}`}></div>
             <div className="modalRecipe">
             <button className="btn btnClose" onClick={closeModal}>х</button>
             <div>
                 <form onSubmit={handleSubmit}>
                     <div className="flexBlock">
-                        <label className="labelModal">Название рецепта:</label>
+                        <h3 className="labelModal">Название рецепта:</h3>
                         <input 
                             className="inputModal"
                             name="title" 
@@ -82,8 +83,9 @@ if(!isModalOpen) return null
                         />
                     </div>
                     <div className="flexBlock">
-                        <label className="labelModal">Описание:</label>
+                        <h3 className="labelModal">Описание:</h3>
                         <textarea 
+                            rows="5"
                             className="inputModal"
                             name="desc" 
                             value={desc}
@@ -92,16 +94,18 @@ if(!isModalOpen) return null
                         />
                     </div>
                     <div className="flexBlock">
-                        <label className="labelModal">Продукты:</label>
-                        <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
+                        <h3 className="labelModal">Продукты:</h3>                     
                     </div>
                     
                     
+                    
 
-                    <button type="submit" className="btn">{modalMode === 'edit' ? 'Сохранить изменения' : 'Добавить рецепт'}</button>
+                    <button type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
                 </form>
+                <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
             </div>
         </div>
         </div>
+        
     )
 }
