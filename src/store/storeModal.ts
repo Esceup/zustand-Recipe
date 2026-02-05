@@ -8,7 +8,6 @@ interface ModalStore {
     openCreateModal: () => void;
     openEditModal: (recipe: IRecipe) => void;
     closeModal: () => void;
-
 }
 
 

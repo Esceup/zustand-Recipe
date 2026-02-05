@@ -5,10 +5,35 @@
   padding: 2rem;
   text-align: center;
 }
+.mr-5px {
+  margin-right: 5px;
+}
+.mb-5px {
+  margin-bottom: 5px;
+}
+.mb-15px {
+  margin-bottom: 15px;
+}
+.mr-15px {
+  margin-right: 15px;
+}
+.mt-15px {
+  margin-top: 15px;
+}
+.ml-15 {
+  margin-left: 15px;
+}
+.j-center{
+  justify-content: center;
+}
 .listReset {
   padding: 0;
   margin: 0;
   list-style-type: none;
+}
+.searchInput {
+  max-width: 500px;
+  width: 100%;
 }
 .logo {
   height: 6em;
@@ -42,7 +67,7 @@
   color: #888;
 }
 .modalRecipe {
-  position: relative;
+  position: fixed;
   z-index: 11;
   max-width: 700px;
   width: 90%;
@@ -51,7 +76,11 @@
   padding-top: 65px;
   background-color: white;
   top: 50%;
-  transform: translate(0, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.btnAddRecipeMain {
+  margin-left: 15px;
 }
 .recipeList {
   padding: 0;
@@ -59,6 +88,9 @@
   gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   list-style-type: none;
+}
+.descItem {
+  margin-right: 5px;
 }
 .recipeItem {
   padding: 20px;
@@ -102,6 +134,12 @@
   padding: 5px;
   width: 100%;
 }
+.inputModal.error {
+  border: 1px solid red;
+}
+.popularIngredientsListBlock .inputModal{
+  margin-top: 5px;
+}
 .inputModal.first {
   margin-right: 10px;
 }
@@ -119,6 +157,7 @@
   display: block;
 }
 .ingredientsList {
+  padding: 0;
   list-style-type: none;
   font-size: 15px;
 }
@@ -137,7 +176,7 @@
   padding: 5px;
 }
 .searchLabel {
-  margin-right: 10px;
+  margin: 0 20px;
 }
 .btnClose {
   position: absolute;
@@ -146,6 +185,7 @@
   padding: 0px 7px 4px 7px;
 }
 .ingredientsItem {
+  position: relative;
   display: flex;
   margin-bottom: 10px;
 }
@@ -169,17 +209,116 @@
   position: absolute;
 }
 .popularIngredientsToggle {
-
+  position: absolute;
 }
-
 .popularIngredientsList {
-  display: none
+    display: none;
+    top: 20px;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr;
+    list-style-type: none;
+    padding: 7px;
+    background: #ffffff;
+    z-index: 20;
+    border-radius: 5px;
+    border: 2px solid #c9c9c9;
+  }
+.popularIngredientsListMain {
+  position: relative;
+
+  column-count: 2;
+  column-gap: 20px;
+ 
+  max-width: 700px;
+  top: 0px;
+  gap: 5px;
+  list-style-type: none;
+  padding: 7px;
+  background: #ffffff;
+  z-index: 20;
+  border-radius: 5px;
+  border: 2px solid #c9c9c9;
+  z-index: 20;
+}
+.popularIngredientsListMain li {
+  min-height: 25px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  width: 100%;
+
+  border: 1px solid #cecece;
+  border-radius: 5px;
+}
+.popularIngredientsList li {
+    padding: 0px 6px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    border: 2px solid #cecece;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+.popularIngredientsList li:hover {
+  background-color: #606060;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+.popularIngredientsListMain.active {
+  display: grid;
 }
 .popularIngredientsList.active {
+    display: grid;
+}
+.popularIngredientsListBlock {
+  position: absolute;
+    height: auto;
+    width: 100%;
+    max-width: 700px;
+    display: none;
+    top: 20px;
+    top: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 7px;
+    background: #ffffff;
+    z-index: 20;
+    border-radius: 5px;
+    border: 2px solid #c9c9c9;
+    z-index: 20;
+    padding: 30px
+}
+.popularIngredientsListBlock.active {
   display: block;
 }
+.popularIngredientItem {
+  text-wrap: nowrap;
+  position: relative;
+  padding: 0 15px;
+}
+.deleteIngredient {
+  position: absolute;
+  padding: 0px 6px;
+  right: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.btnIngredientMain {
+  margin-right: 10px;
+}
+.btnPopularIngredients  {
+   background-color: #e5e5e5;
+   padding: 2px 9px 5px 9px;
+   border-radius: 5px;
+   margin-right: 10px;
+   cursor: pointer;
+ }
+ @media(max-width: 992px) {
+   .recipeList {
+     grid-template-columns: 1fr 1fr;
+   }
+}
 
-@media(max-width: 600px) {
+@media(max-width: 768px) {
   .recipeList {
     grid-template-columns: 1fr;
   }
@@ -193,9 +332,26 @@
     display: none;
   }
   .modalRecipe {
-    position: absolute;
+    position: fixed;
     top: 10%;
     left: 5%;
     transform: translate(0px, 0px);
   }
+    .btnIngredientMain {
+      margin-right: 10px;
+    }
+  
+}
+
+@media(max-width: 500px) {
+  .btnAddRecipeMain {
+    margin-left: 0px;
+  }
+    .popularIngredientsListMain {
+      column-count: 1;
+      column-gap: 0px;
+    }
+    .popularIngredientsListMain li {
+      margin-bottom: 5px;
+    }
 }

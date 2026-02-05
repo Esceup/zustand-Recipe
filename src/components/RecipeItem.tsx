@@ -37,6 +37,10 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
             </ul>
             </div>
             <div><h2>Пошаговый рецепт:</h2></div>
+             <ul className="ingredientsList">{recipe.steps?.map((item, index) => (
+                    <li key={item.id}>{index + 1}. <span>{item.title}</span></li>
+                ))}
+            </ul>
             <button onClick={handleUpdate} className="btn btnEdit">Изм.</button>
             <button onClick={handleRemove} className="btn">Удалить</button>
         </li>

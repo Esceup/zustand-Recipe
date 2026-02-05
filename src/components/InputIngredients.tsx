@@ -1,4 +1,4 @@
-import { useState, type FC, type FormEvent} from "react"
+import { useState, type FC } from "react"
 import type { IIngredient } from "../types/types";
 import { storeIngredients } from "../store/storeIngredients";
 import { generatedId } from "../function/generatedId";
@@ -14,12 +14,12 @@ interface InputIngredients {
 
 export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredients}) => {
 
-    // const { Ingredients, addNewIngredient, searchIngredient} = storeIngredients()
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState('')
     const [unitTitle, setUnitTitle] = useState('')
     const { Ingredients } = storeIngredients()
 
+    // const { addNewIngredient } = storeIngredients()
 
     const updateValue = (id: string, field: keyof IIngredient, value: string) => {
         setIngredients(ingredients.map((item) => 
@@ -32,7 +32,9 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
         setIngredients(ingredients.filter(item => item.id !== id))
     }
 
-    const addIngredient = (event: FormEvent) => {
+    const addIngredient = () => {
+        if(title === '') return false
+
         const newIngredients: IIngredient = {
             id: generatedId(),
             title: title.trim(),
@@ -42,12 +44,7 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
         setIngredients([...ingredients, newIngredients])
         setTitle('')
         setUnitTitle('')
-
-        event.stopPropagation()
     }
-    
-   
-
 
 
     return (
@@ -55,9 +52,8 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
             <ul className="listReset ingredientsList">
                 {ingredients?.map((item) => (
                 <li key={item.id} className="ingredientsItem">
-
                     <input 
-                        className="inputModal first" 
+                        className="inputModal first " 
                         type="text" 
                         value={item.title}
                         onChange={(event) => updateValue(item.id, 'title', event.target.value)}
@@ -73,37 +69,41 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                 </li>
             ))}
             </ul>
-            
-                <div className="ingredientsItem">
-                    <div>
-                        <input 
-                                type="text" 
-                                className="inputModal first"
-                                placeholder="Введите ингредиент"
-                                value={title}
-                                onChange={(event) => setTitle(event.target.value)}
-                            
-                            />
-                            <span className="popularIngredientsToggle">?</span>
-                            <ul className={`popularIngredientsList ${show ? 'active': ''}`}>
-                                {Ingredients?.map((item) => 
-                                    <li key={item.id}>{item.title}</li>
-                                )}
-                            </ul>
-                    </div>
-            
-            <span className="spanUnit">ед. изм.</span>
-            <input 
-                type="text" 
-                className="inputModal"
-                placeholder="Введите ед. изм."
-                value={unitTitle}
-                onChange={(event) => setUnitTitle(event.target.value)}
-            />
-            <button className="btn btnadd" onClick={addIngredient}>+</button>
-                </div>
-            
-            
+           
+            <div className="ingredientsItem">
+                <input 
+                        type="text" 
+                        className="inputModal first"
+                        placeholder="Введите ингредиент"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}
+                    
+                />                     
+                <ul id="popularIngredientsList" className={`popularIngredientsList ${show ? 'active': ''}`}>
+                    {Ingredients?.map((item) => 
+                        <li 
+                            key={item.id} 
+                            onClick={() => {
+                                setTitle(item.title)
+                                setUnitTitle(item.unit)
+                                setShow(false)
+
+                            }}
+                        >{item.title}</li>
+                    )}
+                    {/* <li onClick={() => addNewIngredient(title, unitTitle)}>+</li> */}
+                </ul>
+        
+                <span className="btnPopularIngredients" onClick={() => setShow(show ? false : true)}>?</span>
+                <input 
+                    type="text" 
+                    className="inputModal"
+                    placeholder="Введите ед. изм."
+                    value={unitTitle}
+                    onChange={(event) => setUnitTitle(event.target.value)}
+                />
+                <button className="btn btnadd" onClick={addIngredient}>+</button>
+            </div>          
         </>
     )
 }

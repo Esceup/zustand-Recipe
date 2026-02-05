@@ -1,12 +1,13 @@
-import { useEffect, useState, type FC, type FormEvent } from "react"
+import { useEffect, useState, type FormEvent } from "react"
 import { useRecipesStore } from "../store/store";
 import type { IIngredient, IStep } from "../types/types";
 import  { storeModal } from "../store/storeModal";
 import { InputIngredients } from "./InputIngredients";
+import { TextAreaSteps } from "./TextAreaSteps";
 
 
 
-export const ModalCreateRecipe: FC = () => {
+export const ModalCreateOrUpdateRecipe = () => {
 
     const [title, setTitle] = useState('')
     const [desc, setDesc] = useState('')
@@ -51,9 +52,7 @@ export const ModalCreateRecipe: FC = () => {
                 {title, desc, ingredients, steps}
             )
         } else {
-            createRecipe({
-                title, desc, ingredients, steps
-            })
+            createRecipe({title, desc, ingredients, steps})
         }
 
         resetForm()
@@ -83,7 +82,7 @@ if(!isModalOpen) return null
                         />
                     </div>
                     <div className="flexBlock">
-                        <h3 className="labelModal">Описание:</h3>
+                        <h3 className="labelModal mr-5px">Описание:</h3>
                         <textarea 
                             rows="5"
                             className="inputModal"
@@ -103,6 +102,7 @@ if(!isModalOpen) return null
                     <button type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
                 </form>
                 <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
+                <TextAreaSteps  modalMode={modalMode} />
             </div>
         </div>
         </div>

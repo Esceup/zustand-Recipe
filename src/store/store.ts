@@ -30,7 +30,8 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
             ingredients: [{id: generatedId(), title: 'Фарш', unit: '500 грамм'}],
             steps: [{id: generatedId(), title: 'К фаршу добавить мелкопорезанный лук, муку и перемешать'},]
         },
-    ],
+    ],  
+
 
     createRecipe: (recipeData) => {
         const newRecipe: IRecipe = {

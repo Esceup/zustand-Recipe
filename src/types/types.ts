@@ -5,7 +5,7 @@ export interface IStep {
 export interface IIngredient {
     id: string;
     title: string;
-    unit?: string;
+    unit: string;
 }
 
 export interface IRecipe {
