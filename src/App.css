@@ -76,7 +76,7 @@
   max-width: 700px;
   width: 90%;
   margin: 0 auto;
-  padding: 35px 35px 60px 35px;
+  padding: 35px ;
   padding-top: 65px;
   background-color: white;
   top: 50%;
@@ -157,7 +157,7 @@
 }
 .backModal {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -180,6 +180,7 @@
 .ingredientsList li {
   display: flex;
   width: 100%;
+  padding: 10px 0;
   border-bottom: 1px solid #cecece;
 }
 .ingredientsList span {
@@ -228,25 +229,27 @@
 .inputNewIngredient.active {
   display: block;
 }
-.popularIngredientsList{
-  position: absolute;
-}
 .popularIngredientsToggle {
   position: absolute;
 }
 .popularIngredientsList {
-    display: none;
-    left: -20px;
-    top: 20px;
-    gap: 5px;
-    grid-template-columns: 1fr 1fr 1fr;
-    list-style-type: none;
-    padding: 7px;
-    background: #ffffff;
-    z-index: 20;
-    border-radius: 5px;
-    border: 2px solid #c9c9c9;
-  }
+  display: none;
+  width: 100%;
+  position: absolute;
+  max-height: 400px;
+  max-width: 700px;
+  overflow: auto;
+  left: 0;
+  top: 20px;
+  gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  list-style-type: none;
+  padding: 7px;
+  background: #ffffff;
+  z-index: 20;
+  border-radius: 5px;
+  border: 2px solid #c9c9c9;
+}
 .popularIngredientsListMain {
   position: relative;
 
@@ -275,6 +278,7 @@
   border-radius: 5px;
 }
 .popularIngredientsList li {
+    margin-bottom: 5px;
     padding: 0px 6px;
     background-color: #f3f3f3;
     border-radius: 5px;
@@ -291,7 +295,7 @@
   display: grid;
 }
 .popularIngredientsList.active {
-    display: grid;
+    display: block;
 }
 .popularIngredientsListBlock {
   position: absolute;
@@ -359,14 +363,16 @@
   width: 100%;
  }
  .tabsBlock {
-    background-color: #1a365d;
+    background-color: #7fb0fd;
     padding: 10px 0;
     display: flex;
     width: 100%;
     justify-content: center;
     position: fixed;
     left: 0;
-    bottom: 0;
+    
+    top: 0;
+    z-index: 9;
   }
 .btnTabsMain {
   margin-right: 10px;
@@ -403,6 +409,10 @@
   }
     .btnIngredientMain {
       margin-right: 10px;
+    }
+    .tabsBlock {
+      bottom: 0;
+      top: auto;
     }
   
 }
