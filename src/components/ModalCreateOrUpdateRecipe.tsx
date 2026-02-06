@@ -25,6 +25,8 @@ export const ModalCreateOrUpdateRecipe = () => {
         setSteps([])
     }
 
+   
+
     useEffect(() => {
         if(editingRecipe && modalMode === 'edit') {
             setTitle(editingRecipe.title)
@@ -34,6 +36,15 @@ export const ModalCreateOrUpdateRecipe = () => {
         } else {
             resetForm()
         }
+
+        if (isModalOpen) {
+        document.body.classList.add('modalOpen');
+        } else {
+        document.body.classList.remove('modalOpen');
+        }
+    
+        return () => document.body.classList.remove('modal-open');
+
 
     }, [isModalOpen, modalMode, editingRecipe])
 
@@ -99,10 +110,11 @@ if(!isModalOpen) return null
                     
                     
 
-                    <button type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
+                    
                 </form>
                 <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
-                <TextAreaSteps  modalMode={modalMode} />
+                <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />
+                <button onClick={handleSubmit} type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
             </div>
         </div>
         </div>

@@ -15,11 +15,15 @@ export function RecipeList() {
     const [title, setTitle] = useState('')
     const recipesList = useRecipesStore(state => state.recipesList)
     const { openCreateModal } = storeModal()
+    const [tabs, setTabs] = useState('main')
 
     return (
         <>
 
-            <h1>Список рецептов</h1>
+            {tabs === 'main' ? 
+            
+            <>
+                <h1>Список рецептов</h1>
             <div className="flexBlock j-center ">
                 <IngredientsList />
                 <button className="btn btnAddRecipeMain" onClick={openCreateModal}>Добавить рецепт</button>
@@ -37,7 +41,13 @@ export function RecipeList() {
                     <RecipeItem key={recipe.id} recipe={recipe}/>
                 ))}
             </ul>
-            <ModalCreateOrUpdateRecipe />     
+            <ModalCreateOrUpdateRecipe />
+            </>
+            : false} 
+            <div className="tabsBlock">
+                <button onClick={() => setTabs('main')} className="btn btnTabsMain">Все меню</button>
+                <button onClick={() => setTabs('second')} className="btn btnTabsSecond">Меню на неделю</button>
+            </div>
         </>
     )
 }

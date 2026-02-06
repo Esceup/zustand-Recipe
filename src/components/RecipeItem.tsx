@@ -25,14 +25,15 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
     return (
         
         <li className='recipeItem' key={recipe.id}>               
-            <h2>{recipe.title}</h2>
+            <div>
+                <h2>{recipe.title}</h2>
                          
             {recipe.desc ? <div><span className="descItem">Описание:</span><span>{recipe.desc}</span></div> : ''}
             
             <div>
                 <h3 style={{textAlign: 'left'}}>Продукты:</h3> 
                 <ul className="ingredientsList">{recipe.ingredients?.map((item) => (
-                    <li key={item.id}><span>{item.title}</span> - {item.unit}</li>
+                    <li key={item.id}><div className="ingredientTitle">{item.title}</div><div className="ingredientUnit">{item.unit}</div></li>
                 ))}
             </ul>
             </div>
@@ -41,8 +42,11 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
                     <li key={item.id}>{index + 1}. <span>{item.title}</span></li>
                 ))}
             </ul>
-            <button onClick={handleUpdate} className="btn btnEdit">Изм.</button>
-            <button onClick={handleRemove} className="btn">Удалить</button>
+            </div>
+            <div className="btnBlockUpdateDelete">
+                <button onClick={handleUpdate} className="btn btnEdit">Изм.</button>
+                <button onClick={handleRemove} className="btn">Удалить</button>
+            </div>
         </li>
     )
 }

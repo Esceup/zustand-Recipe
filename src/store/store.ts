@@ -7,10 +7,10 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 
 
 interface RecipeStore {
-    recipesList: IRecipe[],
-    createRecipe: (recipeData: Omit<IRecipe, "id">) => void,
-    updateRecipe: (id: string, recipeData: Partial<Omit<IRecipe, 'id'>>) => void,
-    removeRecipe: (id: string) => void
+    recipesList: IRecipe[];
+    createRecipe: (recipeData: Omit<IRecipe, "id">) => void;
+    updateRecipe: (id: string, recipeData: Partial<Omit<IRecipe, 'id'>>) => void;
+    removeRecipe: (id: string) => void;
 }
 
 export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
@@ -58,7 +58,7 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
 
     },
 
-    removeRecipe: (id: string) => {
+    removeRecipe: (id) => {
         const result = confirm("Точно хотите удалить?")
         if(!result) return false
         const { recipesList } = get()
@@ -66,6 +66,7 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
             recipesList: recipesList.filter(recipe => recipe.id !== id)
         })
     },
+
    
 }),
     {

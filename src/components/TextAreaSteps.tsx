@@ -1,39 +1,58 @@
 import { useState, type FC } from "react";
-import { useRecipesStore } from "../store/store"
+import type { IStep } from "../types/types";
+import { generatedId } from "../function/generatedId";
 
 interface StepsProps {
     modalMode: string;
+    steps: IStep[];
+    setSteps: (steps: IStep[]) => void;
 }
 
-export const TextAreaSteps:FC<StepsProps> = ({ modalMode }) => {
+export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
 
     const [title, setTitle] = useState('')
-    const { recipesList } = useRecipesStore()
 
+
+    const addNewSteps = () => {
+        const newSteps: IStep = {
+            id: generatedId(),
+            title: title,
+        }
+
+        setSteps([...steps, newSteps])
+        setTitle('')
+    }
+
+    const handleRemove = (id: string) => {
+        setSteps(steps.filter(step => step.id !== id))
+    }
 
     return (
        <>
         <h3>Пошаговый рецепт</h3>
-        <ul>
+        <ul className="stepsList">
            {modalMode === 'edit' 
-            ?   
-                recipesList.map(item => 
-                    item.steps.map(step => 
-                        <li>
-                            <textarea name={step.title} id={step.id}>{step.title}</textarea>
-                        </li>
-                    )
-                )
-                
-            :  
-                 <li>
+            ?  steps?.map(step => 
+                    <li>
+                        <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
+                        <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
+                    </li>
+                )            
+            : steps?.map(step => 
+                    <li>
+                        <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
+                        <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
+                    </li>
+                )}
+                <li>
                     <textarea
-                        onChange={(event) => setTitle(event.target.value)}
-                        >{title}</textarea>
+                        className="newStepArea"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}>{title}
+                    </textarea>
+                    <button className="btn btnSteps" onClick={addNewSteps}>+</button>
                 </li>
-            
-           
-           }
+                  
         </ul>
        </>  
     )
