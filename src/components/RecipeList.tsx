@@ -1,13 +1,10 @@
-
 import RecipeItem from "./RecipeItem"
-// import { Button } from "./Button"
 import { useRecipesStore } from "../store/store"
-
 import { ModalCreateOrUpdateRecipe } from "./ModalCreateOrUpdateRecipe"
 import { storeModal } from "../store/storeModal"
 import { useState } from "react"
 import { IngredientsList } from "./IngredientsList"
-
+import { MenuInWeek } from "./menuWeek/MenuInWeek"
 
 
 export function RecipeList() {
@@ -43,7 +40,7 @@ export function RecipeList() {
             </ul>
             <ModalCreateOrUpdateRecipe />
             </>
-            : false} 
+            : <MenuInWeek />} 
             <div className="tabsBlock">
                 <button onClick={() => setTabs('main')} className="btn btnTabsMain">Все меню</button>
                 <button onClick={() => setTabs('second')} className="btn btnTabsSecond">Меню на неделю</button>

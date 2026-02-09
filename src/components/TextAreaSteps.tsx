@@ -18,6 +18,7 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
             id: generatedId(),
             title: title,
         }
+        if(!title) return
 
         setSteps([...steps, newSteps])
         setTitle('')
