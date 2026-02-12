@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useRecipesStore } from "../../store/store"
 import { useMenuWeek } from "../../store/storeMenuWeek"
 import { ModalMenuWeek } from "./ModalMenuWeek"
+import RecipeItem from "../RecipeItem"
 
 
 export const MenuInWeek = () => {
@@ -14,6 +15,10 @@ export const MenuInWeek = () => {
 
     const handleNewMenu = () => {
 
+    }
+
+     const handleAddRecipe = () => {
+        
     }
 
     return (
@@ -44,16 +49,20 @@ export const MenuInWeek = () => {
                 {menuWeek?.filter(item => item.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
                     <li key={item.id} onClick={() => setShow(true)}>
                         <h3>{item.title}</h3>
-                        <ul>{item.includesRecipe?.map((incluedItem) => 
-                            <li>{recipesList?.filter((recipeItem) => recipeItem.id == incluedItem).map((liItem) => liItem.title)}</li>
-                            )}
+                        <ul className="recipeList">{item.includesRecipe?.map(includeItem => 
+                                recipesList?.map(recipeItem => 
+                                    recipeItem.id == includeItem ? <RecipeItem key={recipeItem.id} recipe={recipeItem}/>
+                                      : '')
+                                )
+                         }
+                        <button>+</button>
                         </ul>
                         
                     </li>
             )}
 
             </ul>
-            <ModalMenuWeek show={show} setShow={setShow}/>
+            {/* <ModalMenuWeek show={show} setShow={setShow}/> */}
         </>
     )
 }

@@ -16,7 +16,7 @@ export function RecipeList() {
 
     return (
         <>
-
+            <ModalCreateOrUpdateRecipe />
             {tabs === 'main' ? 
             
             <>
@@ -38,7 +38,7 @@ export function RecipeList() {
                     <RecipeItem key={recipe.id} recipe={recipe}/>
                 ))}
             </ul>
-            <ModalCreateOrUpdateRecipe />
+            
             </>
             : <MenuInWeek />} 
             <div className="tabsBlock">
