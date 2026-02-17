@@ -6,7 +6,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 interface MenuWeekStore {
     menuWeek: IMenuWeek[];
     addNewMenu: (title: string) => void;
-    updateMenu: (id: string) => void;
+    updateIncludesRecipe: (recipe: IMenuWeek, newId: string) => void;
     deleteMenu: (id: string) => void;
 }
 
@@ -23,8 +23,11 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
             menuWeek: [...state.menuWeek, newMenu]
         }))
     },
-    updateMenu: () => {
-
+    updateIncludesRecipe: (recipe, newId) => {
+        set(state => ({
+            menuWeek: [...state.menuWeek, 
+                ...recipe: recipe.includesRecipe?.push(newId)]
+        }))
     },
     deleteMenu: (id) => {
         const { menuWeek } = get()

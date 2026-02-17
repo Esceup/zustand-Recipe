@@ -10,16 +10,8 @@ export const MenuInWeek = () => {
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
-    const { menuWeek, addNewMenu } = useMenuWeek()
+    const { menuWeek, addNewMenu, deleteMenu } = useMenuWeek()
     const { recipesList } = useRecipesStore()
-
-    const handleNewMenu = () => {
-
-    }
-
-     const handleAddRecipe = () => {
-        
-    }
 
     return (
 
@@ -47,8 +39,8 @@ export const MenuInWeek = () => {
             {/* <ul>{recipesList?.map((recipe) => <li key={recipe.id}>{recipe.title}</li>)}</ul> */}
             <ul>
                 {menuWeek?.filter(item => item.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
-                    <li key={item.id} onClick={() => setShow(true)}>
-                        <h3>{item.title}</h3>
+                    <li key={item.id} >
+                        <h3><span onClick={() => setShow(true)}>{item.title}</span><button onClick={() =>deleteMenu(item.id)}>x</button></h3>
                         <ul className="recipeList">{item.includesRecipe?.map(includeItem => 
                                 recipesList?.map(recipeItem => 
                                     recipeItem.id == includeItem ? <RecipeItem key={recipeItem.id} recipe={recipeItem}/>
@@ -62,7 +54,7 @@ export const MenuInWeek = () => {
             )}
 
             </ul>
-            {/* <ModalMenuWeek show={show} setShow={setShow}/> */}
+             <ModalMenuWeek show={show} setShow={setShow}/>
         </>
     )
 }
