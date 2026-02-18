@@ -15,7 +15,6 @@ export interface IRecipe {
     ingredients: IIngredient[],
     steps: IStep[];
 }
-
 export interface IMenuWeek {
     id: string;
     title: string;

@@ -3,10 +3,11 @@ import type { IMenuWeek } from "../types/types";
 import { generatedId } from "../function/generatedId";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+
 interface MenuWeekStore {
     menuWeek: IMenuWeek[];
     addNewMenu: (title: string) => void;
-    updateIncludesRecipe: (recipe: IMenuWeek, newId: string) => void;
+    updateIncludesRecipe: (id: string, addRecipeId: string) => void;
     deleteMenu: (id: string) => void;
 }
 
@@ -16,19 +17,30 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
         const newMenu: IMenuWeek = {
             id: generatedId(),
             title: title,
-            includesRecipe: null
+            includesRecipe: []
         }
 
         set(state => ({
             menuWeek: [...state.menuWeek, newMenu]
         }))
     },
-    updateIncludesRecipe: (recipe, newId) => {
+    updateIncludesRecipe: (id, recipeId) => {
         set(state => ({
-            menuWeek: [...state.menuWeek, 
-                ...recipe: recipe.includesRecipe?.push(newId)]
+            menuWeek: state.menuWeek.map((item) => {
+                if(item.id === id) {
+
+                    const normalizeRecipe = item.includesRecipe || []
+
+                    return {
+                        ...item,
+                        includesRecipe: [...normalizeRecipe, recipeId]
+                    }
+                }
+                return item
+            })
         }))
     },
+
     deleteMenu: (id) => {
         const { menuWeek } = get()
 

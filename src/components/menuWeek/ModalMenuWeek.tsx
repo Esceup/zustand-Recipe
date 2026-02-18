@@ -27,9 +27,16 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow }) => {
                         onChange={(event) => setTitle(event.target.value)}
                     />
                     <div>
-                        {recipesList?.filter(item => 
-                            item.title.toLowerCase() !== title).map(recipeItem => 
-                                <button onClick={() => updateIncludesRecipe(item ,recipeItem.id)}>{recipeItem.title}</button>)}
+                        {menuWeek?.map(menuItem => 
+                            recipesList?.filter(item => 
+                            item.title.toLowerCase().includes(title.toLowerCase())).map(recipeItem => 
+                                <button onClick={() => updateIncludesRecipe(menuItem.id, recipeItem.id)}>{recipeItem.title}</button>
+                        )
+                        )}
+                    </div>
+
+                    <div>
+                        
                     </div>
                     
                 </div>

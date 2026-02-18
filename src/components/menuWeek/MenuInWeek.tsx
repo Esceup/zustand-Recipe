@@ -38,23 +38,26 @@ export const MenuInWeek = () => {
            
             {/* <ul>{recipesList?.map((recipe) => <li key={recipe.id}>{recipe.title}</li>)}</ul> */}
             <ul>
-                {menuWeek?.filter(item => item.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
+                {menuWeek?.filter(filterItem => filterItem.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
                     <li key={item.id} >
                         <h3><span onClick={() => setShow(true)}>{item.title}</span><button onClick={() =>deleteMenu(item.id)}>x</button></h3>
-                        <ul className="recipeList">{item.includesRecipe?.map(includeItem => 
+                        <ul className="recipeList">
+                            
+                            {item.includesRecipe?.map(includeItem => 
                                 recipesList?.map(recipeItem => 
                                     recipeItem.id == includeItem ? <RecipeItem key={recipeItem.id} recipe={recipeItem}/>
                                       : '')
                                 )
-                         }
-                        <button>+</button>
+                            }
+
+                        
                         </ul>
                         
                     </li>
             )}
 
             </ul>
-             <ModalMenuWeek show={show} setShow={setShow}/>
+             <ModalMenuWeek show={show} setShow={setShow} />
         </>
     )
 }
