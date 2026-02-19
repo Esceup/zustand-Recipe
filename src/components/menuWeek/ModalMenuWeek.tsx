@@ -4,7 +4,7 @@ import { useMenuWeek } from "../../store/storeMenuWeek";
 
 interface ModalMenuWeekProps {
     show: boolean;
-    setShow: () => void;
+    setShow: (id: boolean) => void;
 }
 
 export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow }) => {
@@ -14,9 +14,9 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow }) => {
 
     return (
         <>
-            <div  onClick={() => setShow()} className={`modalMenuWeekBack ${show ? 'active' : ''}`}>
+            <div  onClick={() => setShow(false)} className={`modalMenuWeekBack ${show ? 'active' : ''}`}>
                 <div className="modalMenuWeek">
-                    <button onClick={() => setShow()}>x</button>
+                    <button onClick={() => setShow(false)}>x</button>
 
                     <input 
                         type="text" 
