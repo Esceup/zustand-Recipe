@@ -189,10 +189,18 @@
 .btnEdit {
   margin-right: 15px;
 }
+.menuIncludeItem .deleteIngredient{
+  top: -2px;
+}
+.menuIncludeItem {
+    display: flex;
+    justify-content: space-between;
+}
 .btn {
   background-color: #3182ce;
   color: white;
   padding: 0px 7px 4px 7px;
+  z-index: 30;
 }
 .searchInput {
   margin-right: 15px;
@@ -389,6 +397,29 @@
 }
 .modalMenuWeekBack.active {
   display: block;
+}
+
+.modalMenuWeek {
+  position: absolute;
+  height: auto;
+  width: 90%;
+  max-width: 700px;
+  display: none;
+  top: 20px;
+  top: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 7px;
+  background: #ffffff;
+  z-index: 20;
+  border-radius: 5px;
+  border: 2px solid #c9c9c9;
+  z-index: 40;
+  padding: 20px;
+}
+.modalMenuWeek.active {
+  display: block
 }
  @media(min-width: 1024px) {
     .popularIngredientsListBlock {

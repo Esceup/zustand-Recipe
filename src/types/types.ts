@@ -15,9 +15,12 @@ export interface IRecipe {
     ingredients: IIngredient[],
     steps: IStep[];
 }
-
+export interface IIncludeRecipe {
+    id: string;
+    title: string;
+}
 export interface IMenuWeek {
     id: string;
     title: string;
-    includesRecipe: string[] | null;
+    includesRecipe: IIncludeRecipe[];
 }
