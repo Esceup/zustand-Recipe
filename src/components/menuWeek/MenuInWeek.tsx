@@ -2,8 +2,8 @@ import { useState } from "react"
 
 import { useRecipesStore } from "../../store/store"
 import { useMenuWeek } from "../../store/storeMenuWeek"
-import { ModalMenuWeek } from "./ModalMenuWeek"
 import RecipeItem from "../RecipeItem"
+import { ModalMenuWeek } from "./ModalMenuWeek"
 
 
 export const MenuInWeek = () => {
@@ -62,7 +62,7 @@ export const MenuInWeek = () => {
             )}
 
             </ul>
-            {/* <ModalMenuWeek show={show} setShow={setShow}/> */}
+            <ModalMenuWeek show={show} setShow={setShow}/> 
         </>
     )
 }
