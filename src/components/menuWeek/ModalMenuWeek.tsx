@@ -16,6 +16,7 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemP
     const { menuWeek, addIncludeRecipe, deleteInclideMenuItem } = useMenuWeek()
     const { recipesList } = useRecipesStore()
 
+    const includesRecipeLength = menuWeek.find(filterItem => filterItem.id == menuItemProp.id)
    
 
 
@@ -45,15 +46,19 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemP
 
 
                     </ul>
-                    {menuItemProp?.includesRecipe?.length == undefined  || menuItemProp?.includesRecipe?.length < 1 
+
+                    {includesRecipeLength?.includesRecipe.length 
                     
-                    ? <h3>В меню ничего нет</h3> 
-                    
-                    : <>
+                    ?   
+                        <>
+                        {console.log(menuWeek.find(filterItem => filterItem.id == menuItemProp.id))}
                         <h3>Уже в этом меню</h3>
                         <ul className="popularIngredientsListMain">
                             
-                            {menuWeek?.filter(filterItem => filterItem.id == menuItemProp?.id).map(menuItem => menuItem.includesRecipe?.map(includeItem => 
+                            {menuWeek.filter(filterItem =>
+                                filterItem.id == menuItemProp.id).map(menuItem => 
+                                    menuItem.includesRecipe.map(includeItem =>
+                                                                    
                             <li 
                                 className="popularIngredientItem menuIncludeItem" 
                                 key={includeItem.id}>{includeItem.title}
@@ -63,9 +68,13 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemP
                                             x
                                     </span>
                                 </li>
+
                             ))}
                         </ul>
                       </>
+                    
+                    
+                    : <h3>В меню ничего нет</h3> 
                     }
 
                     
