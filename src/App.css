@@ -345,6 +345,21 @@
 .btnBlockUpdateDelete {
   margin-top: 15px;
 }
+.labelMenuWeekAdd {
+  margin-right: 10px;
+
+}
+.flexBlockInputAdd {
+  display: flex;
+  margin-bottom: 15px;
+}
+.inputMenuWeekAdd {
+  margin-right: 10px;
+  width: 100%;
+}
+.tabsBlock .btn {
+  border: 1px solid #fff
+}
 .btnPopularIngredients  {
    background-color: #e5e5e5;
    padding: 2px 9px 5px 9px;
@@ -398,7 +413,9 @@
 .modalMenuWeekBack.active {
   display: block;
 }
-
+.menuWeek .recipeList .recipeList {
+  gap: 10px
+}
 .modalMenuWeek {
   position: absolute;
   height: auto;

@@ -13,7 +13,7 @@ interface MenuWeekStore {
 }
 
 export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
-    menuWeek: [{id: generatedId(), title: '5 дней', includesRecipe: [{title: 'test', id: generatedId()}]}],
+    menuWeek: [{id: generatedId(), title: 'Борщ и тефтели в соусе', includesRecipe: []}],
     addNewMenu: (title) => {
         const newMenu: IMenuWeek = {
             id: generatedId(),
@@ -36,6 +36,7 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
 
                     return {
                         ...item,
+                        title: '123',
                         includesRecipe: [...item.includesRecipe, {id: idRecipe, title: titleRecipe}]
                     }
                 }

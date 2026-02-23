@@ -30,6 +30,13 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
             ingredients: [{id: generatedId(), title: 'Мука', unit: '100 гр'}, {id: generatedId(), title: 'Сахар', unit: '50 гр'}, {id: generatedId(), title: 'Молоко', unit: '70 мл'}, {id: generatedId(), title: 'Сода', unit: '2/3 ч.л'}, {id: generatedId(), title: 'Слив. масло', unit: '60 гр'}],
             steps: [{id: generatedId(), title: 'Растопить масло с сахаром'}, {id: generatedId(), title: 'Смешать всё венчиком в одной миске'}, {id: generatedId(), title: 'Смазывать вафельницу раст. маслом каждый раз'},]
         },
+        {
+            id: generatedId(),
+            title: "Панкейки",
+            desc: 'Рецепт на большие 2 порции',      
+            ingredients: [{id: generatedId(), title: 'Мука', unit: '80 гр'}, {id: generatedId(), title: 'Сахар', unit: '1 ст.л'}, {id: generatedId(), title: 'яйцо', unit: '2 шт'}, {id: generatedId(), title: 'Мягкий творог', unit: '250 гр'}, {id: generatedId(), title: 'Ягоды/клубника', unit: '100 гр'}],
+            steps: [{id: generatedId(), title: 'Смешать всё и поджарить на сковороде, не больше ложки на одну штуку(расплываются)'},]
+        },
     ],  
 
 

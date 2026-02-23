@@ -26,29 +26,31 @@ export const MenuInWeek = () => {
 
     return (
 
-        <>
+        <div className="menuWeek">
             <h2>Меню на неделю</h2>           
-            <div>
-                <label htmlFor="" className="mr-5">Добавить</label>
+            <div className="flexBlockInputAdd">
+               
                 <input 
                     type="text" 
                     value={title}
+                    className="inputMenuWeekAdd"
                     onChange={(event) => setTitle(event.target.value)}
                 />
-                <button onClick={handlAddeNewMenu}>+</button>
+                <button onClick={handlAddeNewMenu} className="btn btnAdd">Добавить</button>
             </div>
             <div>
-                <label htmlFor="">Поиск</label>
+                <h3 className="searchLabel">Поиск</h3>
                 <input 
                     type="text" 
                     value={titleSearch}
+                    className="searchInput"
                     onChange={(event) => setTitleSearch(event.target.value)}
                 />
             </div>
            
            
      
-            <ul>
+            <ul className="recipeList">
                 {menuWeek?.filter(filterItem => filterItem.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
                     
                         <li key={item.id} className="recipeItem">
@@ -58,9 +60,9 @@ export const MenuInWeek = () => {
                             }} className="menuWeekItemTitle">{item.title}</h3>
                             <ul className="recipeList mb-15px">
                                 {item.includesRecipe?.map(includeItem => 
-                                    recipesList?.map(recipeItem => 
+                                    recipesList?.map((recipeItem, index) => 
                                         recipeItem.title == includeItem.title ? 
-                                        <li className="2" key={recipeItem.id}>{recipeItem.title}</li> : '')
+                                        <li className="2" key={recipeItem.id}>{index}. {recipeItem.title}</li> : '')
                                     )
                             }
                           
@@ -75,6 +77,6 @@ export const MenuInWeek = () => {
              
             </ul>
             
-        </>
+        </div>
     )
 }
