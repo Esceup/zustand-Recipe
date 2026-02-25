@@ -1,8 +1,8 @@
-import type { FC } from "react"
-import { useRecipesStore } from "../store/store"
-import type { IRecipe } from "../types/types"
+import { useState, type FC } from "react"
+import { useRecipesStore } from "../../store/store"
+import type { IRecipe } from "../../types/types"
 
-import { storeModal } from "../store/storeModal";
+import { storeModal } from "../../store/storeModal";
 
 interface ItemProps {
     recipe: IRecipe;
@@ -11,6 +11,7 @@ interface ItemProps {
 
 const RecipeItem:FC<ItemProps> = ({ recipe }) => {
 
+    const [active, setActive] = useState(true)
     const removeRecipe = useRecipesStore(state => state.removeRecipe)
     const { openEditModal } = storeModal()
 
@@ -24,9 +25,11 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
    
     return (
         
-        <li className='recipeItem' key={recipe.id}>               
+        <li className={active ? 'recipeItem active' : 'recipeItem'} key={recipe.id}>               
             <div>
-                <h2>{recipe.title}</h2>
+                <div className="headerRecipeItem">
+                    <h2>{recipe.title}</h2><button className="btn-reset" onClick={() => setActive(!active)}><i className="fa-solid fa-angle-down"></i></button>
+                </div>
                          
             {recipe.desc ? <div><span className="descItem">Описание:</span><span>{recipe.desc}</span></div> : ''}
             

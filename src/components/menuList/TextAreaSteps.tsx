@@ -1,6 +1,6 @@
 import { useState, type FC } from "react";
-import type { IStep } from "../types/types";
-import { generatedId } from "../function/generatedId";
+import type { IStep } from "../../types/types";
+import { generatedId } from "../../function/generatedId";
 
 interface StepsProps {
     modalMode: string;

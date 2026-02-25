@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { storeIngredients } from "../store/storeIngredients"
+import { storeIngredients } from "../../store/storeIngredients"
 
 
 

@@ -1,7 +1,10 @@
 import { useState, type FC } from "react"
-import type { IIngredient } from "../types/types";
-import { storeIngredients } from "../store/storeIngredients";
-import { generatedId } from "../function/generatedId";
+
+
+import { generatedId } from "../../function/generatedId";
+import { storeIngredients } from "../../store/storeIngredients";
+import type { IIngredient } from "../../types/types";
+
 
 
 interface InputIngredients {

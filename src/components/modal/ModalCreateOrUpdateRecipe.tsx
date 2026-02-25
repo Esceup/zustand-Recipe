@@ -1,9 +1,9 @@
 import { useEffect, useState, type FormEvent } from "react"
-import { useRecipesStore } from "../store/store";
-import type { IIngredient, IStep } from "../types/types";
-import  { storeModal } from "../store/storeModal";
-import { InputIngredients } from "./InputIngredients";
-import { TextAreaSteps } from "./TextAreaSteps";
+import { useRecipesStore } from "../../store/store";
+import type { IIngredient, IStep } from "../../types/types";
+import  { storeModal } from "../../store/storeModal";
+import { TextAreaSteps } from "../menuList/TextAreaSteps";
+import { InputIngredients } from "../ingredients/InputIngredients";
 
 
 

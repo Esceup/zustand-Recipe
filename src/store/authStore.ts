@@ -16,7 +16,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, displayName?: string) => Promise<void>;
   logout: () => Promise<void>;
-  checkAuth: () => void; // Для подписки на изменения состояния
+  checkAuth: () => void; 
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -24,7 +24,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   loading: true,
   error: null,
 
-  // Подписка на изменения состояния авторизации (важно для сохранения сессии)
+  
   checkAuth: () => {
     onAuthStateChanged(auth, (user) => {
       set({ user, loading: false });
@@ -35,7 +35,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ loading: true, error: null });
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // Пользователь обновится автоматически через onAuthStateChanged
+      
     } catch (error: any) {
       set({ error: error.message, loading: false });
       throw error;
@@ -47,11 +47,11 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       
-      // Если нужно установить имя пользователя сразу
+      
       if (displayName && userCredential.user) {
         await updateProfile(userCredential.user, { displayName });
       }
-      // Пользователь обновится автоматически через onAuthStateChanged
+      
     } catch (error: any) {
       set({ error: error.message, loading: false });
       throw error;

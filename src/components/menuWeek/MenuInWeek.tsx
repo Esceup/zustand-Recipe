@@ -27,7 +27,7 @@ export const MenuInWeek = () => {
     return (
 
         <div className="menuWeek">
-            <h2>Меню на неделю</h2>           
+            <h1>Меню на неделю</h1>           
             <div className="flexBlockInputAdd">
                
                 <input 

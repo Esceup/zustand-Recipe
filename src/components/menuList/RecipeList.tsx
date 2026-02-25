@@ -1,10 +1,12 @@
-import RecipeItem from "./RecipeItem"
-import { useRecipesStore } from "../store/store"
-import { ModalCreateOrUpdateRecipe } from "./ModalCreateOrUpdateRecipe"
-import { storeModal } from "../store/storeModal"
+
+import { useRecipesStore } from "../../store/store"
+import { ModalCreateOrUpdateRecipe } from "../modal/ModalCreateOrUpdateRecipe"
+import { storeModal } from "../../store/storeModal"
 import { useState } from "react"
-import { IngredientsList } from "./IngredientsList"
-import { MenuInWeek } from "./menuWeek/MenuInWeek"
+import { IngredientsList } from "../ingredients/IngredientsList"
+import { MenuInWeek } from "../menuWeek/MenuInWeek"
+import RecipeItem from "./RecipeItem"
+import { useAuthStore } from "../../store/authStore"
 
 
 export function RecipeList() {
@@ -13,11 +15,13 @@ export function RecipeList() {
     const recipesList = useRecipesStore(state => state.recipesList)
     const { openCreateModal } = storeModal()
     const [tabs, setTabs] = useState('MenuInWeek')
+    const { logout } = useAuthStore()
 
     return (
         <>
             <ModalCreateOrUpdateRecipe />
-            {tabs === 'main' ? 
+            <button className="btn btnLogout" onClick={logout}>Выйти</button>
+            {tabs === 'AllMenu' ? 
             
             <>
                 <h1>Список рецептов</h1>
@@ -41,9 +45,9 @@ export function RecipeList() {
             
             </>
             : <MenuInWeek />} 
-            <div className="tabsBlock">
-                <button onClick={() => setTabs('main')} className="btn btnTabsMain">Все меню</button>
+            <div className="tabsBlock">           
                 <button onClick={() => setTabs('MenuInWeek')} className="btn btnTabsSecond">Меню на неделю</button>
+                <button onClick={() => setTabs('AllMenu')} className="btn btnAllMenu">Все меню</button>
             </div>
         </>
     )
