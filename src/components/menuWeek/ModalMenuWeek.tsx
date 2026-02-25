@@ -1,17 +1,23 @@
-import { useState, type FC } from "react"
+import { type FC } from "react"
 import { useMenuWeek } from "../../store/storeMenuWeek";
 import { useRecipesStore } from "../../store/store";
+import type { IMenuWeek } from "../../types/types";
+
 
 
 interface ModalMenuWeekProps {
     show: boolean;
-    setShow: (arg: boolean) => void;
+    setShow: (id: boolean) => void;
+    menuItemProp: IMenuWeek;
 }
 
-export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow }) => {
-    const [title, setTitle] = useState('')
+export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemProp }) => {
+    // const [title, setTitle] = useState('')
+    const { menuWeek, addIncludeRecipe, deleteInclideMenuItem } = useMenuWeek()
     const { recipesList } = useRecipesStore()
-    const { menuWeek, updateIncludesRecipe } = useMenuWeek()
+
+    const includesRecipeLength = menuWeek.find(filterItem => filterItem.id == menuItemProp.id)
+   
 
    
 
@@ -19,28 +25,63 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow }) => {
         <>
             
                 <div className={`modalMenuWeek ${show ? 'active' : ''}`}>
-                    <button onClick={() => setShow(false)} className="btn btnClose">x</button>
+                    <button className="btn btnClose" onClick={() => setShow(false)}>x</button>
 
-                    <input 
+                    {/* <input 
                         type="text" 
                         value={title}
                         onChange={(event) => setTitle(event.target.value)}
-                    />
-                    <div>
-                        {menuWeek?.map(menuItem => 
-                            recipesList?.filter(item => 
-                            item.title.toLowerCase().includes(title.toLowerCase())).map(recipeItem => 
-                                <button onClick={() => updateIncludesRecipe(menuItem.id, recipeItem.id)}>{recipeItem.title}</button>
-                        )
-                        )}
-                    </div>
+                        className="mb-15px"
+                    /> */}
+                    <h3>Меню на выбор</h3>
+                     <ul className="listReset popularIngredientsListMain">
+                        {
+                            recipesList?.sort((a, b) => a.title.localeCompare(b.title)).map((item) => 
+                            <li 
+                                onClick={() => addIncludeRecipe(menuItemProp?.id, item.id, item.title)} 
+                                className="popularIngredientItem" key={item.id}>
+                                    {item.title}
+                                </li>
+                            )
+                        }
 
-                    <div>
-                        
-                    </div>
+
+                    </ul>
+
+                    {includesRecipeLength?.includesRecipe.length 
                     
+                    ?   
+                        <>
+                        {console.log(menuWeek.find(filterItem => filterItem.id == menuItemProp.id))}
+                        <h3>Уже в этом меню</h3>
+                        <ul className="popularIngredientsListMain">
+                            
+                            {menuWeek.filter(filterItem =>
+                                filterItem.id == menuItemProp.id).map(menuItem => 
+                                    menuItem.includesRecipe.map(includeItem =>
+                                                                    
+                            <li 
+                                className="popularIngredientItem menuIncludeItem" 
+                                key={includeItem.id}>{includeItem.title}
+                                    <span 
+                                        className=" deleteIngredient" 
+                                        onClick={() => deleteInclideMenuItem(menuItem.id, includeItem.id)}>
+                                            x
+                                    </span>
+                                </li>
+
+                            ))}
+                        </ul>
+                      </>
+                    
+                    
+                    : <h3>В меню ничего нет</h3> 
+                    }
+
+                    
+                   
                 </div>
-                <div onClick={() => setShow(false)} className={`modalMenuWeekBack ${show ? 'active' : ''}`}></div>
+                <div  onClick={() => setShow(false)} className={`modalMenuWeekBack ${show ? 'active' : ''}`}></div>
 
         </>
     )

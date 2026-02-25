@@ -12,7 +12,7 @@ export function RecipeList() {
     const [title, setTitle] = useState('')
     const recipesList = useRecipesStore(state => state.recipesList)
     const { openCreateModal } = storeModal()
-    const [tabs, setTabs] = useState('main')
+    const [tabs, setTabs] = useState('MenuInWeek')
 
     return (
         <>
@@ -43,7 +43,7 @@ export function RecipeList() {
             : <MenuInWeek />} 
             <div className="tabsBlock">
                 <button onClick={() => setTabs('main')} className="btn btnTabsMain">Все меню</button>
-                <button onClick={() => setTabs('second')} className="btn btnTabsSecond">Меню на неделю</button>
+                <button onClick={() => setTabs('MenuInWeek')} className="btn btnTabsSecond">Меню на неделю</button>
             </div>
         </>
     )

@@ -18,17 +18,24 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
     recipesList: [
          {
             id: generatedId(),
-            title: "Голубцы",
-            desc: 'Нежные голубцы в капусте, Нежные голубцы в капусте, Нежные голубцы в капусте', 
-            ingredients: [{id: generatedId(), title: 'Фарш', unit: '500 гр'}, {id: generatedId(),title: 'Лук', unit: '2 шт.'} ],
-            steps: [{id: generatedId(), title: 'К фаршу добавить мелкопорезанный лук, муку и перемешать'},]
+            title: "Блины с начинкой",
+            desc: 'Церепт на 3 блина. Начинка: сыр и ветчина, яблоки и др. Предварительно разогреть сковороду, чтобы первый билн получился', 
+            ingredients: [{id: generatedId(), title: 'Молоко', unit: '100 мл'}, {id: generatedId(),title: 'Яйцо', unit: '1 шт.'}, {id: generatedId(),title: 'Мука', unit: '30 гр'}, {id: generatedId(),title: 'Сахар', unit: '1 ст.л'} ],
+            steps: [{id: generatedId(), title: 'Замешать всё в одной миске венчиком'},]
         },
         {
             id: generatedId(),
-            title: "Котлеты",
-            desc: '',      
-            ingredients: [{id: generatedId(), title: 'Фарш', unit: '500 грамм'}],
-            steps: [{id: generatedId(), title: 'К фаршу добавить мелкопорезанный лук, муку и перемешать'},]
+            title: "Венские вафли",
+            desc: 'Рецепт на 4 вафли',      
+            ingredients: [{id: generatedId(), title: 'Мука', unit: '100 гр'}, {id: generatedId(), title: 'Сахар', unit: '50 гр'}, {id: generatedId(), title: 'Молоко', unit: '70 мл'}, {id: generatedId(), title: 'Сода', unit: '2/3 ч.л'}, {id: generatedId(), title: 'Слив. масло', unit: '60 гр'}],
+            steps: [{id: generatedId(), title: 'Растопить масло с сахаром'}, {id: generatedId(), title: 'Смешать всё венчиком в одной миске'}, {id: generatedId(), title: 'Смазывать вафельницу раст. маслом каждый раз'},]
+        },
+        {
+            id: generatedId(),
+            title: "Панкейки",
+            desc: 'Рецепт на большие 2 порции',      
+            ingredients: [{id: generatedId(), title: 'Мука', unit: '80 гр'}, {id: generatedId(), title: 'Сахар', unit: '1 ст.л'}, {id: generatedId(), title: 'яйцо', unit: '2 шт'}, {id: generatedId(), title: 'Мягкий творог', unit: '250 гр'}, {id: generatedId(), title: 'Ягоды/клубника', unit: '100 гр'}],
+            steps: [{id: generatedId(), title: 'Смешать всё и поджарить на сковороде, не больше ложки на одну штуку(расплываются)'},]
         },
     ],  
 

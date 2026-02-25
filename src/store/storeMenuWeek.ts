@@ -7,12 +7,13 @@ import { createJSONStorage, persist } from "zustand/middleware";
 interface MenuWeekStore {
     menuWeek: IMenuWeek[];
     addNewMenu: (title: string) => void;
-    updateIncludesRecipe: (id: string, addRecipeId: string) => void;
+    addIncludeRecipe: (id: string, idRecipe: string, titleRecipe: string) => void;
     deleteMenu: (id: string) => void;
+    deleteInclideMenuItem: (idMenuWeek: string, idDeleteRecipeItem: string) => void;
 }
 
 export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
-    menuWeek: [{id: generatedId(), title: '5 дней', includesRecipe: ['24431eed048448mljqvn1w', '123']}],
+    menuWeek: [{id: generatedId(), title: 'Борщ и тефтели в соусе', includesRecipe: []}],
     addNewMenu: (title) => {
         const newMenu: IMenuWeek = {
             id: generatedId(),
@@ -24,20 +25,24 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
             menuWeek: [...state.menuWeek, newMenu]
         }))
     },
-    updateIncludesRecipe: (id, recipeId) => {
+    addIncludeRecipe: (idMenuWeekItem, idRecipe, titleRecipe) => {
         set(state => ({
-            menuWeek: state.menuWeek.map((item) => {
-                if(item.id === id) {
+           menuWeek: state.menuWeek.map((item) => {
+                if(item.id === idMenuWeekItem) {
 
-                    const normalizeRecipe = item.includesRecipe || []
+                    if(item.includesRecipe.some(item => item.title === titleRecipe)) {
+                        return item
+                    }
 
                     return {
                         ...item,
-                        includesRecipe: [...normalizeRecipe, recipeId]
+                        title: '123',
+                        includesRecipe: [...item.includesRecipe, {id: idRecipe, title: titleRecipe}]
                     }
                 }
                 return item
-            })
+           })
+            
         }))
     },
 
@@ -48,6 +53,19 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
             menuWeek: menuWeek.filter(item => item.id !== id)
         })
     },
+    deleteInclideMenuItem: (idMenuWeek, idDeleteRecipeItem) => {
+        
+        set(state => ({
+            menuWeek: state.menuWeek.map(menuItem => {
+            if(menuItem.id == idMenuWeek) {
+                return {
+                    ...menuItem, 
+                    includesRecipe: menuItem.includesRecipe.filter(item => item.id !== idDeleteRecipeItem)
+                }}
+            return menuItem}
+            )
+        }))
+    }
 
 }),
     {
