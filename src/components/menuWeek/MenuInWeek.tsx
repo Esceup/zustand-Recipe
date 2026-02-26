@@ -8,20 +8,26 @@ import type { IMenuWeek } from "../../types/types";
 
 export const MenuInWeek = () => {
     const [show, setShow] = useState(false)
+    const [active, setActive] = useState(false)
     const [menuItemProp, menuItemPropSet] = useState<IMenuWeek>({ 
     id: '', 
     title: '', 
     includesRecipe: [] 
-})
+})  
+    const [titleItemEdit, setTitleItemEdit] = useState('')
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
-    const { menuWeek, addNewMenu, deleteMenu } = useMenuWeek()
+    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu } = useMenuWeek()
     const { recipesList } = useRecipesStore()
 
     const handlAddeNewMenu = () => {
         if(title == '' || title.length <= 3) return
         if(menuWeek.some(item => item.title.toLowerCase() === title.toLowerCase())) return
         addNewMenu(title)
+    }
+
+    const handleEditTitle = (idmenuItem, editTitle) => {
+        editTitleMenu(id, titleItemEdit)
     }
 
     return (
@@ -51,13 +57,32 @@ export const MenuInWeek = () => {
            
      
             <ul className="recipeList">
-                {menuWeek?.filter(filterItem => filterItem.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
+                {menuWeek?.filter(filterItem => 
+                    filterItem.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
                     
                         <li key={item.id} className="recipeItem">
-                            <h3 onClick={() => {
-                                setShow(true)
-                                menuItemPropSet(item)
-                            }} className="menuWeekItemTitle">{item.title}</h3>
+                            <h3 className="menuWeekItemTitle">
+                                <span  onClick={() => {
+                                    setShow(true)
+                                    menuItemPropSet(item)
+                                    }} 
+                                    className={active ? 'spanTitleItem active' : 'spanTitleItem'} >
+                                    {item.title}
+                                </span>
+                            <input 
+                                className={active ? 'titleItemEdit' : 'titleItemEdit active'}
+                                type="text" 
+                                value={titleItemEdit} 
+                                
+                                onChange={(e) => {
+                                    
+                                    setTitleItemEdit(e.target.value)          
+                                }}/> 
+                            
+                            <button className="btn-reset ml-5px" onClick={() => {
+                                setTitleItemEdit(item.title)
+                                setActive(!active)}
+                            }><i className="fa-solid fa-pencil "></i></button> </h3>
                             <ul className="recipeList mb-15px">
                                 {item.includesRecipe?.map(includeItem => 
                                     recipesList?.map((recipeItem, index) => 

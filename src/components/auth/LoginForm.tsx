@@ -4,6 +4,7 @@ import { useAuthStore } from "../../store/authStore"
 export const LoginForm = () => {
 
     const [isRegister, setIsRegister] = useState(false)
+    const [title, setTitle] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { register, login } = useAuthStore()
@@ -12,7 +13,7 @@ export const LoginForm = () => {
         e.preventDefault()
         try {
            if(isRegister) {
-             await register(email, password)
+             await register(email, password, title)
            } else {
             await login(email, password)
            }
@@ -25,6 +26,18 @@ export const LoginForm = () => {
         <div className="LoginForm">
             <h2>{isRegister ? 'Регистрация' : "Авторизация"}</h2>
             <form onSubmit={handleSubmit}>
+                 {isRegister ? <div className="blockForLabel">
+                    
+                    <input 
+                        type="text" 
+                        placeholder=""
+                        value={title} 
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="inputEmail"
+                        required
+                    />
+                    <label className="labelEmail">Имя*</label>
+                </div> : ''}
                 <div className="blockForLabel">
                     
                     <input 
@@ -35,7 +48,7 @@ export const LoginForm = () => {
                         className="inputEmail"
                         required
                     />
-                    <label className="labelEmail">Email</label>
+                    <label className="labelEmail">Email*</label>
                 </div>
                  <div className="blockForLabel">
                     
@@ -47,7 +60,7 @@ export const LoginForm = () => {
                         className="inputPass"
                         required
                     />
-                    <label className="labelPass">Пароль</label>
+                    <label className="labelPass">Пароль*</label>
                  </div>
                 
                 <div>

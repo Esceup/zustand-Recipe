@@ -28,7 +28,7 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
         <li className={active ? 'recipeItem active' : 'recipeItem'} key={recipe.id}>               
             <div>
                 <div className="headerRecipeItem">
-                    <h2>{recipe.title}</h2><button className="btn-reset" onClick={() => setActive(!active)}><i className="fa-solid fa-angle-down"></i></button>
+                    <h2 className="recipeItemTitle">{recipe.title}</h2><button className="btn-reset" onClick={() => setActive(!active)}><i className="fa-solid fa-angle-down"></i></button>
                 </div>
                          
             {recipe.desc ? <div><span className="descItem">Описание:</span><span>{recipe.desc}</span></div> : ''}
