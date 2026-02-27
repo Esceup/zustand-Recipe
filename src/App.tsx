@@ -1,6 +1,6 @@
 import './App.css'
 import { LoginForm } from './components/auth/LoginForm';
-import { RecipeList } from './components/menuList/RecipeList'
+import { RecipeList } from './components/recipeListPage/RecipeList'
 import { useAuthStore } from './store/authStore'
 import { useEffect } from 'react';
 
@@ -19,10 +19,10 @@ function App() {
 
   return (
     <>
-    <div className={user ? 'headerBlock' : 'headerBlock loginForm'}>
+    {/* <div className={user ? 'headerBlock' : 'headerBlock loginForm'}>
       
       <img className='logoMain' src="/src/assets/main-logo.png" alt="menu" />
-    </div>
+    </div> */}
       {user ? <RecipeList/> : <LoginForm />  }
     </>
   )

@@ -55,6 +55,9 @@
   max-width: 500px;
   width: 100%;
 }
+.btnAllMenu i {
+  font-size: 25px;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -110,6 +113,7 @@
   gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   list-style-type: none;
+  transition: all 0.3s ease-in-out;
 }
 .headerRecipeItem {
   display: flex;
@@ -534,7 +538,7 @@ display: none;
   width: 100%;
  }
  .tabsBlock {
-    background-color: #7fb0fd;
+    background-color: #3182ce;
     padding: 10px 0;
     display: flex;
     width: 100%;
@@ -547,6 +551,11 @@ display: none;
   }
 .btnAllMenu {
   margin-right: 10px;
+  background-color: inherit;
+  border: none !important;
+}
+.underTitleTabs {
+  font-size: 14px;
 }
 .modalMenuWeekBack {
     display: none;
@@ -585,6 +594,9 @@ display: none;
 }
 .modalMenuWeek.active {
   display: block
+}
+.headerBlock .logoMain {
+  display: none;
 }
 .loader {
   position: absolute;
@@ -667,6 +679,9 @@ display: none;
   .btnAddRecipeMain {
     margin-left: 0px;
   }
+    .headerBlock .logoMain {
+      display: block;
+    }
     .popularIngredientsListMain {
       column-count: auto;
       column-gap: 0px;

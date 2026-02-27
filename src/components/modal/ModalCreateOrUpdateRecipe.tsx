@@ -2,8 +2,8 @@ import { useEffect, useState, type FormEvent } from "react"
 import { useRecipesStore } from "../../store/store";
 import type { IIngredient, IStep } from "../../types/types";
 import  { storeModal } from "../../store/storeModal";
-import { TextAreaSteps } from "../menuList/TextAreaSteps";
-import { InputIngredients } from "../ingredients/InputIngredients";
+import { TextAreaSteps } from "../recipeListPage/TextAreaSteps";
+import { InputIngredients } from "../ingredientsPage/InputIngredients";
 
 
 

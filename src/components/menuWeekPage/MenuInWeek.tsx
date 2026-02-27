@@ -10,10 +10,10 @@ export const MenuInWeek = () => {
     const [show, setShow] = useState(false)
     const [active, setActive] = useState(false)
     const [menuItemProp, menuItemPropSet] = useState<IMenuWeek>({ 
-    id: '', 
-    title: '', 
-    includesRecipe: [] 
-})  
+        id: '', 
+        title: '', 
+        includesRecipe: [] 
+    })  
     const [titleItemEdit, setTitleItemEdit] = useState('')
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
@@ -26,8 +26,8 @@ export const MenuInWeek = () => {
         addNewMenu(title)
     }
 
-    const handleEditTitle = (idmenuItem, editTitle) => {
-        editTitleMenu(id, titleItemEdit)
+    const handleEditTitle = (idMenuItem, titleItemEdit) => {
+        editTitleMenu(idMenuItem, titleItemEdit)
     }
 
     return (
@@ -41,6 +41,7 @@ export const MenuInWeek = () => {
                     value={title}
                     className="inputMenuWeekAdd"
                     onChange={(event) => setTitle(event.target.value)}
+                    placeholder="Наименовние меню"
                 />
                 <button onClick={handlAddeNewMenu} className="btn btnAdd">Добавить</button>
             </div>
@@ -51,6 +52,7 @@ export const MenuInWeek = () => {
                     value={titleSearch}
                     className="searchInput"
                     onChange={(event) => setTitleSearch(event.target.value)}
+                    placeholder="поиск меню"
                 />
             </div>
            
@@ -66,22 +68,25 @@ export const MenuInWeek = () => {
                                     setShow(true)
                                     menuItemPropSet(item)
                                     }} 
-                                    className={active ? 'spanTitleItem active' : 'spanTitleItem'} >
+                                    className={!active ? 'spanTitleItem active' : 'spanTitleItem'} >
                                     {item.title}
                                 </span>
+
                             <input 
-                                className={active ? 'titleItemEdit' : 'titleItemEdit active'}
+                                className={!active ? 'titleItemEdit' : 'titleItemEdit active'}
                                 type="text" 
-                                value={titleItemEdit} 
-                                
-                                onChange={(e) => {
-                                    
+                                value={titleItemEdit}                                
+                                onChange={(e) => {                                    
                                     setTitleItemEdit(e.target.value)          
                                 }}/> 
                             
                             <button className="btn-reset ml-5px" onClick={() => {
+                                if(active) {
+                                    handleEditTitle(item.id, titleItemEdit)
+                                }
                                 setTitleItemEdit(item.title)
-                                setActive(!active)}
+                                setActive(!active)
+                            }
                             }><i className="fa-solid fa-pencil "></i></button> </h3>
                             <ul className="recipeList mb-15px">
                                 {item.includesRecipe?.map(includeItem => 
