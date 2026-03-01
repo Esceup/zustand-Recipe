@@ -33,7 +33,7 @@ export const LoginForm = () => {
                         placeholder=""
                         value={title} 
                         onChange={(e) => setTitle(e.target.value)}
-                        className="inputEmail"
+                        className="inputEmail input-reset"
                         required
                     />
                     <label className="labelEmail">Имя*</label>
@@ -45,7 +45,7 @@ export const LoginForm = () => {
                         placeholder=""
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
-                        className="inputEmail"
+                        className="inputEmail input-reset"
                         required
                     />
                     <label className="labelEmail">Email*</label>
@@ -57,19 +57,19 @@ export const LoginForm = () => {
                         placeholder=""
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}
-                        className="inputPass"
+                        className="inputPass input-reset"
                         required
                     />
-                    <label className="labelPass">Пароль*</label>
+                    <label className="labelPass ">Пароль*</label>
                  </div>
                 
                 <div>
-                    <button className="btn btnRegister" type="submit">{isRegister ? "Создать аккаунт " : "Вход"}</button> 
+                    <button className="btn btnRegister btn-gradient" type="submit">{isRegister ? "Создать аккаунт " : "Вход"}</button> 
                 </div>              
             </form>
             <button 
                 onClick={() => setIsRegister(!isRegister)}
-                className="btn btnFlipRegister">                  
+                className="btn btnFlipRegister btn-gradient-blue">                  
                 {isRegister ? "Войти" : "Регистрация"}
             </button>
         </div>

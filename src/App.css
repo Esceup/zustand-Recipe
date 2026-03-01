@@ -223,10 +223,9 @@
 }
 .labelEmail, .labelPass {
   position: absolute;
-  top: 0;
-  left: 5px;
-  color: #000;
-  opacity: 0.6;
+  top: 9px;
+  left: 20px;
+  color: #ffffff;
 }
 .blockForLabel input~label {
   transition: all 0.3s ease-in-out;
@@ -556,6 +555,19 @@ display: none;
 .modalUserProfileBack.show {
   display: block;
 }
+.blockForLabel .input-reset {
+    padding: 15px;
+    border-radius: 15px;
+    width: 100%;
+    padding-left: 32px;
+    background: var(--gray);
+    border: none;
+    color: white;
+    outline: none;
+    /* padding-top: 3px; */
+    border-bottom: 1px solid #000;
+}
+
 .flexBlockInputAdd {
     display: flex;
     position: relative;
@@ -599,6 +611,10 @@ display: none;
 }
 .btn-gradient {
   background: linear-gradient(135deg, #bd1ec9 0%, #ff6b9d 100%);
+}
+.btn-gradient-blue {
+    background: linear-gradient(135deg, #431ec9 0%, #ab6bff 100%) !important;
+    color: white !important;
 }
 .tabsBlock .btn {
   border: 1px solid #fff
