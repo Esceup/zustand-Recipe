@@ -19,10 +19,6 @@ function App() {
 
   return (
     <>
-    {/* <div className={user ? 'headerBlock' : 'headerBlock loginForm'}>
-      
-      <img className='logoMain' src="/src/assets/main-logo.png" alt="menu" />
-    </div> */}
       {user ? <RecipeList/> : <LoginForm />  }
     </>
   )

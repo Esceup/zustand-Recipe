@@ -8,18 +8,20 @@ interface MenuWeekStore {
     menuWeek: IMenuWeek[];
     addNewMenu: (title: string) => void;
     addIncludeRecipe: (id: string, idRecipe: string, titleRecipe: string) => void;
+    toggleEditmenu: (id: string, value: boolean) => void;
     editTitleMenu: (id: string, title: string) => void;
     deleteMenu: (id: string) => void;
     deleteInclideMenuItem: (idMenuWeek: string, idDeleteRecipeItem: string) => void;
 }
 
 export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
-    menuWeek: [{id: generatedId(), title: 'Борщ и тефтели в соусе', includesRecipe: []}],
+    menuWeek: [{id: generatedId(), title: 'Борщ и тефтели в соусе', includesRecipe: [], editMode: false}],
     addNewMenu: (title) => {
         const newMenu: IMenuWeek = {
             id: generatedId(),
             title: title,
-            includesRecipe: []
+            includesRecipe: [],
+            editMode: false,
         }
 
         set(state => ({
@@ -43,6 +45,19 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
                 return item
            })
             
+        }))
+    },
+    toggleEditmenu: (id, value) => {
+        set(state => ({
+            menuWeek: state.menuWeek.map(item => {
+                if(item.id === id) {
+                    return {
+                        ...item,
+                        editMode: value 
+                    }
+                }
+                return item
+            })
         }))
     },
     editTitleMenu: (id, title) => {

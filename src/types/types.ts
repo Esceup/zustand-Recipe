@@ -23,4 +23,5 @@ export interface IMenuWeek {
     id: string;
     title: string;
     includesRecipe: IIncludeRecipe[];
+    editMode: boolean;
 }

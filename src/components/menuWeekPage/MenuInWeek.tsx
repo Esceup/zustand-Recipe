@@ -12,12 +12,13 @@ export const MenuInWeek = () => {
     const [menuItemProp, menuItemPropSet] = useState<IMenuWeek>({ 
         id: '', 
         title: '', 
-        includesRecipe: [] 
+        includesRecipe: [],
+        editMode: false
     })  
     const [titleItemEdit, setTitleItemEdit] = useState('')
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
-    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu } = useMenuWeek()
+    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu, toggleEditmenu } = useMenuWeek()
     const { recipesList } = useRecipesStore()
 
     const handlAddeNewMenu = () => {
@@ -26,14 +27,12 @@ export const MenuInWeek = () => {
         addNewMenu(title)
     }
 
-    const handleEditTitle = (idMenuItem, titleItemEdit) => {
-        editTitleMenu(idMenuItem, titleItemEdit)
-    }
 
     return (
 
         <div className="menuWeek">
-            <h1>Меню на неделю</h1>           
+            <h1>Меню на неделю</h1>    
+                 
             <div className="flexBlockInputAdd">
                
                 <input 
@@ -41,19 +40,23 @@ export const MenuInWeek = () => {
                     value={title}
                     className="inputMenuWeekAdd"
                     onChange={(event) => setTitle(event.target.value)}
-                    placeholder="Наименовние меню"
+                    placeholder=""
                 />
-                <button onClick={handlAddeNewMenu} className="btn btnAdd">Добавить</button>
+                <button onClick={handlAddeNewMenu} className="btn btnAdd btn-gradient">Добавить</button>
+                
             </div>
             <div>
                 <h3 className="searchLabel">Поиск</h3>
-                <input 
+                <div className="flexBlockInputAdd">
+                    <input 
                     type="text" 
                     value={titleSearch}
                     className="searchInput"
                     onChange={(event) => setTitleSearch(event.target.value)}
-                    placeholder="поиск меню"
+                    placeholder=""
                 />
+                <i className="searchInputAbsolute fa-solid fa-magnifying-glass"></i>
+                </div>
             </div>
            
            
@@ -68,36 +71,51 @@ export const MenuInWeek = () => {
                                     setShow(true)
                                     menuItemPropSet(item)
                                     }} 
-                                    className={!active ? 'spanTitleItem active' : 'spanTitleItem'} >
+                                    className={!item.editMode ? 'spanTitleItem active' : 'spanTitleItem'} >
                                     {item.title}
                                 </span>
 
                             <input 
-                                className={!active ? 'titleItemEdit' : 'titleItemEdit active'}
+                                className={`input-reset ${!item.editMode ? 'titleItemEdit' : 'titleItemEdit active'}`}
                                 type="text" 
                                 value={titleItemEdit}                                
                                 onChange={(e) => {                                    
                                     setTitleItemEdit(e.target.value)          
                                 }}/> 
                             
-                            <button className="btn-reset ml-5px" onClick={() => {
-                                if(active) {
-                                    handleEditTitle(item.id, titleItemEdit)
+                            <button className="btn-reset ml-5px" onClick={() => {                           
+                                    toggleEditmenu(item.id, true)
+                                    if(item.editMode === true) {
+                                        toggleEditmenu(item.id, false)
+                                        editTitleMenu(item.id, titleItemEdit)  
+                                    
+                                    
                                 }
                                 setTitleItemEdit(item.title)
                                 setActive(!active)
                             }
-                            }><i className="fa-solid fa-pencil "></i></button> </h3>
+                            }><i className={`fa-solid ${active ? "fa-check " : "fa-pencil"} `}></i>
+                            </button> 
+                            <button 
+                                className="btn-reset" 
+                                onClick={() => {
+                                    let res = confirm('Точно удалить?')
+                                    if(!res) return
+                                    deleteMenu(item.id)
+                                }}>
+                                    <i className="fa-solid fa-trash-can"></i>
+                            </button>   
+                            </h3>
                             <ul className="recipeList mb-15px">
-                                {item.includesRecipe?.map(includeItem => 
+                                 {item.includesRecipe?.map(includeItem => 
                                     recipesList?.map((recipeItem, index) => 
                                         recipeItem.title == includeItem.title ? 
-                                        <li className="2" key={recipeItem.id}>{index}. {recipeItem.title}</li> : '')
+                                        <li className="2" key={recipeItem.id}>{index + 1}. {recipeItem.title}</li> : '')
                                     )
-                            }
+                             }
                           
                             </ul> 
-                            <button className="btn" onClick={() => deleteMenu(item.id)}>Удалить меню</button>                       
+                                                
                         </li>
 
                         

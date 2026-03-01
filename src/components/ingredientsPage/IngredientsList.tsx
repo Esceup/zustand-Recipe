@@ -8,6 +8,7 @@ export const IngredientsList = () => {
     const { Ingredients, addNewIngredient, deleteIngredient} = storeIngredients()
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState('')
+    const [searchTitle, setSearchTitle] = useState('')
     const [unit, setUnit] = useState('')
     const [error, setError] = useState(false)
 
@@ -26,31 +27,47 @@ export const IngredientsList = () => {
 
     return (
           <>
-          <button className="btn btnIngredientMain" onClick={() => setShow(show ? false : true)}>Ингредиенты</button>
+            <h2>Ингредиенты</h2>
+            {/* <img src="src\assets\11.jpg" alt="" />   */}
             <div className={`popularIngredientsListBlock ${show ? 'active' : ''}`}>
-            
-            <ul className={`listReset popularIngredientsListMain`}>
-                {Ingredients?.sort((a, b) => a.title.localeCompare(b.title)).map((item) => 
-                    <li className="popularIngredientItem" key={item.id}>{item.title} <span onClick={() => deleteIngredient(item.id)} className="deleteIngredient">х</span></li>
-                )}
-            </ul>
             <div className="flexBlock mt-15px">
                 <input 
                     type="text" 
-                    className={`inputModal first mb-5px ${error ? 'error' : ''} `}
+                    className={`inputModal first  mb-5px input-reset ${error ? 'error' : ''} `}
                     value={title}
                     placeholder="Наименование ингредиента"
                     onChange={(event) => setTitle(event.target.value)}
                 />
                 <input 
                     type="text" 
-                    className="inputModal mb-5px mr-15px"
+                    className="inputModal mb-5px mr-15px input-reset"
                     value={unit}
                     placeholder="кол-во и ед. измерения"
                     onChange={(event) => setUnit(event.target.value)}
                 />
-                <button className="btn btnAddNewIngredient" onClick={handleNewIngredient}>+</button>
+                <button className="btn btnAddNewIngredient btn-gradient" onClick={handleNewIngredient}>Добавить</button>
                 </div>
+                <h3 className="searchLabel">Поиск</h3>
+                <input 
+                    type="text" 
+                    className={`inputModal first mb-15px input-reset ${error ? 'error' : ''} `}
+                    value={searchTitle}
+                    placeholder=""
+                    onChange={(event) => setSearchTitle(event.target.value)}
+                />
+            <ul className={`listReset popularIngredientsListMain`}>
+                {Ingredients?.filter(filterItem => 
+                    filterItem.title.toLowerCase().includes(searchTitle.toLowerCase())).sort((a, b) => a.title.localeCompare(b.title)).map((item) => 
+                    <li className="popularIngredientItem" key={item.id}>{item.title} 
+                        <span 
+                            onClick={() => deleteIngredient(item.id)} 
+                            className="deleteIngredient">
+                            <i className="fa-solid fa-trash-can"></i> 
+                        </span>
+                    </li>
+                )}
+            </ul>
+            
            </div>
            <div onClick={() => setShow(false)} className={`backModal ${show ? 'active' : ''}`}></div>
           </>

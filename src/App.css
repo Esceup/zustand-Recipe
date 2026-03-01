@@ -2,8 +2,12 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 20px 10px 100px 10px;
   text-align: center;
+  background-color: #000;
+}
+:root {
+    --gray: #242831;
 }
 .btn-reset {
   background-color: initial !important;
@@ -56,6 +60,7 @@
   width: 100%;
 }
 .btnAllMenu i {
+  color: #7f7f7f;
   font-size: 25px;
 }
 .logo {
@@ -106,14 +111,38 @@
 }
 .btnAddRecipeMain {
   margin-left: 15px;
+  width: 100%;
+  padding: 10px !important;
+  border-radius: 15px;
+}
+.modalUserProfile {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  padding: 15px;
+  transform: translate(-50%, -50%);
+  z-index: 40;
+  background-color: #555555;
+  border-radius: 15px;
+}
+.modalUserProfile.show {
+  display: block;
+}
+.recipeList .recipeList {
+  min-height: 75px;
 }
 .recipeList {
-  padding: 0;
+  padding: 10px;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   list-style-type: none;
   transition: all 0.3s ease-in-out;
+  background: var(--gray);
+  border-radius: 15px;
 }
 .headerRecipeItem {
   display: flex;
@@ -126,22 +155,32 @@
 .descItem {
   margin-right: 5px;
 }
+.recipeItemProductsBlock {
+  padding: 15px;
+  border-radius: 15px;
+  background-color: var(--gray);
+}
 .recipeItem {
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    /* box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); */
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    background: #000;
+    border-radius: 15px;
+    color: white;
 }
 .recipeItem.active {
   max-height: 50px;
   overflow: hidden;
   padding: 0 20px;
   transition: all 0.3s ease-in-out;
+}
+.recipeItem i {
+  color: white
 }
 .descItem {
   font-weight: bold;
@@ -354,6 +393,12 @@ display: none;
 .searchInput {
   margin-right: 15px;
   padding: 5px;
+  background: inherit;
+  color: white;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #000;
+  padding-left: 32px;
 }
 .searchLabel {
   margin: 0 20px;
@@ -407,32 +452,38 @@ display: none;
   border-radius: 5px;
   border: 2px solid #c9c9c9;
 }
+.btnAddNewIngredient {
+  margin-top: 15px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 10px;
+}
 .popularIngredientsListMain {
   position: relative;
-
   column-count: 2;
   column-gap: 20px;
-  max-height: 400px;
+  max-height: 100%;
   max-width: 700px;
   top: 0px;
   gap: 5px;
   list-style-type: none;
   padding: 7px;
-  background: #ffffff;
+  background: #000;
   z-index: 20;
   border-radius: 5px;
-  border: 2px solid #c9c9c9;
   z-index: 20;
+  padding: 15px;
+  border-radius: 15px;
   overflow: auto;
 }
 .popularIngredientsListMain li {
-  min-height: 25px;
-  break-inside: avoid;
-  page-break-inside: avoid;
-  width: 100%;
-
-  border: 1px solid #cecece;
-  border-radius: 5px;
+    min-height: 25px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    width: 100%;
+    border: 2px solid #373737;
+    border-radius: 5px;
+    color: white;
 }
 .popularIngredientsList li {
     margin-bottom: 5px;
@@ -455,23 +506,18 @@ display: none;
     display: block;
 }
 .popularIngredientsListBlock {
-  position: absolute;
-  height: auto;
-  width: 90%;
+  padding: 15px;
+  width: 100%;
   max-width: 700px;
-  display: none;
   top: 20px;
   top: 20px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 7px;
   background: #ffffff;
   z-index: 20;
-  border-radius: 5px;
-  border: 2px solid #c9c9c9;
+  border-radius: 15px;
   z-index: 20;
-  padding: 20px
+  background: var(--gray);
 }
 .popularIngredientsListBlock.active {
   display: block;
@@ -498,13 +544,61 @@ display: none;
   margin-right: 10px;
 
 }
+.modalUserProfileBack {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+}
+.modalUserProfileBack.show {
+  display: block;
+}
 .flexBlockInputAdd {
-  display: flex;
-  margin-bottom: 15px;
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    padding: 7px 15px;
+    background-color: var(--gray);
+}
+.flexBlockInputAdd i {
+  color: white
+}
+.menuWeekItemTitle .input-reset {
+  display: none;
+}
+.menuWeekItemTitle .input-reset.active {
+  display: inline-block;
+  width: auto;
+  border-bottom: 1px solid #ffffff;
+}
+.input-reset {
+  margin-right: 10px;
+  width: 100%;
+  padding-left: 32px;
+  background: inherit;
+  border: none;
+  color: white;
+  outline: none;
+  padding-top: 3px;
+  border-bottom: 1px solid #000;
 }
 .inputMenuWeekAdd {
   margin-right: 10px;
   width: 100%;
+  padding-left: 32px;
+  background: inherit;
+  border: none;
+  color: white;
+  outline: none;
+  padding-top: 3px;
+  border-bottom: 1px solid #000;
+}
+.btn-gradient {
+  background: linear-gradient(135deg, #bd1ec9 0%, #ff6b9d 100%);
 }
 .tabsBlock .btn {
   border: 1px solid #fff
@@ -538,21 +632,38 @@ display: none;
   width: 100%;
  }
  .tabsBlock {
-    background-color: #3182ce;
+    background-color: #000000;
     padding: 10px 0;
     display: flex;
     width: 100%;
     justify-content: center;
     position: fixed;
     left: 0;
-    
     top: 0;
     z-index: 9;
-  }
+    border-top: 1px solid white;
+}
+.searchInputAbsolute {
+  position: absolute;
+  left: 23px;
+  top: 50%;
+  transform: translate(-0%, -50%)
+}
 .btnAllMenu {
   margin-right: 10px;
   background-color: inherit;
   border: none !important;
+  padding: 5px;
+}
+.btnAllMenu.active {
+  outline: none;
+  color: white;
+}
+.btnAllMenu .underTitleTabs {
+  color: #a5a5a5;
+}
+.btnAllMenu.active i, .btnAllMenu.active .underTitleTabs{
+  color: white;
 }
 .underTitleTabs {
   font-size: 14px;

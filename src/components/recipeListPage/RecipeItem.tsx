@@ -33,7 +33,7 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
                          
             {recipe.desc ? <div><span className="descItem">Описание:</span><span>{recipe.desc}</span></div> : ''}
             
-            <div>
+            <div className="recipeItemProductsBlock">
                 <h3 style={{textAlign: 'left'}}>Продукты:</h3> 
                 <ul className="ingredientsList">{recipe.ingredients?.map((item) => (
                     <li key={item.id}><div className="ingredientTitle">{item.title}</div><div className="ingredientUnit">{item.unit}</div></li>
@@ -47,8 +47,8 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
             </ul>
             </div>
             <div className="btnBlockUpdateDelete">
-                <button onClick={handleUpdate} className="btn btnEdit">Изм.</button>
-                <button onClick={handleRemove} className="btn">Удалить</button>
+                <button onClick={handleUpdate} className="btn btn-reset"><i className="fa-solid fa-pencil "></i></button>
+                <button onClick={handleRemove} className="btn btn-reset"><i className="fa-solid fa-trash-can"></i></button>
             </div>
         </li>
     )

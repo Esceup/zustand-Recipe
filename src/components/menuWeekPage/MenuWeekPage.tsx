@@ -14,16 +14,22 @@ export const MenuWeekPage = () => {
         <>
                         <h1>Список рецептов</h1>
                     <div className="flexBlock j-center ">
-                        <IngredientsList />
-                        <button className="btn btnAddRecipeMain" onClick={openCreateModal}>Добавить рецепт</button>
+                        
+                        <button className="btn btnAddRecipeMain btn-gradient" onClick={openCreateModal}>Добавить рецепт</button>
                     </div>
-                    <h3 className="searchLabel">Поиск рецепта</h3>
-                    <input 
-                        type="text"
-                        className="searchInput"
-                        value={title} 
-                        onChange={(event) => setTitle(event?.target.value)}
-                    />
+                    <div >
+                        <h3 className="searchLabel">Поиск</h3>
+                        <div className="flexBlockInputAdd">
+                            <input 
+                            type="text"
+                            className="searchInput"
+                            value={title} 
+                            onChange={(event) => setTitle(event?.target.value)}
+                            
+                        />
+                        <i className="searchInputAbsolute fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
                     
                     <ul className="recipeList">
                         {recipesList?.filter(item => item.title.toLowerCase().includes(title.toLowerCase())).map((recipe) => (
