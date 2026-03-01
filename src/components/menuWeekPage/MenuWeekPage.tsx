@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { useRecipesStore } from "../../store/store"
-import { IngredientsList } from "../ingredientsPage/IngredientsList"
 import RecipeItem from "../recipeListPage/RecipeItem"
 import { storeModal } from "../../store/storeModal"
 

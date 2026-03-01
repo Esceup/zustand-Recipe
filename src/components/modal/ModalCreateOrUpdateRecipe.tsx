@@ -95,7 +95,7 @@ if(!isModalOpen) return null
                     <div className="flexBlock">
                         <h3 className="labelModal mr-5px">Описание:</h3>
                         <textarea 
-                            rows="5"
+                           
                             className="inputModal"
                             name="desc" 
                             value={desc}
