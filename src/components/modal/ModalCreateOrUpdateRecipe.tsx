@@ -84,11 +84,11 @@ if(!isModalOpen) return null
                     <div className="flexBlock">
                         <h3 className="labelModal">Название рецепта:</h3>
                         <input 
-                            className="inputModal"
+                            className="inputModal input-reset"
                             name="title" 
                             type="text"
                             value={title}
-                            placeholder="Наименование рецепта"
+                            placeholder=""
                             onChange={(event) => setTitle(event.target.value)}
                         />
                     </div>
@@ -96,10 +96,10 @@ if(!isModalOpen) return null
                         <h3 className="labelModal mr-5px">Описание:</h3>
                         <textarea 
                            
-                            className="inputModal"
+                            className="inputModal input-reset"
                             name="desc" 
                             value={desc}
-                            placeholder="Описание рецепта"
+                            placeholder=""
                             onChange={(event) => setDesc(event.target.value)}
                         />
                     </div>

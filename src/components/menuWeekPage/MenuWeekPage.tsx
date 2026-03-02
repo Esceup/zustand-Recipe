@@ -8,12 +8,11 @@ export const MenuWeekPage = () => {
     const [title, setTitle] = useState('')
     const recipesList = useRecipesStore(state => state.recipesList)
     const { openCreateModal } = storeModal()
-
     return (
         <>
-                        <h1>Список рецептов</h1>
-                    <div className="flexBlock j-center ">
-                        
+                    <h1>Список рецептов</h1>
+
+                    <div className="flexBlock j-center "> 
                         <button className="btn btnAddRecipeMain btn-gradient" onClick={openCreateModal}>Добавить рецепт</button>
                     </div>
                     <div >
