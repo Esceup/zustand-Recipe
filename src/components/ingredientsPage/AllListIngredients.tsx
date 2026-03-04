@@ -50,7 +50,7 @@ export const AllListIngredients = () => {
                 <h3 className="searchLabel">Поиск</h3>
                 <input 
                     type="text" 
-                    className={`inputModal first mb-15px input-reset ${error ? 'error' : ''} `}
+                    className={`inputModal first mb-15px input-reset  `}
                     value={searchTitle}
                     placeholder=""
                     onChange={(event) => setSearchTitle(event.target.value)}

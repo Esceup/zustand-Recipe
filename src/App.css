@@ -414,8 +414,8 @@ display: none;
 }
 .btnClose {
   position: absolute;
-  right: 35px;
-  top: 35px;
+  right: 12px;
+  top: 15px;
   padding: 0px 7px 4px 7px;
 }
 .ingredientsItem {
