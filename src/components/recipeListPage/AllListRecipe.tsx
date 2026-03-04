@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useRecipesStore } from "../../store/store"
-import RecipeItem from "../recipeListPage/RecipeItem"
+import RecipeItem from "./RecipeItem"
 import { storeModal } from "../../store/storeModal"
 
-export const MenuWeekPage = () => {
+export const AllListRecipe = () => {
 
     const [title, setTitle] = useState('')
     const recipesList = useRecipesStore(state => state.recipesList)
@@ -34,6 +34,7 @@ export const MenuWeekPage = () => {
                             <RecipeItem key={recipe.id} recipe={recipe}/>
                         ))}
                     </ul>
+                    <div></div>
                     
                     </>
     )

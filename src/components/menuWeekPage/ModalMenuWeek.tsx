@@ -25,7 +25,7 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemP
         <>
             
                 <div className={`modalMenuWeek ${show ? 'active' : ''}`}>
-                    <button className="btn btnClose" onClick={() => setShow(false)}>x</button>
+                    <button className="btn btnClose btn-reset" onClick={() => setShow(false)}><i className="fa-solid fa-xmark"></i></button>
 
                     {/* <input 
                         type="text" 

@@ -3,7 +3,7 @@ import { storeIngredients } from "../../store/storeIngredients"
 
 
 
-export const IngredientsList = () => {
+export const AllListIngredients = () => {
 
     const { Ingredients, addNewIngredient, deleteIngredient} = storeIngredients()
     const [show, setShow] = useState(false)

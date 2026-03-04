@@ -12,7 +12,7 @@ export const ModalUserProfile:FC<UserProfileProps> = ({ showModal, setShowModal 
     return (
         <>
             <div className={`modalUserProfile ${showModal ? 'show' : ''} ` }>
-                <button className="btn btn-gradient" onClick={logout}>Выйти из профиля</button>
+                <button className="btn btn-gradient btn-exit" onClick={logout}>Выйти из профиля</button>
             </div>
             <div className={`modalUserProfileBack ${showModal ? 'show' : ''} `} onClick={() => setShowModal(!showModal)}></div>
         </>

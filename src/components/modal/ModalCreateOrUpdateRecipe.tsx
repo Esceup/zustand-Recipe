@@ -78,7 +78,7 @@ if(!isModalOpen) return null
         <div>
             <div onClick={closeModal} className={`backModal ${isModalOpen ? 'active' : ''}`}></div>
             <div className="modalRecipe">
-            <button className="btn btnClose" onClick={closeModal}>х</button>
+            <button className="btn btnClose btn-reset" onClick={closeModal}><i className="fa-solid fa-xmark"></i></button>
             <div>
                 <form onSubmit={handleSubmit}>
                     <div className="flexBlock">
@@ -114,7 +114,7 @@ if(!isModalOpen) return null
                 </form>
                 <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
                 <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />
-                <button onClick={handleSubmit} type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
+                <button onClick={handleSubmit} type="submit" className="btn btnUpdate btn-gradient">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
             </div>
         </div>
         </div>

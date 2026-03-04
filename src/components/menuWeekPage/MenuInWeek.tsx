@@ -94,7 +94,7 @@ export const MenuInWeek = () => {
                                 setTitleItemEdit(item.title)
                                 setActive(!active)
                             }
-                            }><i className={`fa-solid ${active ? "fa-check " : "fa-pencil"} `}></i>
+                            }><i className={`fa-solid ${item.editMode === true ? "fa-check " : "fa-pencil"} `}></i>
                             </button> 
                             <button 
                                 className="btn-reset" 
@@ -106,15 +106,22 @@ export const MenuInWeek = () => {
                                     <i className="fa-solid fa-trash-can"></i>
                             </button>   
                             </h3>
-                            <ul className="recipeList mb-15px">
+                            {item.includesRecipe.length ? (
+                                <ul className="recipeList mb-15px">
                                  {item.includesRecipe?.map(includeItem => 
                                     recipesList?.map((recipeItem, index) => 
                                         recipeItem.title == includeItem.title ? 
-                                        <li className="2" key={recipeItem.id}>{index + 1}. {recipeItem.title}</li> : '')
+                                        <li className="includeRecipeItem" key={recipeItem.id}>{index + 1}. {recipeItem.title}</li> : '')
                                     )
                              }
                           
                             </ul> 
+                            ) : (
+                                 <ul className="recipeList mb-15px">
+                                    <li className="includeRecipeItem" >Меню пустое</li>
+                                 </ul>
+                            )}
+                            
                                                 
                         </li>
 

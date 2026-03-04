@@ -1,6 +1,6 @@
 import './App.css'
 import { LoginForm } from './components/auth/LoginForm';
-import { RecipeList } from './components/recipeListPage/RecipeList'
+import { TabsBlock } from './components/recipeListPage/TabsBlock'
 import { useAuthStore } from './store/authStore'
 import { useEffect } from 'react';
 
@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       
-      {user ? <RecipeList/> : <LoginForm />  }
+      {user ? <TabsBlock/> : <LoginForm />  }
     </>
   )
 }

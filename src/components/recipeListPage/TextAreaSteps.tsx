@@ -36,13 +36,13 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
             ?  steps?.map(step => 
                     <li>
                         <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
-                        <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
+                        <button className="btn btnSteps btn-reset" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-xmark"></i></button>
                     </li>
                 )            
             : steps?.map(step => 
                     <li>
                         <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
-                        <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
+                        <button className="btn btn-reset" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-xmark"></i></button>
                     </li>
                 )}
                 <li>
@@ -51,7 +51,7 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
                         value={title}
                         onChange={(event) => setTitle(event.target.value)}>{title}
                     </textarea>
-                    <button className="btn btnSteps" onClick={addNewSteps}>+</button>
+                    <button className="btn btnSteps btn-gradient" onClick={addNewSteps}>+</button>
                 </li>
                   
         </ul>
