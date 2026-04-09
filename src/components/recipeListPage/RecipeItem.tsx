@@ -2,7 +2,7 @@ import { useState, type FC } from "react"
 import { useRecipesStore } from "../../store/store"
 import type { IRecipe } from "../../types/types"
 
-import { storeModal } from "../../store/storeModal";
+import { useStoreModal } from "../../store/storeModal";
 
 interface ItemProps {
     recipe: IRecipe;
@@ -13,7 +13,7 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
 
     const [active, setActive] = useState(true)
     const removeRecipe = useRecipesStore(state => state.removeRecipe)
-    const { openEditModal } = storeModal()
+    const { openEditModal } = useStoreModal()
 
 
     const handleRemove = () => {

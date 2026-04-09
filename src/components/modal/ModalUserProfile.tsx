@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useAuthStore } from "../../store/authStore";
+import { useAuthStore } from "../../store/storeAuth";
 
 interface UserProfileProps {
     showModal: boolean;

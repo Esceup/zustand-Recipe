@@ -11,7 +11,7 @@ interface ModalStore {
 }
 
 
-export const storeModal = create<ModalStore>((set) => ({
+export const useStoreModal = create<ModalStore>((set) => ({
     isModalOpen: false,
     editingRecipe: null,
     modalMode: 'create',

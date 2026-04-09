@@ -10,7 +10,7 @@ interface IngredientsStore {
     deleteIngredient: (id: string) => void;
 }
 
-export const storeIngredients = create<IngredientsStore>()(persist((set, get) => ({
+export const useStoreIngredients = create<IngredientsStore>()(persist((set, get) => ({
 
     Ingredients: [
         { id: generatedId(), title: 'Картофель', unit: '3 шт'},

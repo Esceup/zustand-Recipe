@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react"
 import { useRecipesStore } from "../../store/store";
 import type { IIngredient, IStep } from "../../types/types";
-import  { storeModal } from "../../store/storeModal";
+import  { useStoreModal } from "../../store/storeModal";
 import { TextAreaSteps } from "../recipeListPage/TextAreaSteps";
 import { InputIngredients } from "../ingredientsPage/InputIngredients";
 
@@ -16,7 +16,7 @@ export const ModalCreateOrUpdateRecipe = () => {
 
     const createRecipe = useRecipesStore(state => state.createRecipe)
     const updateRecipe = useRecipesStore(state => state.updateRecipe)
-    const { isModalOpen, editingRecipe, modalMode, closeModal } = storeModal()
+    const { isModalOpen, editingRecipe, modalMode, closeModal } = useStoreModal()
 
     const resetForm = () => {
         setTitle('')

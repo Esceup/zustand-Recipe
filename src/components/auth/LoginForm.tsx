@@ -1,30 +1,57 @@
 import React, { useState } from "react"
-import { useAuthStore } from "../../store/authStore"
+import { useAuthStore } from "../../store/storeAuth"
+
+const getErrorMessage = (errorCode: string): string => {
+  switch (errorCode) {
+    case 'auth/invalid-email':
+      return 'Некорректный формат email.';
+    case 'auth/weak-password':
+      return 'Пароль должен содержать минимум 6 символов.';
+    case 'auth/email-already-in-use':
+      return 'Пользователь с таким email уже существует.';
+    case 'auth/user-not-found':
+      return 'Пользователь не найден.';
+    case 'auth/wrong-password':
+      return 'Неверный пароль.';
+    case 'auth/invalid-credential':
+        return 'Неверный логин или пароль'  
+    default:
+      return 'Произошла ошибка. Попробуйте снова.';
+  }
+};
 
 export const LoginForm = () => {
 
-    const [isRegister, setIsRegister] = useState(false)
+    const [isRegister, setIsRegister] = useState(true)
     const [title, setTitle] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { register, login } = useAuthStore()
 
+   
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+
+        const trimmerEmail = email.trim()
+        const trimmerPassword = password.trim()
+
         try {
            if(isRegister) {
-             await register(email, password, title)
+             await register(trimmerEmail, trimmerPassword, title)
            } else {
-            await login(email, password)
+            await login(trimmerEmail, trimmerPassword)
            }
-        } catch(err) {
-            console.error('Ошибка', err)
+        } catch(err) {         
+            console.error('Ошибка', err?.code)
+            const errCode = err?.code || unknown 
+            alert(getErrorMessage(errCode))
         }
     }
 
     return (
         <div className="LoginForm">
-            <h2>{isRegister ? 'Регистрация' : "Авторизация"}</h2>
+            <h2>{isRegister ? 'Регистрация' : 'Авторизация'}</h2>
             <form onSubmit={handleSubmit}>
                  {isRegister ? <div className="blockForLabel">
                     
@@ -41,7 +68,7 @@ export const LoginForm = () => {
                 <div className="blockForLabel">
                     
                     <input 
-                        type="text" 
+                        type="email" 
                         placeholder=""
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
@@ -53,7 +80,7 @@ export const LoginForm = () => {
                  <div className="blockForLabel">
                     
                     <input 
-                        type="text" 
+                        type="password" 
                         placeholder=""
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}

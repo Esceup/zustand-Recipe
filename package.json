@@ -1,5 +1,5 @@
 {
-  "name": "react-ts-redux",
+  "name": "zustand-Recipe",
   "private": true,
   "version": "0.0.0",
   "homepage": "https://esceup.github.io/zustand-Recipe/",
@@ -9,11 +9,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist" 
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
-    "@supabase/supabase-js": "^2.93.1",
     "firebase": "^12.9.0",
     "node": "^25.5.0",
     "react": "^19.2.0",
