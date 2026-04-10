@@ -82,39 +82,35 @@ if(!isModalOpen) return null
             <div>
                 <form onSubmit={handleSubmit}>
                     <div className="flexBlock">
-                        <h3 className="labelModal">Название рецепта:</h3>
+                        {/* <h3 className="labelModal">Название рецепта:</h3> */}
                         <input 
                             className="inputModal input-reset"
                             name="title" 
                             type="text"
                             value={title}
-                            placeholder=""
+                            placeholder="Название рецепта"
                             onChange={(event) => setTitle(event.target.value)}
                         />
                     </div>
                     <div className="flexBlock">
-                        <h3 className="labelModal mr-5px">Описание:</h3>
+                        {/* <h3 className="labelModal mr-5px">Описание:</h3> */}
                         <textarea 
                            
                             className="inputModal input-reset"
                             name="desc" 
                             value={desc}
-                            placeholder=""
+                            placeholder="Описание"
                             onChange={(event) => setDesc(event.target.value)}
                         />
                     </div>
                     <div className="flexBlock">
-                        <h3 className="labelModal">Продукты:</h3>                     
+                        <h3 className="labelModal">Добавление продукта:</h3>                     
                     </div>
-                    
-                    
-                    
-
-                    
+                    <button onClick={handleSubmit} type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
                 </form>
                 <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
                 <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />
-                <button onClick={handleSubmit} type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
+                
             </div>
         </div>
         </div>

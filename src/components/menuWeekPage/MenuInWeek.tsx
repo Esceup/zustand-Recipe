@@ -67,11 +67,7 @@ export const MenuInWeek = () => {
                     
                         <li key={item.id} className="recipeItem">
                             <h3 className="menuWeekItemTitle">
-                                <span  onClick={() => {
-                                    setShow(true)
-                                    menuItemPropSet(item)
-                                    }} 
-                                    className={!item.editMode ? 'spanTitleItem active' : 'spanTitleItem'} >
+                                <span className={!item.editMode ? 'spanTitleItem active' : 'spanTitleItem'} >
                                     {item.title}
                                 </span>
 
@@ -83,36 +79,47 @@ export const MenuInWeek = () => {
                                     setTitleItemEdit(e.target.value)          
                                 }}/> 
                             
-                            <button className="btn-reset ml-5px" onClick={() => {                           
-                                    toggleEditmenu(item.id, true)
-                                    if(item.editMode === true) {
-                                        toggleEditmenu(item.id, false)
-                                        editTitleMenu(item.id, titleItemEdit)  
-                                    
-                                    
-                                }
-                                setTitleItemEdit(item.title)
-                                setActive(!active)
-                            }
-                            }><i className={`fa-solid ${active ? "fa-check " : "fa-pencil"} `}></i>
-                            </button> 
-                            <button 
-                                className="btn-reset" 
-                                onClick={() => {
-                                    let res = confirm('Точно удалить?')
-                                    if(!res) return
-                                    deleteMenu(item.id)
-                                }}>
-                                    <i className="fa-solid fa-trash-can"></i>
-                            </button>   
+                            
                             </h3>
+
+                            <div className="mb-10px">
+                                <button className="btn-reset" onClick={() => {                           
+                                toggleEditmenu(item.id, true)
+                                if(item.editMode === true) {
+                                    toggleEditmenu(item.id, false)
+                                    editTitleMenu(item.id, titleItemEdit)   
+                                  }
+                                    setTitleItemEdit(item.title)
+                                    setActive(!active)
+                                 }
+                                }><i className={`fa-solid ${active ? "fa-check " : "fa-pencil"} `}></i>
+                                </button> 
+                                <button 
+                                    className="btn-reset" 
+                                    onClick={() => {
+                                        const isDelete = confirm('Точно удалить?')
+                                        if(!isDelete) return
+                                        deleteMenu(item.id)
+                                    }}>
+                                        <i className="fa-solid fa-trash-can"></i>
+                                </button> 
+                            </div>  
+
                             <ul className="recipeList mb-15px">
+                               
                                  {item.includesRecipe?.map(includeItem => 
-                                    recipesList?.map((recipeItem, index) => 
+                                    recipesList?.map((recipeItem) => 
                                         recipeItem.title == includeItem.title ? 
-                                        <li className="2" key={recipeItem.id}>{index + 1}. {recipeItem.title}</li> : '')
+                                        <li key={recipeItem.id}><i className="fa-solid fa-circle"></i>{recipeItem.title}</li> : '')
                                     )
                              }
+                              <button onClick={() => {
+                                setShow(true)
+                                menuItemPropSet(item)
+                                }} 
+                                className="btn-reset">
+                                        <i className="fa-solid fa-plus"></i>
+                            </button>
                           
                             </ul> 
                                                 

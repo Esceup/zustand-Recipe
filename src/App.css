@@ -1,4 +1,5 @@
 #root {
+  position:relative;
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
@@ -111,7 +112,6 @@
   max-height: 80vh;
 }
 .btnAddRecipeMain {
-  margin-left: 15px;
   width: 100%;
   padding: 10px !important;
   border-radius: 15px;
@@ -157,6 +157,7 @@
   margin-right: 5px;
 }
 .recipeItemProductsBlock {
+  margin-top: 10px;
   padding: 15px;
   border-radius: 15px;
   background-color: var(--gray);
@@ -166,8 +167,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
-    /* box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); */
+    padding: 0 20px;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
     background: #000;
@@ -177,7 +177,6 @@
 .recipeItem.active {
   max-height: 50px;
   overflow: hidden;
-  padding: 0 20px;
   transition: all 0.3s ease-in-out;
 }
 .recipeItem i {
@@ -385,10 +384,11 @@ display: none;
     justify-content: space-between;
 }
 .btn {
-  background-color: #3182ce;
+  background-color: initial;
   color: white;
   padding: 0px 7px 4px 7px;
   z-index: 30;
+  border: none;
 }
 .searchInput {
   margin-right: 15px;
@@ -484,6 +484,7 @@ display: none;
     border: 2px solid #373737;
     border-radius: 5px;
     color: white;
+    cursor: pointer;
 }
 .popularIngredientsList li {
     margin-bottom: 5px;
@@ -539,6 +540,7 @@ display: none;
 }
 .btnBlockUpdateDelete {
   margin-top: 15px;
+  margin-bottom: 10px;
 }
 .labelMenuWeekAdd {
   margin-right: 10px;
@@ -568,17 +570,23 @@ display: none;
     /* padding-top: 3px; */
     border-bottom: 1px solid #000;
 }
-
+.inputModal::placeholder {
+  color: white;
+  opacity: 0.8;
+}
 .flexBlockInputAdd {
     display: flex;
     position: relative;
     margin-bottom: 15px;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 7px 15px;
     background-color: var(--gray);
 }
 .flexBlockInputAdd i {
   color: white
+}
+.menuWeekItemTitle {
+  margin-bottom: 5px;
 }
 .menuWeekItemTitle .input-reset {
   display: none;
@@ -701,6 +709,19 @@ display: none;
 .menuWeek .recipeList .recipeList {
   gap: 10px
 }
+.menuWeek .recipeList .recipeList li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menuWeek .recipeList .recipeList li:nth-last-child(1) {
+  border-bottom: 1px solid #fff;
+}
+.menuWeek .recipeList .recipeList li i {
+  font-size: 6px;
+  margin-right: 7px;
+  margin-top: 3px;
+}
 .modalMenuWeek {
   position: absolute;
   height: auto;
@@ -713,9 +734,9 @@ display: none;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 7px;
-  background: #ffffff;
+  background: #1d2027;
   z-index: 20;
-  border-radius: 5px;
+  border-radius: 15px;
   border: 2px solid #c9c9c9;
   z-index: 40;
   padding: 20px;
@@ -767,11 +788,15 @@ display: none;
     .popularIngredientsListBlock {
       padding: 30px;
     }
+   
  }
  @media(max-width: 992px) {
    .recipeList {
      grid-template-columns: 1fr 1fr;
    }
+    #root {
+      padding: 20px 25px 100px 25px;
+    }
 }
 
 @media(max-width: 768px) {

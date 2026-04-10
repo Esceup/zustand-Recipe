@@ -47,12 +47,12 @@ export const IngredientsList = () => {
                 />
                 <button className="btn btnAddNewIngredient btn-gradient" onClick={handleNewIngredient}>Добавить</button>
                 </div>
-                <h3 className="searchLabel">Поиск</h3>
+                
                 <input 
                     type="text" 
                     className={`inputModal first mb-15px input-reset ${error ? 'error' : ''} `}
                     value={searchTitle}
-                    placeholder=""
+                    placeholder="Поиск"
                     onChange={(event) => setSearchTitle(event.target.value)}
                 />
             <ul className={`listReset popularIngredientsListMain`}>
