@@ -67,7 +67,7 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
 
     removeRecipe: (id) => {
         const result = confirm("Точно хотите удалить?")
-        if(!result) return false
+        if(!result) return;
         const { recipesList } = get()
         set({
             recipesList: recipesList.filter(recipe => recipe.id !== id)

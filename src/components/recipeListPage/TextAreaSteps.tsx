@@ -3,7 +3,7 @@ import type { IStep } from "../../types/types";
 import { generatedId } from "../../function/generatedId";
 
 interface StepsProps {
-    modalMode: string;
+    modalMode: 'edit' | 'create';
     steps: IStep[];
     setSteps: (steps: IStep[]) => void;
 }
@@ -31,20 +31,16 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
     return (
        <>
         <h3>Пошаговый рецепт</h3>
+        <h4>1</h4>
         <ul className="stepsList">
-           {modalMode === 'edit' 
-            ?  steps?.map(step => 
-                    <li>
-                        <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
-                        <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
-                    </li>
-                )            
-            : steps?.map(step => 
-                    <li>
-                        <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
-                        <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
-                    </li>
+           
+           {steps?.map(step => 
+            <li>
+                <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
+                <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
+            </li>
                 )}
+            {modalMode === 'edit' ?
                 <li>
                     <textarea
                         className="newStepArea"
@@ -52,7 +48,8 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
                         onChange={(event) => setTitle(event.target.value)}>{title}
                     </textarea>
                     <button className="btn btnSteps" onClick={addNewSteps}>+</button>
-                </li>
+                </li> 
+            : ''}
                   
         </ul>
        </>  

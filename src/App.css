@@ -217,6 +217,11 @@
   padding: 5px;
   padding-bottom: 10px;
   font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+.inputPass:invalid {
+  transition: all 0.3s ease-in-out;
+  border-bottom: 1px solid red !important;
 }
 .LoginForm h2 {
   margin-bottom: 60px;
@@ -467,25 +472,24 @@ display: none;
   top: 0px;
   gap: 5px;
   list-style-type: none;
-  padding: 7px;
-  background: #000;
-  z-index: 20;
-  border-radius: 5px;
-  z-index: 20;
   padding: 15px;
   border-radius: 15px;
   overflow: auto;
+  background: #000;
+  z-index: 20;
 }
 .popularIngredientsListMain li {
-    min-height: 25px;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    width: 100%;
-    border: 2px solid #373737;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+  min-height: 25px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  width: 100%;
+  border: 2px solid #373737;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 5px;
 }
+
 .popularIngredientsList li {
     margin-bottom: 5px;
     padding: 0px 6px;

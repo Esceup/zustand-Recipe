@@ -1,24 +1,33 @@
 import React, { useState } from "react"
 import { useAuthStore } from "../../store/storeAuth"
+import { FirebaseError } from "firebase/app"
 
-const getErrorMessage = (errorCode: string): string => {
+const getRussianErrorMessage = (errorCode: string): string => {
   switch (errorCode) {
-    case 'auth/invalid-email':
-      return 'Некорректный формат email.';
-    case 'auth/weak-password':
-      return 'Пароль должен содержать минимум 6 символов.';
     case 'auth/email-already-in-use':
-      return 'Пользователь с таким email уже существует.';
+      return 'Пользователь с таким email уже существует';
+    case 'auth/invalid-email':
+      return 'Некорректный формат email';
+    case 'auth/weak-password':
+      return 'Пароль слишком слабый (минимум 6 символов)';
     case 'auth/user-not-found':
-      return 'Пользователь не найден.';
+      return 'Пользователь с таким email не найден';
     case 'auth/wrong-password':
-      return 'Неверный пароль.';
+      return 'Неверный пароль';
     case 'auth/invalid-credential':
-        return 'Неверный логин или пароль'  
+      return 'Неверный email или пароль'; 
+    case 'auth/too-many-requests':
+      return 'Слишком много неудачных попыток. Попробуйте позже';
+    case 'auth/network-request-failed':
+      return 'Ошибка сети. Проверьте подключение';
     default:
-      return 'Произошла ошибка. Попробуйте снова.';
+      return `Ошибка: ${errorCode}`;
   }
 };
+
+const handleChanheInput = () => {
+    
+}
 
 export const LoginForm = () => {
 
@@ -42,16 +51,21 @@ export const LoginForm = () => {
            } else {
             await login(trimmerEmail, trimmerPassword)
            }
-        } catch(err) {         
-            console.error('Ошибка', err?.code)
-            const errCode = err?.code || unknown 
-            alert(getErrorMessage(errCode))
+        } catch(error: unknown) {         
+            if(error instanceof FirebaseError) {
+                const russianMessage = getRussianErrorMessage(error.code)
+                console.error(russianMessage)
+                alert(russianMessage)
+            } else {
+                alert('Некорректные данные')
+            }
+            
         }
     }
 
     return (
         <div className="LoginForm">
-            <h2>{isRegister ? 'Регистрация' : 'Авторизация'}</h2>
+            <h2>{isRegister ? 'Регистрация' : 'Авторизация1'}</h2>
             <form onSubmit={handleSubmit}>
                  {isRegister ? <div className="blockForLabel">
                     
@@ -61,7 +75,7 @@ export const LoginForm = () => {
                         value={title} 
                         onChange={(e) => setTitle(e.target.value)}
                         className="inputEmail input-reset"
-                        required
+                        maxLength={30}
                     />
                     <label className="labelEmail">Имя*</label>
                 </div> : ''}
@@ -85,6 +99,7 @@ export const LoginForm = () => {
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}
                         className="inputPass input-reset"
+                        minLength={6}
                         required
                     />
                     <label className="labelPass ">Пароль*</label>
@@ -92,13 +107,16 @@ export const LoginForm = () => {
                 
                 <div>
                     <button className="btn btnRegister btn-gradient" type="submit">{isRegister ? "Создать аккаунт " : "Вход"}</button> 
-                </div>              
-            </form>
-            <button 
+                </div> 
+
+                  <button 
                 onClick={() => setIsRegister(!isRegister)}
                 className="btn btnFlipRegister btn-gradient-blue">                  
                 {isRegister ? "Войти" : "Регистрация"}
             </button>
+                        
+            </form>
+          
         </div>
     )
 }

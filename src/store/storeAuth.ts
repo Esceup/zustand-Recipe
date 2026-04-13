@@ -8,6 +8,7 @@ import {
   updateProfile 
 } from 'firebase/auth';
 import { auth } from '../lib/firebase';
+import { FirebaseError } from 'firebase/app' 
 
 interface AuthState {
   user: User | null;
@@ -16,56 +17,62 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, displayName?: string) => Promise<void>;
   logout: () => Promise<void>;
-  checkAuth: () => void; 
+
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  loading: true,
-  error: null,
+export const useAuthStore = create<AuthState>((set) => {
 
-  
-  checkAuth: () => {
-    onAuthStateChanged(auth, (user) => {
-      set({ user, loading: false });
-    });
-  },
+  onAuthStateChanged(auth, (user) => {
+    set({ user, loading: false})
+  })
 
-  login: async (email, password) => {
-    set({ loading: true, error: null });
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      
-    } catch (error: any) {
-      set({ error: error.message, loading: false });
-      throw error;
-    }
-  },
+  return {
+    user: null,
+    loading: true,
+    error: null,
 
-  register: async (email, password, displayName) => {
-    set({ loading: true, error: null });
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      
-      if (displayName && userCredential.user) {
-        await updateProfile(userCredential.user, { displayName });
+
+    login: async (email, password) => {
+      set({ loading: true, error: null });
+      try {
+        await signInWithEmailAndPassword(auth, email, password);    
+      } catch (error: unknown) {
+        const message = error instanceof FirebaseError ? error.message : 'Неизвестная ошибка';
+        
+        set({ error: message, loading: false });
+        throw error; 
       }
-      
-    } catch (error: any) {
-      set({ error: error.message, loading: false });
-      throw error;
-    }
-  },
+    },
 
-  logout: async () => {
-    set({ loading: true, error: null });
-    try {
-      await signOut(auth);
-      set({ user: null, loading: false });
-    } catch (error: any) {
-      set({ error: error.message, loading: false });
-      throw error;
-    }
-  },
-}));
+    register: async (email, password, displayName) => {
+      set({ loading: true, error: null });
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        if (displayName && userCredential.user) {
+          await updateProfile(userCredential.user, { displayName });
+        }
+        
+      } catch (error: unknown) {
+       const message = error instanceof FirebaseError ? error.message : 'Неизвестная ошибка';
+        
+       set({ error: message, loading: false });
+       throw error; 
+       
+      }
+    },
+
+    logout: async () => {
+      set({ loading: true, error: null });
+      try {
+        await signOut(auth);
+        
+      } catch (error: unknown) {
+        const message = error instanceof FirebaseError ? error.message : 'Неизвестная ошибка';
+        
+        set({ error: message, loading: false });
+        throw error; 
+      }
+    },
+  }
+});
