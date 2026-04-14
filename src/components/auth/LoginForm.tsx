@@ -25,9 +25,7 @@ const getRussianErrorMessage = (errorCode: string): string => {
   }
 };
 
-const handleChanheInput = () => {
-    
-}
+
 
 export const LoginForm = () => {
 
@@ -36,8 +34,13 @@ export const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { register, login } = useAuthStore()
+    const [lengthValue, setLengthValue] = useState(true)
 
-   
+   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value)
+      const lengthValue = e.target.value.length
+      setLengthValue(lengthValue > 6) 
+  }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -97,8 +100,8 @@ export const LoginForm = () => {
                         type="password" 
                         placeholder=""
                         value={password} 
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="inputPass input-reset"
+                        onChange={handleChangeInput}
+                        className={`inputPass input-reset ${lengthValue ? '' : 'error'}`}
                         minLength={6}
                         required
                     />

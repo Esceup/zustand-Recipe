@@ -8,10 +8,10 @@ interface MenuWeekStore {
     menuWeek: IMenuWeek[];
     addNewMenu: (title: string) => void;
     addIncludeRecipe: (id: string, idRecipe: string, titleRecipe: string) => void;
-    toggleEditmenu: (id: string, value: boolean) => void;
+    toggleEditMenu: (id: string, value: boolean) => void;
     editTitleMenu: (id: string, title: string) => void;
     deleteMenu: (id: string) => void;
-    deleteInclideMenuItem: (idMenuWeek: string, idDeleteRecipeItem: string) => void;
+    deleteIncludeMenuItem: (idMenuWeek: string, idDeleteRecipeItem: string) => void;
 }
 
 export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
@@ -47,7 +47,7 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
             
         }))
     },
-    toggleEditmenu: (id, value) => {
+    toggleEditMenu: (id, value) => {
         set(state => ({
             menuWeek: state.menuWeek.map(item => {
                 if(item.id === id) {
@@ -80,11 +80,11 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
             menuWeek: menuWeek.filter(item => item.id !== id)
         })
     },
-    deleteInclideMenuItem: (idMenuWeek, idDeleteRecipeItem) => {
+    deleteIncludeMenuItem: (idMenuWeek, idDeleteRecipeItem) => {
         
         set(state => ({
             menuWeek: state.menuWeek.map(menuItem => {
-            if(menuItem.id == idMenuWeek) {
+            if(menuItem.id === idMenuWeek) {
                 return {
                     ...menuItem, 
                     includesRecipe: menuItem.includesRecipe.filter(item => item.id !== idDeleteRecipeItem)

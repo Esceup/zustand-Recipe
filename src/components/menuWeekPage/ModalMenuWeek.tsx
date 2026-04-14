@@ -2,9 +2,6 @@ import { type FC } from "react"
 import { useMenuWeek } from "../../store/storeMenuWeek";
 import { useRecipesStore } from "../../store/store";
 import type { IMenuWeek } from "../../types/types";
-
-
-
 interface ModalMenuWeekProps {
     show: boolean;
     setShow: (id: boolean) => void;
@@ -13,7 +10,7 @@ interface ModalMenuWeekProps {
 
 export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemProp }) => {
     // const [title, setTitle] = useState('')
-    const { menuWeek, addIncludeRecipe, deleteInclideMenuItem } = useMenuWeek()
+    const { menuWeek, addIncludeRecipe, deleteIncludeMenuItem } = useMenuWeek()
     const { recipesList } = useRecipesStore()
 
     const includesRecipeLength = menuWeek.find(filterItem => filterItem.id == menuItemProp.id)
@@ -65,7 +62,7 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemP
                                 key={includeItem.id}>{includeItem.title}
                                     <span 
                                         className=" deleteIngredient" 
-                                        onClick={() => deleteInclideMenuItem(menuItem.id, includeItem.id)}>
+                                        onClick={() => deleteIncludeMenuItem(menuItem.id, includeItem.id)}>
                                             x
                                     </span>
                                 </li>

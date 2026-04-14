@@ -4,16 +4,10 @@ import { useState, type FC } from "react"
 import { generatedId } from "../../function/generatedId";
 import { useStoreIngredients } from "../../store/storeIngredients";
 import type { IIngredient } from "../../types/types";
-
-
-
 interface InputIngredients {
     ingredients: IIngredient[];
     setIngredients: (ingredients: IIngredient[]) => void;
 }
-
-
-
 
 export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredients}) => {
 

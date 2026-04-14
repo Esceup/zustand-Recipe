@@ -18,13 +18,14 @@ export const MenuInWeek = () => {
     const [titleItemEdit, setTitleItemEdit] = useState('')
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
-    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu, toggleEditmenu } = useMenuWeek()
+    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu, toggleEditMenu } = useMenuWeek()
     const { recipesList } = useRecipesStore()
 
-    const handlAddeNewMenu = () => {
-        if(title == '' || title.length <= 3) return
+    const handleAddNewMenu = () => {
+        if(title === '' || title.length <= 3) return
         if(menuWeek.some(item => item.title.toLowerCase() === title.toLowerCase())) return
         addNewMenu(title)
+        setTitle('')
     }
 
 
@@ -42,7 +43,7 @@ export const MenuInWeek = () => {
                     onChange={(event) => setTitle(event.target.value)}
                     placeholder=""
                 />
-                <button onClick={handlAddeNewMenu} className="btn btnAdd btn-gradient">Добавить</button>
+                <button onClick={handleAddNewMenu} className="btn btnAdd btn-gradient">Добавить</button>
                 
             </div>
             <div>
@@ -84,15 +85,15 @@ export const MenuInWeek = () => {
 
                             <div className="mb-10px">
                                 <button className="btn-reset" onClick={() => {                           
-                                toggleEditmenu(item.id, true)
-                                if(item.editMode === true) {
-                                    toggleEditmenu(item.id, false)
-                                    editTitleMenu(item.id, titleItemEdit)   
-                                  }
-                                    setTitleItemEdit(item.title)
-                                    setActive(!active)
-                                 }
-                                }><i className={`fa-solid ${active ? "fa-check " : "fa-pencil"} `}></i>
+                                    toggleEditMenu(item.id, true)
+                                    if(item.editMode === true) {
+                                        toggleEditMenu(item.id, false)
+                                        editTitleMenu(item.id, titleItemEdit)   
+                                    }
+                                        setTitleItemEdit(item.title)
+                                        setActive(!active)
+                                    }
+                                    }><i className={`fa-solid ${active ? "fa-pencil" : "fa-check"} `}></i>
                                 </button> 
                                 <button 
                                     className="btn-reset" 
@@ -109,16 +110,16 @@ export const MenuInWeek = () => {
                                
                                  {item.includesRecipe?.map(includeItem => 
                                     recipesList?.map((recipeItem) => 
-                                        recipeItem.title == includeItem.title ? 
+                                        recipeItem.title === includeItem.title ? 
                                         <li key={recipeItem.id}><i className="fa-solid fa-circle"></i>{recipeItem.title}</li> : '')
                                     )
                              }
-                              <button onClick={() => {
+                            <button onClick={() => {
                                 setShow(true)
                                 menuItemPropSet(item)
                                 }} 
-                                className="btn-reset">
-                                        <i className="fa-solid fa-plus"></i>
+                                className="btn-reset border-top-white">
+                                    <i className="fa-solid fa-plus"></i>
                             </button>
                           
                             </ul> 

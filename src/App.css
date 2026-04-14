@@ -51,6 +51,17 @@
 .j-center{
   justify-content: center;
 }
+.searchEditTitle {
+  margin-top: 15px;
+  padding: 5px;
+  background: inherit;
+  color: white;
+  outline: none;
+  font-size: 19px;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  padding: 5px 10px;
+}
 .listReset {
   padding: 0;
   margin: 0;
@@ -219,10 +230,10 @@
   font-size: 16px;
   transition: all 0.3s ease-in-out;
 }
-.inputPass:invalid {
+/* .inputPass:invalid {
   transition: all 0.3s ease-in-out;
   border-bottom: 1px solid red !important;
-}
+} */
 .LoginForm h2 {
   margin-bottom: 60px;
 }
@@ -336,6 +347,10 @@ display: none;
 }
 .inputModal.error {
   border: 1px solid red;
+}
+.inputPass.error {
+  transition: all 0.3s ease-in-out;
+  border-bottom: 2px solid red !important;
 }
 .popularIngredientsListBlock .inputModal{
   margin-top: 5px;
@@ -558,6 +573,7 @@ display: none;
   right: 0;
   bottom: 0;
   z-index: 30;
+  background-color: rgb(0 0 0 / 0.5);
 }
 .modalUserProfileBack.show {
   display: block;
@@ -704,8 +720,35 @@ display: none;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgb(0 0 0 / 0.2);
-    z-index: 10;
+    background-color: rgb(0 0 0 / 0.5);
+    z-index: 39;
+}
+.d-none {
+  display: none;
+}
+.d-inline {
+  display: inline;
+}
+.d-block {
+  display: block;
+}
+.d-flex {
+  display: flex;
+}
+.white i {
+  color: white;
+}
+.modalUserProfile button.white {
+  margin-left: 5px;
+}
+.p-btn-normal {
+  padding: 7px 14px;
+}
+.border-top-white {
+  margin-top: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid white
 }
 .modalMenuWeekBack.active {
   display: block;

@@ -35,7 +35,7 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
         <ul className="stepsList">
            
            {steps?.map(step => 
-            <li>
+            <li key={step.id}>
                 <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
                 <button className="btn btnSteps" onClick={() => handleRemove(step.id)}>x</button>
             </li>

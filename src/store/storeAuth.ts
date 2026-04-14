@@ -17,14 +17,23 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, displayName?: string) => Promise<void>;
   logout: () => Promise<void>;
-
+  updateUserDisplayName: (newDisplayName: string) => Promise<void>
 }
+
+
 
 export const useAuthStore = create<AuthState>((set) => {
 
   onAuthStateChanged(auth, (user) => {
     set({ user, loading: false})
   })
+
+  const checkValidError = (err: unknown) => {
+    const message = err instanceof FirebaseError ? err.message : 'Неизвестная ошибка';
+        
+    set({ error: message, loading: false });
+    throw err; 
+  }
 
   return {
     user: null,
@@ -37,10 +46,7 @@ export const useAuthStore = create<AuthState>((set) => {
       try {
         await signInWithEmailAndPassword(auth, email, password);    
       } catch (error: unknown) {
-        const message = error instanceof FirebaseError ? error.message : 'Неизвестная ошибка';
-        
-        set({ error: message, loading: false });
-        throw error; 
+          checkValidError(error) 
       }
     },
 
@@ -54,11 +60,7 @@ export const useAuthStore = create<AuthState>((set) => {
         }
         
       } catch (error: unknown) {
-       const message = error instanceof FirebaseError ? error.message : 'Неизвестная ошибка';
-        
-       set({ error: message, loading: false });
-       throw error; 
-       
+        checkValidError(error)   
       }
     },
 
@@ -68,11 +70,23 @@ export const useAuthStore = create<AuthState>((set) => {
         await signOut(auth);
         
       } catch (error: unknown) {
-        const message = error instanceof FirebaseError ? error.message : 'Неизвестная ошибка';
-        
-        set({ error: message, loading: false });
-        throw error; 
+        checkValidError(error)
       }
+    },
+
+    updateUserDisplayName: async (newDisplayName: string) => {
+    
+      const currentUser = auth.currentUser
+      if(!currentUser) throw new Error('Нет авторизованного пользователя')
+
+      set({ loading: true, error: null})
+      
+      try {
+        await updateProfile(currentUser,{ displayName: newDisplayName })
+        set({ user: {...currentUser, displayName: newDisplayName},loading: false })
+      } catch(error: unknown) {
+        checkValidError(error)
+      }  
     },
   }
 });

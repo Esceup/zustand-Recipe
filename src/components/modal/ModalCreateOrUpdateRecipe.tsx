@@ -25,8 +25,6 @@ export const ModalCreateOrUpdateRecipe = () => {
         setSteps([])
     }
 
-   
-
     useEffect(() => {
         if(editingRecipe && modalMode === 'edit') {
             setTitle(editingRecipe.title)
@@ -44,7 +42,6 @@ export const ModalCreateOrUpdateRecipe = () => {
         }
     
         return () => document.body.classList.remove('modal-open');
-
 
     }, [isModalOpen, modalMode, editingRecipe])
 
@@ -70,15 +67,13 @@ export const ModalCreateOrUpdateRecipe = () => {
         closeModal()
     }
 
-
-
 if(!isModalOpen) return null
 
     return (
         <div>
             <div onClick={closeModal} className={`backModal ${isModalOpen ? 'active' : ''}`}></div>
             <div className="modalRecipe">
-            <button className="btn btnClose" onClick={closeModal}>х</button>
+                <button className="btn btnClose" onClick={closeModal}>х</button>
             <div>
                 <form onSubmit={handleSubmit}>
                     <div className="flexBlock">
@@ -112,8 +107,7 @@ if(!isModalOpen) return null
                 <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />
                 
             </div>
+            </div>
         </div>
-        </div>
-        
     )
 }
