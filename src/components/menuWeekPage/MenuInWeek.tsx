@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 import { useRecipesStore } from "../../store/store"
 import { useMenuWeek } from "../../store/storeMenuWeek"
@@ -7,8 +7,8 @@ import type { IMenuWeek } from "../../types/types";
 
 
 export const MenuInWeek = () => {
+    const refInput = useRef<HTMLInputElement>(null)
     const [show, setShow] = useState(false)
-    const [active, setActive] = useState(false)
     const [menuItemProp, menuItemPropSet] = useState<IMenuWeek>({ 
         id: '', 
         title: '', 
@@ -22,8 +22,8 @@ export const MenuInWeek = () => {
     const { recipesList } = useRecipesStore()
 
     const handleAddNewMenu = () => {
-        if(title === '' || title.length <= 3) return
-        if(menuWeek.some(item => item.title.toLowerCase() === title.toLowerCase())) return
+        // if(title === '' || title.length <= 3) return
+        // if(menuWeek.some(item => item.title.toLowerCase() === title.toLowerCase())) return
         addNewMenu(title)
         setTitle('')
     }
@@ -53,7 +53,7 @@ export const MenuInWeek = () => {
                     type="text" 
                     value={titleSearch}
                     className="searchInput"
-                    onChange={(event) => setTitleSearch(event.target.value)}
+                    onChange={(event) => setTitleSearch(event.target.value)}                  
                     placeholder=""
                 />
                 <i className="searchInputAbsolute fa-solid fa-magnifying-glass"></i>
@@ -68,14 +68,15 @@ export const MenuInWeek = () => {
                     
                         <li key={item.id} className="recipeItem">
                             <h3 className="menuWeekItemTitle">
-                                <span className={!item.editMode ? 'spanTitleItem active' : 'spanTitleItem'} >
-                                    {item.title}
+                                <span className={`${!item.editMode ? 'spanTitleItem active' : 'spanTitleItem'}`} >
+                                    {item.title ? item.title : 'Меню без названия'}
                                 </span>
 
                             <input 
                                 className={`input-reset ${!item.editMode ? 'titleItemEdit' : 'titleItemEdit active'}`}
                                 type="text" 
-                                value={titleItemEdit}                                
+                                value={titleItemEdit}     
+                                ref={refInput}                           
                                 onChange={(e) => {                                    
                                     setTitleItemEdit(e.target.value)          
                                 }}/> 
@@ -84,16 +85,20 @@ export const MenuInWeek = () => {
                             </h3>
 
                             <div className="mb-10px">
-                                <button className="btn-reset" onClick={() => {                           
-                                    toggleEditMenu(item.id, true)
+                                <button className="btn-reset" onClick={() => {
+                                    toggleEditMenu(item.id, true) 
+
+                                    setTimeout(() => {
+                                        refInput.current?.focus()
+                                    }, 0)
                                     if(item.editMode === true) {
                                         toggleEditMenu(item.id, false)
                                         editTitleMenu(item.id, titleItemEdit)   
+                                    }                         
+                                        
+                                        setTitleItemEdit(item.title)                                       
                                     }
-                                        setTitleItemEdit(item.title)
-                                        setActive(!active)
-                                    }
-                                    }><i className={`fa-solid ${active ? "fa-pencil" : "fa-check"} `}></i>
+                                    }><i className={`fa-solid ${item.editMode ? "fa-check" : "fa-pencil"} `}></i>
                                 </button> 
                                 <button 
                                     className="btn-reset" 
@@ -125,10 +130,9 @@ export const MenuInWeek = () => {
                             </ul> 
                                                 
                         </li>
-
-                        
-                    
+   
             )}
+
             <ModalMenuWeek show={show} setShow={setShow} menuItemProp={menuItemProp}/>
              
             </ul>

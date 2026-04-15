@@ -54,7 +54,7 @@ export const useStoreIngredients = create<IngredientsStore>()(persist((set, get)
     }
 }),
 {
-    name: "ingredient-storage",
+    name: `ingredient-storage`,
     storage: createJSONStorage(() => localStorage)
 }
 

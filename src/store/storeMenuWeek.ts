@@ -96,7 +96,7 @@ export const useMenuWeek = create<MenuWeekStore>()(persist((set, get) => ({
 
 }),
     {
-        name: 'menuWeek-storage',
+        name: `menuWeek-storage`,
         storage: createJSONStorage(() => localStorage)
     }
 ))

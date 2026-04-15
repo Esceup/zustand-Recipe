@@ -77,7 +77,7 @@ export const useRecipesStore = create<RecipeStore>()(persist((set, get) => ({
    
 }),
     {
-        name: 'recipe-storage',
+        name: `recipe-storage`,
         storage: createJSONStorage(() => localStorage)
     }
 ))

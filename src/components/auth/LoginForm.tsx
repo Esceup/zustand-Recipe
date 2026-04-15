@@ -73,39 +73,42 @@ export const LoginForm = () => {
                  {isRegister ? <div className="blockForLabel">
                     
                     <input 
+                        id="name"
                         type="text" 
-                        placeholder=""
+                        placeholder=" "
                         value={title} 
                         onChange={(e) => setTitle(e.target.value)}
                         className="inputEmail input-reset"
                         maxLength={30}
                     />
-                    <label className="labelEmail">Имя*</label>
+                    <label htmlFor="name" className="labelEmail">Имя*</label>
                 </div> : ''}
                 <div className="blockForLabel">
                     
                     <input 
+                        id="email"
                         type="email" 
-                        placeholder=""
+                        placeholder=" "
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
                         className="inputEmail input-reset"
                         required
                     />
-                    <label className="labelEmail">Email*</label>
+                    <label htmlFor="email" className="labelEmail">Email*</label>
                 </div>
                  <div className="blockForLabel">
                     
                     <input 
+                        id="password"
                         type="password" 
-                        placeholder=""
+                        placeholder=" "
                         value={password} 
                         onChange={handleChangeInput}
                         className={`inputPass input-reset ${lengthValue ? '' : 'error'}`}
                         minLength={6}
                         required
                     />
-                    <label className="labelPass ">Пароль*</label>
+                    <label htmlFor="password" className="labelPass ">Пароль*</label>
                  </div>
                 
                 <div>
@@ -113,10 +116,10 @@ export const LoginForm = () => {
                 </div> 
 
                   <button 
-                onClick={() => setIsRegister(!isRegister)}
-                className="btn btnFlipRegister btn-gradient-blue">                  
-                {isRegister ? "Войти" : "Регистрация"}
-            </button>
+                    onClick={() => setIsRegister(!isRegister)}
+                    className="btn btnFlipRegister">                  
+                    {isRegister ? "Войти" : "Регистрация"}
+                </button>
                         
             </form>
           

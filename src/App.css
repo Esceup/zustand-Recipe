@@ -312,8 +312,8 @@
 }
 .LoginForm .btnFlipRegister {
   border: 1px solid #000;
-  background: white;
-  color: #000
+  background: #000000;
+  color: #c0c0c0;
 }
 .modalMenuWeek {
   position: absolute;
@@ -614,6 +614,9 @@ display: none;
 .menuWeekItemTitle .input-reset.active {
   display: inline-block;
   width: auto;
+  text-align: center;
+  padding: 3px;
+  margin: 0px;
   border-bottom: 1px solid #ffffff;
 }
 .input-reset {
