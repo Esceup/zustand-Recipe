@@ -772,6 +772,10 @@ display: none;
   margin-right: 7px;
   margin-top: 3px;
 }
+.menuWeek .recipeList .recipeList {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .modalMenuWeek {
   position: absolute;
   height: auto;

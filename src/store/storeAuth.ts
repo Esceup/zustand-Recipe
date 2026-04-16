@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 import { FirebaseError } from 'firebase/app' 
+import { useRecipesStore } from './store'
 
 interface AuthState {
   user: User | null;
@@ -26,7 +27,14 @@ export const useAuthStore = create<AuthState>((set) => {
 
   onAuthStateChanged(auth, (user) => {
     set({ user, loading: false})
+    if(user) {
+      useRecipesStore.getState().fetchRecipe(user.uid)
+    } else {
+      useRecipesStore.setState({ recipesList: [], loading: false, error: null})
+    }
   })
+
+  
 
   const checkValidError = (err: unknown) => {
     const message = err instanceof FirebaseError ? err.message : 'Неизвестная ошибка';

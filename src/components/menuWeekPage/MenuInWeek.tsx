@@ -123,7 +123,7 @@ export const MenuInWeek = () => {
                                 setShow(true)
                                 menuItemPropSet(item)
                                 }} 
-                                className="btn-reset border-top-white">
+                                className="btn-reset">
                                     <i className="fa-solid fa-plus"></i>
                             </button>
                           
