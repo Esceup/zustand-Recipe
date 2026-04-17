@@ -9,7 +9,8 @@ import {
 } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 import { FirebaseError } from 'firebase/app' 
-import { useRecipesStore } from './store'
+import { useRecipesStore } from './storeRecipes'
+import { useStoreIngredients } from './storeIngredients';
 
 interface AuthState {
   user: User | null;
@@ -29,8 +30,10 @@ export const useAuthStore = create<AuthState>((set) => {
     set({ user, loading: false})
     if(user) {
       useRecipesStore.getState().fetchRecipe(user.uid)
+      useStoreIngredients.getState().fetchIngredient(user.uid)
     } else {
       useRecipesStore.setState({ recipesList: [], loading: false, error: null})
+      useStoreIngredients.setState({ Ingredients: [], loading: false, error: null })
     }
   })
 

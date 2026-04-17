@@ -1,6 +1,6 @@
 import { type FC } from "react"
 import { useMenuWeek } from "../../store/storeMenuWeek";
-import { useRecipesStore } from "../../store/store";
+import { useRecipesStore } from "../../store/storeRecipes";
 import type { IMenuWeek } from "../../types/types";
 interface ModalMenuWeekProps {
     show: boolean;
@@ -22,7 +22,7 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemP
         <>
             
                 <div className={`modalMenuWeek ${show ? 'active' : ''}`}>
-                    <button className="btn btnClose" onClick={() => setShow(false)}>x</button>
+                    <button className="btn btnClose" onClick={() => setShow(false)}><i className="fa-solid fa-xmark"></i></button>
 
                     {/* <input 
                         type="text" 

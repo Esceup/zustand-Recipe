@@ -1,9 +1,10 @@
 import { useState, useRef } from "react"
 
-import { useRecipesStore } from "../../store/store"
+import { useRecipesStore } from "../../store/storeRecipes"
 import { useMenuWeek } from "../../store/storeMenuWeek"
 import { ModalMenuWeek } from './ModalMenuWeek';
 import type { IMenuWeek } from "../../types/types";
+import { useAuthStore } from "../../store/storeAuth";
 
 
 export const MenuInWeek = () => {
@@ -18,19 +19,25 @@ export const MenuInWeek = () => {
     const [titleItemEdit, setTitleItemEdit] = useState('')
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
-    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu, toggleEditMenu } = useMenuWeek()
+    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu, toggleEditMenu, loading } = useMenuWeek()
     const { recipesList } = useRecipesStore()
+    const userId = useAuthStore(state => state.user?.uid)
+
+    if(userId === undefined) return
 
     const handleAddNewMenu = () => {
-        // if(title === '' || title.length <= 3) return
-        // if(menuWeek.some(item => item.title.toLowerCase() === title.toLowerCase())) return
-        addNewMenu(title)
+        if(title === '' || title.length <= 3) return
+        if(menuWeek.some(item => item.title.toLowerCase() === title.toLowerCase())) return
+        addNewMenu(userId, title)
         setTitle('')
     }
 
 
     return (
-
+        <>
+        <div className={`loaderFullBack ${loading ? 'loading' : ''}`}>
+                <div className='loader'></div>
+            </div>
         <div className="menuWeek">
             <h1>Меню на неделю</h1>    
                  
@@ -86,14 +93,14 @@ export const MenuInWeek = () => {
 
                             <div className="mb-10px">
                                 <button className="btn-reset" onClick={() => {
-                                    toggleEditMenu(item.id, true) 
+                                    toggleEditMenu(userId, item.id, true) 
 
                                     setTimeout(() => {
                                         refInput.current?.focus()
                                     }, 0)
                                     if(item.editMode === true) {
-                                        toggleEditMenu(item.id, false)
-                                        editTitleMenu(item.id, titleItemEdit)   
+                                        toggleEditMenu(userId, item.id, false)
+                                        editTitleMenu(userId, item.id, titleItemEdit)   
                                     }                         
                                         
                                         setTitleItemEdit(item.title)                                       
@@ -105,7 +112,7 @@ export const MenuInWeek = () => {
                                     onClick={() => {
                                         const isDelete = confirm('Точно удалить?')
                                         if(!isDelete) return
-                                        deleteMenu(item.id)
+                                        deleteMenu(userId, item.id)
                                     }}>
                                         <i className="fa-solid fa-trash-can"></i>
                                 </button> 
@@ -138,5 +145,6 @@ export const MenuInWeek = () => {
             </ul>
             
         </div>
+    </>
     )
 }

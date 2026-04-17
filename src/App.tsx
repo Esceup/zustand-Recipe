@@ -1,6 +1,6 @@
 import './App.css'
 import { LoginForm } from './components/auth/LoginForm';
-import { RecipeList } from './components/recipeListPage/RecipeList'
+import { MainPage } from './components/recipeListPage/RecipeList'
 import { useAuthStore } from './store/storeAuth'
 
 
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>     
-      {user ? <RecipeList/> : <LoginForm />  }
+      {user ? <MainPage/> : <LoginForm />  }
     </>
   )
 }

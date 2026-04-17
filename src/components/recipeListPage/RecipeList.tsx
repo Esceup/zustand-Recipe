@@ -3,12 +3,12 @@ import { ModalCreateOrUpdateRecipe } from "../modal/ModalCreateOrUpdateRecipe"
 import { useState } from "react"
 import { MenuInWeek } from "../menuWeekPage/MenuInWeek"
 import { Ingredients } from "../ingredientsPage/Ingredients"
-import  { MenuWeekPage } from "../menuWeekPage/MenuWeekPage"
+import  { RecipesList } from "../menuWeekPage/MenuWeekPage"
 import { ModalUserProfile } from "../modal/ModalUserProfile"
 
 
 
-export function RecipeList() {
+export function MainPage() {
 
     const [tabs, setTabs] = useState('MenuInWeek')
     const [showModal, setShowModal] = useState(false)
@@ -17,7 +17,7 @@ export function RecipeList() {
     return (
         <>
             <button className="btn btnLogout" onClick={() => setShowModal(!showModal)}><i className="fa-solid fa-gear"></i></button>
-            {tabs === 'AllMenu' ? <MenuWeekPage />
+            {tabs === 'AllMenu' ? <RecipesList />
             :  tabs === 'MenuInWeek' ? <MenuInWeek />
             : tabs === 'Ingredients' ? <Ingredients /> : ''}
 

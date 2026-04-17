@@ -91,7 +91,9 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                     {/* <li onClick={() => addNewIngredient(title, unitTitle)}>+</li> */}
                 </ul>
         
-                <span className="btnPopularIngredients" onClick={() => setShow(show ? false : true)}>?</span>
+                <span className="btnPopularIngredients" onClick={() => setShow(show ? false : true)}>
+                    <i className="fa-solid fa-carrot "></i>
+                </span>
                 <input 
                     type="text" 
                     className="inputModal"
@@ -99,7 +101,7 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                     value={unitTitle}
                     onChange={(event) => setUnitTitle(event.target.value)}
                 />
-                <button className="btn btnadd" onClick={addIngredient}>+</button>
+                <button className="btn btnadd" onClick={addIngredient}><i className="fa-solid fa-plus"></i></button>
             </div>          
         </>
     )

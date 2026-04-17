@@ -1,8 +1,9 @@
 import { useState, type FC } from "react"
-import { useRecipesStore } from "../../store/store"
+import { useRecipesStore } from "../../store/storeRecipes"
 import type { IRecipe } from "../../types/types"
 
 import { useStoreModal } from "../../store/storeModal";
+import { useAuthStore } from "../../store/storeAuth";
 
 interface ItemProps {
     recipe: IRecipe;
@@ -13,11 +14,20 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
 
     const [active, setActive] = useState(true)
     const removeRecipe = useRecipesStore(state => state.removeRecipe)
+    const userId = useAuthStore(state => state.user?.uid)
+    const loading = useAuthStore(state => state.loading)
     const { openEditModal } = useStoreModal()
 
 
-    const handleRemove = () => {
-        removeRecipe(recipe.id)
+    const handleRemove = async () => {
+        if(userId === undefined) return
+        try {
+            
+            await removeRecipe(userId, recipe.id)
+        } catch(err: unknown) {
+            console.error(err)
+            alert(err)
+        }
     }
 
     const handleUpdate = () => openEditModal(recipe)
@@ -48,7 +58,7 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
             </div>
             <div className="btnBlockUpdateDelete">
                 <button onClick={handleUpdate} className="btn btn-reset"><i className="fa-solid fa-pencil "></i></button>
-                <button onClick={handleRemove} className="btn btn-reset"><i className="fa-solid fa-trash-can"></i></button>
+                <button onClick={handleRemove} className="btn btn-reset" disabled={!!loading || !userId}><i className="fa-solid fa-trash-can"></i></button>
             </div>
         </li>
     )

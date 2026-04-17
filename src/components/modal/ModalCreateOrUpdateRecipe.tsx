@@ -1,9 +1,10 @@
 import { useEffect, useState, type FormEvent } from "react"
-import { useRecipesStore } from "../../store/store";
+import { useRecipesStore } from "../../store/storeRecipes";
 import type { IIngredient, IStep } from "../../types/types";
 import  { useStoreModal } from "../../store/storeModal";
 import { TextAreaSteps } from "../recipeListPage/TextAreaSteps";
 import { InputIngredients } from "../ingredientsPage/InputIngredients";
+import { useAuthStore } from "../../store/storeAuth";
 
 
 
@@ -14,9 +15,10 @@ export const ModalCreateOrUpdateRecipe = () => {
     const [ingredients, setIngredients] = useState<IIngredient[]>([])
     const [steps, setSteps] = useState<IStep[]>([])
 
-    const createRecipe = useRecipesStore(state => state.createRecipe)
-    const updateRecipe = useRecipesStore(state => state.updateRecipe)
+    const { createRecipe, updateRecipe } = useRecipesStore()
     const { isModalOpen, editingRecipe, modalMode, closeModal } = useStoreModal()
+
+    const userId = useAuthStore(state => state.user?.uid)
 
     const resetForm = () => {
         setTitle('')
@@ -36,17 +38,17 @@ export const ModalCreateOrUpdateRecipe = () => {
         }
 
         if (isModalOpen) {
-        document.body.classList.add('modalOpen');
+            document.body.classList.add('modalOpen');
         } else {
-        document.body.classList.remove('modalOpen');
+            document.body.classList.remove('modalOpen');
         }
     
         return () => document.body.classList.remove('modal-open');
 
     }, [isModalOpen, modalMode, editingRecipe])
 
-    const handleSubmit = (event: FormEvent) => {
-
+    const handleSubmit = async (event: FormEvent) => {
+        if(userId === undefined) return
         event.preventDefault()
 
         if(!title.trim()) {
@@ -55,12 +57,23 @@ export const ModalCreateOrUpdateRecipe = () => {
         }
 
         if(modalMode === 'edit' && editingRecipe) {
-            updateRecipe(
-                editingRecipe.id, 
-                {title, desc, ingredients, steps}
-            )
+            try {
+                await updateRecipe(
+                    userId,
+                    editingRecipe.id, 
+                    {title, desc, ingredients, steps}
+                )
+            } catch(err: unknown) {
+                console.error(err)
+                alert(err)
+            }
         } else {
-            createRecipe({title, desc, ingredients, steps})
+            try {
+                await createRecipe(userId, {title, desc, ingredients, steps})
+            } catch(err: unknown) {
+                console.error(err)
+                alert(err)
+            }
         }
 
         resetForm()
@@ -73,7 +86,7 @@ if(!isModalOpen) return null
         <div>
             <div onClick={closeModal} className={`backModal ${isModalOpen ? 'active' : ''}`}></div>
             <div className="modalRecipe">
-                <button className="btn btnClose" onClick={closeModal}>х</button>
+                <button className="btn btnClose" onClick={closeModal}><i className="fa-solid fa-xmark"></i></button>
             <div>
                 <form onSubmit={handleSubmit}>
                     <div className="flexBlock">
@@ -101,10 +114,12 @@ if(!isModalOpen) return null
                     <div className="flexBlock">
                         <h3 className="labelModal">Добавление продукта:</h3>                     
                     </div>
-                    <button onClick={handleSubmit} type="submit" className="btn btnUpdate">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
+
+                    <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
+                    <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />
+                    <button onClick={handleSubmit} type="submit" className="btn btnUpdate btn-gradient">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
                 </form>
-                <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
-                <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />
+                
                 
             </div>
             </div>

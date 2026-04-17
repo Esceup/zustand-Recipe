@@ -1,24 +1,30 @@
 import { useState } from "react"
 import { useStoreIngredients } from "../../store/storeIngredients"
+import { useAuthStore } from "../../store/storeAuth"
 
 
 
 export const Ingredients = () => {
 
-    const { Ingredients, addNewIngredient, deleteIngredient} = useStoreIngredients()
+    const { Ingredients, addNewIngredient, deleteIngredient, loading} = useStoreIngredients()
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState('')
     const [searchTitle, setSearchTitle] = useState('')
     const [unit, setUnit] = useState('')
     const [error, setError] = useState(false)
 
+    const userId = useAuthStore(state => state.user?.uid)
+    if(userId === undefined) return
+    
     const handleNewIngredient = () => {        
         if(title === '')  {
             setError(true)
             return false
         }
+
+        
         setError(title ? false : true)
-        addNewIngredient(title, unit)
+        addNewIngredient(userId, title, unit)
         setTitle('')
         setUnit('')
         
@@ -27,6 +33,9 @@ export const Ingredients = () => {
 
     return (
           <>
+            <div className={`loaderFullBack ${loading ? 'loading' : ''}`}>
+                <div className='loader'></div>
+            </div>
             <h2>Ингредиенты</h2>
             {/* <img src="src\assets\11.jpg" alt="" />   */}
             <div className={`popularIngredientsListBlock ${show ? 'active' : ''}`}>
@@ -60,7 +69,7 @@ export const Ingredients = () => {
                     filterItem.title.toLowerCase().includes(searchTitle.toLowerCase())).sort((a, b) => a.title.localeCompare(b.title)).map((item) => 
                     <li className="popularIngredientItem" key={item.id}>{item.title} 
                         <span 
-                            onClick={() => deleteIngredient(item.id)} 
+                            onClick={() => deleteIngredient(userId, item.id)} 
                             className="deleteIngredient">
                             <i className="fa-solid fa-trash-can"></i> 
                         </span>

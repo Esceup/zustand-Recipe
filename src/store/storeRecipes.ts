@@ -37,10 +37,9 @@ export const useRecipesStore = create<RecipeStore>((set) => ({
             
         } catch(err: unknown) {
             if(err instanceof FirebaseError) {
-                set({ error: err.message, loading: false})
-                 throw err
+                set({ loading: false, error: err.message})
+                alert(err)
             }
-            
         }
     },
     createRecipe: async (userId, recipeData) => {
@@ -55,8 +54,8 @@ export const useRecipesStore = create<RecipeStore>((set) => ({
             }))
         } catch(err: unknown) {
             if(err instanceof FirebaseError) {
-                set({ error: err.message, loading: false})
-                 throw err
+                set({ loading: false, error: err.message})
+                alert(err)
             }
         }
   
@@ -65,20 +64,20 @@ export const useRecipesStore = create<RecipeStore>((set) => ({
     updateRecipe: async  (userId, id, recipeData) => {    
        set({ loading: true, error: null})
        try {
-            const docRef = doc(db, 'users', userId, 'recipe', id)
+            const docRef = doc(db, 'users', userId, 'recipes', id)
             await updateDoc(docRef, recipeData)
             set((state) => ({
                 recipesList: state.recipesList.map((recipe) => 
-                    recipe.id === id ? {...recipe, recipeData} : recipe
+                    recipe.id === id ? {...recipe, ...recipeData} : recipe
                 ),
                 loading: false,
             }))
        } catch(err: unknown) {
             if(err instanceof FirebaseError) {
-                set({ error: err.message, loading: false})
-                throw err
+                set({ loading: false, error: err.message})
+                alert(err)
             }
-       }
+        }
     },
 
     removeRecipe: async (userId, id) => {
@@ -87,7 +86,7 @@ export const useRecipesStore = create<RecipeStore>((set) => ({
         set({ loading: true, error: null})
 
         try {
-            const docRef = doc(db, 'users', userId, 'recipe', id)
+            const docRef = doc(db, 'users', userId, 'recipes', id)
             await deleteDoc(docRef)
             set((state) => ({
                 recipesList: state.recipesList.filter((recipe) => recipe.id !== id),
@@ -96,14 +95,9 @@ export const useRecipesStore = create<RecipeStore>((set) => ({
 
         } catch(err: unknown) {
             if(err instanceof FirebaseError) {
-                set({ error: err.message, loading: false})
-                throw err
+                set({ loading: false, error: err.message})
+                alert(err)
             }
-        }
-
-        
-    },
-
-   
-})
-)
+        }     
+    },  
+}))
