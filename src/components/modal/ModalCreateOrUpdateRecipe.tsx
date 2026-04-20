@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from "react"
 import { useRecipesStore } from "../../store/storeRecipes";
 import type { IIngredient, IStep } from "../../types/types";
 import  { useStoreModal } from "../../store/storeModal";
-import { TextAreaSteps } from "../recipeListPage/TextAreaSteps";
+import { TextAreaSteps } from "../recipeListPage/RecipeTextAreaSteps";
 import { InputIngredients } from "../ingredientsPage/InputIngredients";
 import { useAuthStore } from "../../store/storeAuth";
 
@@ -89,7 +89,7 @@ if(!isModalOpen) return null
                 <button className="btn btnClose" onClick={closeModal}><i className="fa-solid fa-xmark"></i></button>
             <div>
                 <form onSubmit={handleSubmit}>
-                    <div className="flexBlock">
+                    <div className="flexBlock mt-40px">
                         {/* <h3 className="labelModal">Название рецепта:</h3> */}
                         <input 
                             className="inputModal input-reset"
@@ -119,8 +119,6 @@ if(!isModalOpen) return null
                     <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />
                     <button onClick={handleSubmit} type="submit" className="btn btnUpdate btn-gradient">{modalMode === 'edit' ? 'Сохранить' : 'Добавить'}</button>
                 </form>
-                
-                
             </div>
             </div>
         </div>

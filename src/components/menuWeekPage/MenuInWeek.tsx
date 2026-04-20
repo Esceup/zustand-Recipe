@@ -1,37 +1,42 @@
 import { useState, useRef } from "react"
 
 import { useRecipesStore } from "../../store/storeRecipes"
-import { useMenuWeek } from "../../store/storeMenuWeek"
+import { useMenuWeekStore } from "../../store/storeMenuWeek"
 import { ModalMenuWeek } from './ModalMenuWeek';
 import type { IMenuWeek } from "../../types/types";
 import { useAuthStore } from "../../store/storeAuth";
 
 
 export const MenuInWeek = () => {
+
+
     const refInput = useRef<HTMLInputElement>(null)
     const [show, setShow] = useState(false)
     const [menuItemProp, menuItemPropSet] = useState<IMenuWeek>({ 
         id: '', 
         title: '', 
-        includesRecipe: [],
-        editMode: false
+        recipesForWeek: [],
     })  
     const [titleItemEdit, setTitleItemEdit] = useState('')
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
-    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu, toggleEditMenu, loading } = useMenuWeek()
+    const { menuWeek, addNewMenu, deleteMenu, editTitleMenu, loading, editingMenuId, setEditingMenuId } = useMenuWeekStore()
     const { recipesList } = useRecipesStore()
     const userId = useAuthStore(state => state.user?.uid)
 
-    if(userId === undefined) return
+    if(!userId) return null
 
     const handleAddNewMenu = () => {
-        if(title === '' || title.length <= 3) return
+        if(title.length <= 3) {
+            alert('Длина заголовка меню должна быть не менее 4 символов')
+            return
+        }
         if(menuWeek.some(item => item.title.toLowerCase() === title.toLowerCase())) return
         addNewMenu(userId, title)
         setTitle('')
     }
 
+    
 
     return (
         <>
@@ -71,16 +76,19 @@ export const MenuInWeek = () => {
      
             <ul className="recipeList">
                 {menuWeek?.filter(filterItem => 
-                    filterItem.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => 
-                    
-                        <li key={item.id} className="recipeItem">
+                    filterItem.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => {
+
+                        const editMode = editingMenuId === item.id
+                        
+                        return (
+                            <li key={item.id} className="recipeItem">
                             <h3 className="menuWeekItemTitle">
-                                <span className={`${!item.editMode ? 'spanTitleItem active' : 'spanTitleItem'}`} >
+                                <span className={`${!editMode ? 'spanTitleItem active' : 'spanTitleItem'}`} >
                                     {item.title ? item.title : 'Меню без названия'}
-                                </span>
+                                </span>                              
 
                             <input 
-                                className={`input-reset ${!item.editMode ? 'titleItemEdit' : 'titleItemEdit active'}`}
+                                className={`input-reset ${!editMode ? 'titleItemEdit' : 'titleItemEdit active'}`}
                                 type="text" 
                                 value={titleItemEdit}     
                                 ref={refInput}                           
@@ -90,25 +98,34 @@ export const MenuInWeek = () => {
                             
                             
                             </h3>
-
+                               
                             <div className="mb-10px">
-                                <button className="btn-reset" onClick={() => {
-                                    toggleEditMenu(userId, item.id, true) 
-
-                                    setTimeout(() => {
-                                        refInput.current?.focus()
-                                    }, 0)
-                                    if(item.editMode === true) {
-                                        toggleEditMenu(userId, item.id, false)
-                                        editTitleMenu(userId, item.id, titleItemEdit)   
-                                    }                         
+                                <button className="btn-reset" onClick={() => {                             
+                                    if(editMode) {
+                                        if(titleItemEdit === item.title) {
+                                            setEditingMenuId(null)
+                                            return
+                                        }
+                                        if(titleItemEdit.length < 1 || titleItemEdit.length > 25) {
+                                            alert('Введите хоть один символ и не больше 25')
+                                            return
+                                        }
                                         
-                                        setTitleItemEdit(item.title)                                       
-                                    }
-                                    }><i className={`fa-solid ${item.editMode ? "fa-check" : "fa-pencil"} `}></i>
+                                        editTitleMenu(userId, item.id, titleItemEdit) 
+                                        setEditingMenuId(null)                                         
+                                    } else {
+                                        setTitleItemEdit(item.title)     
+                                        setEditingMenuId(item.id) 
+
+                                        setTimeout(() => {
+                                            refInput.current?.focus()
+                                        }, 0)
+                                    }                                                                                                      
+                                }}>
+                                    <i className={`fa-solid ${editMode ? "fa-check" : "fa-pencil"} `}></i>
                                 </button> 
                                 <button 
-                                    className="btn-reset" 
+                                    className="btn-reset btn-delete" 
                                     onClick={() => {
                                         const isDelete = confirm('Точно удалить?')
                                         if(!isDelete) return
@@ -120,30 +137,30 @@ export const MenuInWeek = () => {
 
                             <ul className="recipeList mb-15px">
                                
-                                 {item.includesRecipe?.map(includeItem => 
+                                 {item.recipesForWeek?.map(includeItem => 
                                     recipesList?.map((recipeItem) => 
                                         recipeItem.title === includeItem.title ? 
-                                        <li key={recipeItem.id}><i className="fa-solid fa-circle"></i>{recipeItem.title}</li> : '')
+                                        <li key={recipeItem.id}>{recipeItem.title}</li> : '')
                                     )
                              }
                             <button onClick={() => {
-                                setShow(true)
-                                menuItemPropSet(item)
+                                    setShow(true)
+                                    menuItemPropSet(item)
                                 }} 
-                                className="btn-reset">
+                                className="btn-reset btnAddRecipeForWeek">
                                     <i className="fa-solid fa-plus"></i>
                             </button>
                           
                             </ul> 
                                                 
                         </li>
-   
+                        )
+                    }
             )}
 
             <ModalMenuWeek show={show} setShow={setShow} menuItemProp={menuItemProp}/>
              
-            </ul>
-            
+            </ul>          
         </div>
     </>
     )

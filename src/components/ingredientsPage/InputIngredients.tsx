@@ -2,7 +2,7 @@ import { useState, type FC } from "react"
 
 
 import { generatedId } from "../../function/generatedId";
-import { useStoreIngredients } from "../../store/storeIngredients";
+import { useIngredientsStore } from "../../store/storeIngredients";
 import type { IIngredient } from "../../types/types";
 interface InputIngredients {
     ingredients: IIngredient[];
@@ -14,7 +14,7 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState('')
     const [unitTitle, setUnitTitle] = useState('')
-    const { Ingredients } = useStoreIngredients()
+    const { Ingredients } = useIngredientsStore()
 
     // const { addNewIngredient } = storeIngredients()
 

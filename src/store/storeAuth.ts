@@ -10,7 +10,8 @@ import {
 import { auth } from '../lib/firebase';
 import { FirebaseError } from 'firebase/app' 
 import { useRecipesStore } from './storeRecipes'
-import { useStoreIngredients } from './storeIngredients';
+import { useIngredientsStore } from './storeIngredients';
+import { useMenuWeekStore } from './storeMenuWeek';
 
 interface AuthState {
   user: User | null;
@@ -22,23 +23,22 @@ interface AuthState {
   updateUserDisplayName: (newDisplayName: string) => Promise<void>
 }
 
-
-
 export const useAuthStore = create<AuthState>((set) => {
 
   onAuthStateChanged(auth, (user) => {
     set({ user, loading: false})
     if(user) {
       useRecipesStore.getState().fetchRecipe(user.uid)
-      useStoreIngredients.getState().fetchIngredient(user.uid)
+      useIngredientsStore.getState().fetchIngredient(user.uid)
+      useMenuWeekStore.getState().fetchMenuWeek(user.uid)
     } else {
       useRecipesStore.setState({ recipesList: [], loading: false, error: null})
-      useStoreIngredients.setState({ Ingredients: [], loading: false, error: null })
+      useIngredientsStore.setState({ Ingredients: [], loading: false, error: null })
+      useMenuWeekStore.setState({ menuWeek: [], loading: false, error: null })
     }
   })
 
   
-
   const checkValidError = (err: unknown) => {
     const message = err instanceof FirebaseError ? err.message : 'Неизвестная ошибка';
         

@@ -1,10 +1,10 @@
 
-import { ModalCreateOrUpdateRecipe } from "../modal/ModalCreateOrUpdateRecipe"
+import { ModalCreateOrUpdateRecipe } from "./modal/ModalCreateOrUpdateRecipe"
 import { useState } from "react"
-import { MenuInWeek } from "../menuWeekPage/MenuInWeek"
-import { Ingredients } from "../ingredientsPage/Ingredients"
-import  { RecipesList } from "../menuWeekPage/MenuWeekPage"
-import { ModalUserProfile } from "../modal/ModalUserProfile"
+import { MenuInWeek } from "./menuWeekPage/MenuInWeek"
+import { Ingredients } from "./ingredientsPage/Ingredients"
+import  { RecipesList } from "./recipeListPage/RecipesList"
+import { ModalUserProfile } from "./modal/ModalUserProfile"
 
 
 

@@ -25,8 +25,6 @@ const getRussianErrorMessage = (errorCode: string): string => {
   }
 };
 
-
-
 export const LoginForm = () => {
 
     const [isRegister, setIsRegister] = useState(true)
@@ -121,8 +119,7 @@ export const LoginForm = () => {
                     {isRegister ? "Войти" : "Регистрация"}
                 </button>
                         
-            </form>
-          
+            </form>         
         </div>
     )
 }

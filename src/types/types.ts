@@ -15,13 +15,12 @@ export interface IRecipe {
     ingredients: IIngredient[],
     steps: IStep[];
 }
-export interface IIncludeRecipe {
+export interface IRecipesForWeek {
     id: string;
     title: string;
 }
 export interface IMenuWeek {
     id: string;
     title: string;
-    includesRecipe: IIncludeRecipe[];
-    editMode?: boolean;
+    recipesForWeek: IRecipesForWeek[];
 }

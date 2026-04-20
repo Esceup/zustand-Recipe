@@ -1,29 +1,29 @@
 import { create } from "zustand";
 import type { IMenuWeek } from "../types/types";
-import { generatedId } from "../function/generatedId";
 import { FirebaseError } from "firebase/app";
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
-
-
 
 interface MenuWeekStore {
     loading: boolean;
     error: string | null;
     menuWeek: IMenuWeek[];
+    editingMenuId: string | null;
+    setEditingMenuId: (id: string | null) => void;
     fetchMenuWeek: (userId: string) => Promise<void> 
     addNewMenu: (userId: string, title: string) =>  Promise<void>;
-    addIncludeRecipe: (userId: string, id: string, idRecipe: string, titleRecipe: string) =>  Promise<void>;
-    // toggleEditMenu: (userId: string, id: string, value: boolean) =>  Promise<void>;
+    addExistedRecipe: (userId: string, id: string, idRecipe: string, titleRecipe: string) =>  Promise<void>;
     editTitleMenu: (userId: string, id: string, title: string) =>  Promise<void>;
     deleteMenu: (userId: string, id: string) =>  Promise<void>;
-    deleteIncludeMenuItem: (userId: string, idMenuWeek: string, idDeleteRecipeItem: string) =>  Promise<void>;
+    deleteExistedMenuItem: (userId: string, idMenuWeek: string, idDeleteRecipeItem: string) =>  Promise<void>;
 }
 
-export const useMenuWeek = create<MenuWeekStore>((set, get) => ({
+export const useMenuWeekStore = create<MenuWeekStore>((set, get) => ({
     loading: false,
     error: null,
     menuWeek: [],
+    editingMenuId: null,
+    setEditingMenuId: (id) => set({ editingMenuId: id }),
     fetchMenuWeek: async (userId) => {
         set({ loading: true, error: null})
         try {
@@ -50,7 +50,7 @@ export const useMenuWeek = create<MenuWeekStore>((set, get) => ({
         try{
             const colRef = collection(db, 'users', userId, 'menuWeek')
             const docRef = await addDoc(colRef, { title, includesRecipe: []})
-            const newMenu: IMenuWeek = { id: docRef.id, title, includesRecipe: []}
+            const newMenu: IMenuWeek = { id: docRef.id, title, recipesForWeek: []}
             set(state => ({ menuWeek: [...state.menuWeek, newMenu], loading: false}))
         } catch(err: unknown) {
             if(err instanceof FirebaseError) {
@@ -59,42 +59,41 @@ export const useMenuWeek = create<MenuWeekStore>((set, get) => ({
             }
         }
     },
-    addIncludeRecipe: async (userId, idMenuWeekItem, idRecipe, titleRecipe) => {
+
+    addExistedRecipe: async (userId, idMenuWeekItem, idRecipe, titleRecipe) => {
         set({ loading: true, error: null})
-       
-
-
-        // set(state => ({
-        //    menuWeek: state.menuWeek.map((item) => {
-        //         if(item.id === idMenuWeekItem) {
-
-        //             if(item.includesRecipe.some(item => item.title === titleRecipe)) {
-        //                 return item
-        //             }
-
-        //             return {
-        //                 ...item,
-        //                 includesRecipe: [...item.includesRecipe, {id: idRecipe, title: titleRecipe}]
-        //             }
-        //         }
-        //         return item
-        //    })
+        try {
+            const menuItem = get().menuWeek.find(item => item.id === idMenuWeekItem)
             
-        // }))
+            if(!menuItem) throw new Error('Меню не найдено')
+            if(menuItem?.recipesForWeek.some(recipe => recipe.id === idRecipe)) {
+                set({ loading: false })
+                alert('Уже есть в вашем меню')
+                return
+            }
+
+            const newRecipeForMenu = [...menuItem.recipesForWeek, {id: idRecipe, title: titleRecipe}]
+
+            const docRef = doc(db, 'users', userId, 'menuWeek', idMenuWeekItem)
+            await updateDoc(docRef, { recipesForWeek:  newRecipeForMenu}) 
+            console.log(2)
+            set(state => ({ menuWeek: state.menuWeek.map(menuItem => 
+                menuItem.id === idMenuWeekItem ? {...menuItem, recipesForWeek: newRecipeForMenu} : menuItem), 
+                loading: false
+            }))
+            console.log(3)
+        } catch(err: unknown) {
+            if(err instanceof FirebaseError) {
+                set({ loading: false, error: err.message})
+                alert(err)
+            } else {
+                set({ loading: false, error: 'Ошибка'})
+                alert('Ошибка добавления меню')
+            }
+        }
+
     },
-    // toggleEditMenu: async (userId, id, value) => {
-    //     set(state => ({
-    //         menuWeek: state.menuWeek.map(item => {
-    //             if(item.id === id) {
-    //                 return {
-    //                     ...item,
-    //                     editMode: value 
-    //                 }
-    //             }
-    //             return item
-    //         })
-    //     }))
-    // },
+   
     editTitleMenu: async (userId, id, title) => {
        set({ loading: true, error: null})
        try {
@@ -111,6 +110,7 @@ export const useMenuWeek = create<MenuWeekStore>((set, get) => ({
             }
         }
     },
+
     deleteMenu: async (userId, id) => {
         set({ loading: true, error: null})
        try {
@@ -127,18 +127,29 @@ export const useMenuWeek = create<MenuWeekStore>((set, get) => ({
             }
         }
     },
-    deleteIncludeMenuItem: async (userId, idMenuWeek, idDeleteRecipeItem) => {
-        
-        set(state => ({
-            menuWeek: state.menuWeek.map(menuItem => {
-            if(menuItem.id === idMenuWeek) {
-                return {
-                    ...menuItem, 
-                    includesRecipe: menuItem.includesRecipe.filter(item => item.id !== idDeleteRecipeItem)
-                }}
-            return menuItem}
-            )
-        }))
+
+    deleteExistedMenuItem: async (userId, idMenuWeek, idDeleteRecipeItem) => {
+        set({ loading: true, error: null})
+       try {
+            const menuItem = get().menuWeek.find(menu => menu.id === idMenuWeek)
+            if(!menuItem) throw new Error('Меню не найдено')
+
+            const newRecipeForMenu = menuItem.recipesForWeek.filter(recipe => recipe.id !== idDeleteRecipeItem) 
+            const docRef = doc(db, 'users', userId, 'menuWeek', idMenuWeek)
+            await updateDoc(docRef, { recipesForWeek:  newRecipeForMenu })
+
+            set(state => ({
+                menuWeek: state.menuWeek.map(menu => menu.id === idMenuWeek ? {...menu, recipesForWeek: newRecipeForMenu} : menu),
+                loading: false
+            }))
+
+       } catch(err: unknown) {
+            if(err instanceof FirebaseError) {
+                set({ loading: false, error: err.message})
+                alert(err)
+            }
+        }
+      
     }
 
 }))

@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { useStoreIngredients } from "../../store/storeIngredients"
+import { useIngredientsStore } from "../../store/storeIngredients"
 import { useAuthStore } from "../../store/storeAuth"
 
 
 
 export const Ingredients = () => {
 
-    const { Ingredients, addNewIngredient, deleteIngredient, loading} = useStoreIngredients()
+    const { Ingredients, addNewIngredient, deleteIngredient, loading} = useIngredientsStore()
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState('')
     const [searchTitle, setSearchTitle] = useState('')

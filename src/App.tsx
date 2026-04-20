@@ -1,6 +1,6 @@
 import './App.css'
 import { LoginForm } from './components/auth/LoginForm';
-import { MainPage } from './components/recipeListPage/RecipeList'
+import { MainPage } from './components/MainPage'
 import { useAuthStore } from './store/storeAuth'
 
 

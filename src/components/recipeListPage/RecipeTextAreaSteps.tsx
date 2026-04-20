@@ -24,6 +24,8 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
         setTitle('')
     }
 
+    
+
     const handleRemove = (id: string) => {
         setSteps(steps.filter(step => step.id !== id))
     }
@@ -37,6 +39,7 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
            {steps?.map(step => 
             <li key={step.id}>
                 <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
+                <button className="btn btnSteps" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-xmark"></i></button>
                 <button className="btn btnSteps" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-xmark"></i></button>
             </li>
                 )}

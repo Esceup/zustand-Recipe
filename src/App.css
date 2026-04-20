@@ -48,6 +48,9 @@
 .ml-15 {
   margin-left: 15px;
 }
+.mt-40px {
+  margin-top: 40px;
+}
 .j-center{
   justify-content: center;
 }
@@ -191,6 +194,10 @@
   overflow: hidden;
   transition: all 0.3s ease-in-out;
 }
+.recipeItem .recipeList li {
+  border-bottom: 1px solid;
+}
+
 .recipeItem i {
   color: white
 }
@@ -289,10 +296,11 @@
   width: 100%;
   display: flex;
 }
-.btnLogout {
+#root .btnLogout {
   position: absolute;
   right: 15px;
   top: 15px;
+  z-index: 31;
   background: #000 !important;
 }
 .LoginForm {
@@ -425,11 +433,11 @@ display: none;
   margin: 0 20px;
 }
 .btnClose {
-  position: absolute;
-  right: 35px;
-  top: 35px;
-  padding: 0px 7px 4px 7px;
-}
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    padding: 0px 7px 4px 7px;
+  }
 .ingredientsItem {
   position: relative;
   display: flex;
@@ -445,6 +453,7 @@ display: none;
 .ingredientsList .ingredientsItem span {
   white-space: nowrap;
   margin: 0 10px;
+  color: white
 }
 .inputNewIngredient {
   display: none;
@@ -762,6 +771,20 @@ display: none;
 .modalMenuWeekBack.active {
   display: block;
 }
+.menuWeek .recipeList .recipeItem {
+  position: relative;
+  justify-content: initial;
+}
+.menuWeek .recipeItem .btn-delete {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+
+}
+.menuWeek .recipeItem .btn-delete i{
+  color: #ff6b9d;
+  font-size: 20px;
+}
 .menuWeek .recipeList .recipeList {
   gap: 10px
 }
@@ -769,6 +792,7 @@ display: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 10px;
 }
 .menuWeek .recipeList .recipeList li:nth-last-child(1) {
   border-bottom: 1px solid #fff;
@@ -779,7 +803,7 @@ display: none;
   margin-top: 3px;
 }
 .menuWeek .recipeList .recipeList {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
 }
 
 .modalMenuWeek {
@@ -816,7 +840,7 @@ display: none;
   left: 0;
   right: 0;
   background-color: rgb(0 0 0 / 0.5);
-  z-index: 30;
+  z-index: 41;
 }
 .loaderFullBack.loading {
   display: block;
@@ -858,12 +882,23 @@ display: none;
     box-shadow: 0 -48px inset;
   }
 }
+
  @media(min-width: 1024px) {
     .popularIngredientsListBlock {
       padding: 30px;
     }
-   
+    
+    .popularIngredientsListBlock, .popularIngredientsListMain {
+      max-width:none;
+    }
  }
+@media(min-width: 769px) {
+  h1 {
+      padding-top: 60px;
+    }
+}
+
+
  @media(max-width: 992px) {
    .recipeList {
      grid-template-columns: 1fr 1fr;

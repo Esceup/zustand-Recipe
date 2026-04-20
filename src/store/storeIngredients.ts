@@ -29,7 +29,7 @@ const DEFAULT_INGREDIENTS: Omit<IIngredient, 'id'>[] = [
     { title: 'Молоко', unit: '70 мл'},
     { title: 'Сметана', unit: '1 ст.л'},
 ]
-export const useStoreIngredients = create<IngredientsStore>()((set, get) => ({
+export const useIngredientsStore = create<IngredientsStore>()((set, get) => ({
     loading: false,
     error: null,
     Ingredients: [],
