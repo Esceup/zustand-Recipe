@@ -40,9 +40,9 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
                 {recipe.desc ? <div><span className="descItem">Описание:</span><span>{recipe.desc}</span></div> : ''}
                 
                 <div className="recipeItemProductsBlock">
-                    <h3 style={{textAlign: 'left'}}>Продукты:</h3> 
+                    <h3>Продукты</h3> 
                     <ul className="ingredientsList">{recipe.ingredients?.map((item) => (
-                        <li key={item.id}><div className="ingredientTitle">{item.title}</div><div className="ingredientUnit">{item.unit}</div></li>
+                        <li key={item.id}><div className="ingredientTitle">{item.title}</div><div className="ingredientUnit">{item.value} {item.unit}</div></li>
                     ))}
                 </ul>
                 </div>

@@ -9,25 +9,28 @@ export const Ingredients = () => {
     const { Ingredients, addNewIngredient, deleteIngredient, loading} = useIngredientsStore()
     const [show, setShow] = useState(false)
     const [title, setTitle] = useState('')
+    const [valueUnit, setValueUnit] = useState('')
     const [searchTitle, setSearchTitle] = useState('')
-    const [unit, setUnit] = useState('')
+    const [selectedUnit, setSelectedUnit] = useState('кг')
     const [error, setError] = useState(false)
 
     const userId = useAuthStore(state => state.user?.uid)
     if(userId === undefined) return
     
     const handleNewIngredient = () => {        
-        if(title === '')  {
+        if(title === '' && valueUnit === '')  {
             setError(true)
             return false
         }
 
-        
         setError(title ? false : true)
-        addNewIngredient(userId, title, unit)
+        addNewIngredient(userId, title, valueUnit, selectedUnit)
         setTitle('')
-        setUnit('')
-        
+        setValueUnit('') 
+    }
+
+    const handleChangeUnit = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedUnit(event.target.value)
     }
 
 
@@ -50,10 +53,21 @@ export const Ingredients = () => {
                 <input 
                     type="text" 
                     className="inputModal mb-5px mr-15px input-reset"
-                    value={unit}
-                    placeholder="кол-во и ед. измерения"
-                    onChange={(event) => setUnit(event.target.value)}
+                    value={valueUnit}
+                    placeholder="Значение"
+                    onChange={(event) => setValueUnit(event.target.value)}
                 />
+               <div className="blockForSelect"> 
+                <select value={selectedUnit} onChange={handleChangeUnit}>
+                    <option value="кг">кг</option>
+                    <option value="гр">гр</option>
+                    <option value="мл">мл</option>
+                    <option value="шт">шт</option>
+                    <option value="ст.л">ст.л</option>
+                    <option value="ч.л">ч.л</option>
+                    <option value="стакан">стакан</option>
+                </select>
+                </div>
                 <button className="btn btnAddNewIngredient btn-gradient" onClick={handleNewIngredient}>Добавить</button>
                 </div>
                 

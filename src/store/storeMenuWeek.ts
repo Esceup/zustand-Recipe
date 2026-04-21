@@ -76,12 +76,12 @@ export const useMenuWeekStore = create<MenuWeekStore>((set, get) => ({
 
             const docRef = doc(db, 'users', userId, 'menuWeek', idMenuWeekItem)
             await updateDoc(docRef, { recipesForWeek:  newRecipeForMenu}) 
-            console.log(2)
+            
             set(state => ({ menuWeek: state.menuWeek.map(menuItem => 
                 menuItem.id === idMenuWeekItem ? {...menuItem, recipesForWeek: newRecipeForMenu} : menuItem), 
                 loading: false
             }))
-            console.log(3)
+            
         } catch(err: unknown) {
             if(err instanceof FirebaseError) {
                 set({ loading: false, error: err.message})

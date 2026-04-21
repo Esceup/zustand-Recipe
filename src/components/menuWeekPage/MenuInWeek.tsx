@@ -55,7 +55,7 @@ export const MenuInWeek = () => {
                     onChange={(event) => setTitle(event.target.value)}
                     placeholder=""
                 />
-                <button onClick={handleAddNewMenu} className="btn btnAdd btn-gradient">Добавить</button>
+                <button onClick={handleAddNewMenu} className="btn btnAdd btn-gradient">Создать</button>
                 
             </div>
             <div>
@@ -74,12 +74,18 @@ export const MenuInWeek = () => {
            
            
      
-            <ul className="recipeList">
+            {menuWeek?.length !== 0 ? (
+                <ul className="recipeList">
                 {menuWeek?.filter(filterItem => 
                     filterItem.title.toLowerCase().includes(titleSearch.toLowerCase())).map((item) => {
 
                         const editMode = editingMenuId === item.id
                         
+                        const getAllIngredients = () => {
+                            const allIngredients: {title: string, value: string, unit: string}[] = []
+
+                        }
+
                         return (
                             <li key={item.id} className="recipeItem">
                             <h3 className="menuWeekItemTitle">
@@ -137,12 +143,14 @@ export const MenuInWeek = () => {
 
                             <ul className="recipeList mb-15px">
                                
-                                 {item.recipesForWeek?.map(includeItem => 
+                                {item.recipesForWeek?.map(includeItem => 
                                     recipesList?.map((recipeItem) => 
                                         recipeItem.title === includeItem.title ? 
-                                        <li key={recipeItem.id}>{recipeItem.title}</li> : '')
+                                            <li key={recipeItem.id}>{recipeItem.title}</li> : ''
+                                            
+                                        )
                                     )
-                             }
+                                }
                             <button onClick={() => {
                                     setShow(true)
                                     menuItemPropSet(item)
@@ -152,7 +160,19 @@ export const MenuInWeek = () => {
                             </button>
                           
                             </ul> 
-                                                
+                            <h3>Продукты для рецептов</h3>
+                            <ul className="list-reset listIncludeProducts">
+                                 {item.recipesForWeek?.map(includeItem => 
+                                    recipesList?.map((recipeItem) => 
+                                        recipeItem.title === includeItem.title ? 
+                                            recipeItem.ingredients.map((ing) => 
+                                               <li key={recipeItem.id}>{ing.title} - {ing.value} {ing.unit}</li>
+                                             ) : ''                          
+                                        )
+                                )}
+                            </ul>
+                           
+                                   
                         </li>
                         )
                     }
@@ -161,6 +181,7 @@ export const MenuInWeek = () => {
             <ModalMenuWeek show={show} setShow={setShow} menuItemProp={menuItemProp}/>
              
             </ul>          
+            ) : (<div className="notMenuWeekItem">Создайте меню на неделю</div>)}
         </div>
     </>
     )

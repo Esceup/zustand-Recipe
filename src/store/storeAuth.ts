@@ -93,8 +93,8 @@ export const useAuthStore = create<AuthState>((set) => {
       set({ loading: true, error: null})
       
       try {
-        await updateProfile(currentUser,{ displayName: newDisplayName })
-        set({ user: {...currentUser, displayName: newDisplayName},loading: false })
+        await updateProfile( currentUser, { displayName: newDisplayName })
+        set({ user: {...currentUser, displayName: newDisplayName}, loading: false })
       } catch(error: unknown) {
         checkValidError(error)
       }  

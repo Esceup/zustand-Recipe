@@ -10,6 +10,13 @@
 :root {
     --gray: #242831;
 }
+.list-reset {
+  list-style-type: none;
+  padding: 15px
+}
+.listIncludeProducts {
+  padding-top: 0;
+}
 .btn-reset {
   background-color: initial !important;
   outline: none;
@@ -167,6 +174,7 @@
 }
 .recipeItemTitle {
   font-size: 15px;
+  margin-left: 20px;
 }
 .descItem {
   margin-right: 5px;
@@ -429,6 +437,10 @@ display: none;
   border-bottom: 1px solid #000;
   padding-left: 32px;
 }
+.notMenuWeekItem {
+  font-size: 14px;
+  color: #e34baf;
+}
 .searchLabel {
   margin: 0 20px;
 }
@@ -443,6 +455,40 @@ display: none;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+}
+.ingredientsItem .inputModal {
+  margin-right: 10px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 1px 31px 4px 12px;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+select:hover {
+  border-color: #888;
 }
 .ingredientsList {
   width: 100%;
@@ -671,7 +717,7 @@ display: none;
 }
 .btnPopularIngredients  {
    background-color: #e5e5e5;
-   padding: 2px 9px 5px 9px;
+   padding: 2px 5px 2px 5px;
    border-radius: 5px;
    margin-right: 10px;
    cursor: pointer;
@@ -872,7 +918,12 @@ display: none;
   height: 25px;
   border-radius: 0 4px 4px 0;
 }
-
+.blockForSelect {
+  justify-content: left;
+  display: flex;
+  padding-left: 27px;
+  margin: 10px 0px;
+}
 @keyframes fill {
   0% {
     box-shadow: 0 0 inset;

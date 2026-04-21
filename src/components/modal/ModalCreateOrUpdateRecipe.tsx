@@ -3,7 +3,7 @@ import { useRecipesStore } from "../../store/storeRecipes";
 import type { IIngredient, IStep } from "../../types/types";
 import  { useStoreModal } from "../../store/storeModal";
 import { TextAreaSteps } from "../recipeListPage/RecipeTextAreaSteps";
-import { InputIngredients } from "../ingredientsPage/InputIngredients";
+import { InputIngredients } from "../ingredientsPage/InputsIngredients";
 import { useAuthStore } from "../../store/storeAuth";
 
 
@@ -63,6 +63,7 @@ export const ModalCreateOrUpdateRecipe = () => {
                     editingRecipe.id, 
                     {title, desc, ingredients, steps}
                 )
+                closeModal()
             } catch(err: unknown) {
                 console.error(err)
                 alert(err)
@@ -70,14 +71,13 @@ export const ModalCreateOrUpdateRecipe = () => {
         } else {
             try {
                 await createRecipe(userId, {title, desc, ingredients, steps})
+                resetForm()
+                closeModal()
             } catch(err: unknown) {
                 console.error(err)
                 alert(err)
             }
-        }
-
-        resetForm()
-        closeModal()
+        } 
     }
 
 if(!isModalOpen) return null
@@ -111,9 +111,9 @@ if(!isModalOpen) return null
                             onChange={(event) => setDesc(event.target.value)}
                         />
                     </div>
-                    <div className="flexBlock">
-                        <h3 className="labelModal">Добавление продукта:</h3>                     
-                    </div>
+                    
+                    <h3 className="labelModal">Добавление продукта</h3>                     
+                    
 
                     <InputIngredients ingredients={ingredients} setIngredients={setIngredients}/>
                     <TextAreaSteps  modalMode={modalMode} steps={steps} setSteps={setSteps} />

@@ -8,26 +8,26 @@ interface IngredientsStore {
     error: string | null;
     Ingredients: IIngredient[];
     fetchIngredient: (userId: string) => Promise<void>;
-    addNewIngredient: (userId: string, title: string, unit: string) => Promise<void>;
+    addNewIngredient: (userId: string, title: string, value:string ,unit: string) => Promise<void>;
     searchIngredient: (title: string) => IIngredient[];
     deleteIngredient: (userId: string, id: string) => Promise<void>;
 }
 
 const DEFAULT_INGREDIENTS: Omit<IIngredient, 'id'>[] = [
-    { title: 'Картофель', unit: '3 шт'},
-    { title: 'Лук', unit: '1 шт'},
-    { title: 'Морковь', unit: '1 шт'},
-    { title: 'Помидоры', unit: '1 шт'},
-    { title: 'Курица', unit: '500 гр'},
-    { title: 'Говядина', unit: '500 гр'},
-    { title: 'Свинина', unit: '500 гр'},
-    { title: 'Рис', unit: '200 гр'},
-    { title: 'Соль', unit: '1 ст.л'},
-    { title: 'Перец', unit: '1 шт'},
-    { title: 'Мука', unit: '100 гр'},
-    { title: 'Яйца', unit: '1 шт'},
-    { title: 'Молоко', unit: '70 мл'},
-    { title: 'Сметана', unit: '1 ст.л'},
+    { title: 'Картофель', value: '3', unit: 'шт'},
+    { title: 'Лук', value: '3', unit: 'шт'},
+    { title: 'Морковь', value: '1', unit: 'шт'},
+    { title: 'Помидоры', value: '1', unit: 'шт'},
+    { title: 'Курица', value: '500', unit: 'гр'},
+    { title: 'Говядина', value: '500', unit: 'гр'},
+    { title: 'Свинина', value: '500', unit: 'гр'},
+    { title: 'Рис', value: '200', unit: 'гр'},
+    { title: 'Соль', value: '1', unit: 'ст.л'},
+    { title: 'Перец', value: '1', unit: 'шт'},
+    { title: 'Мука', value: '100 ', unit: 'гр'},
+    { title: 'Яйца', value: '1 ', unit: 'шт'},
+    { title: 'Молоко', value: '70', unit: 'мл'},
+    { title: 'Сметана', value: '1 ', unit: 'ст.л'},
 ]
 export const useIngredientsStore = create<IngredientsStore>()((set, get) => ({
     loading: false,
@@ -39,10 +39,19 @@ export const useIngredientsStore = create<IngredientsStore>()((set, get) => ({
         try {
             const colRef = collection(db, 'users', userId, 'ingredients' )
             const snapshot = await getDocs(colRef)
-            const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}) ) as IIngredient[]
+            const items = snapshot.docs.map(doc => {
+                const data = doc.data()
+                return {
+                    id: doc.id,
+                    title: data.title ?? '',
+                    value: data.value ?? '',
+                    unit: data.unit ?? 'кг',
+
+                } as IIngredient
+            })
 
             if(items.length === 0) {
-                await Promise.all(DEFAULT_INGREDIENTS.map((ing) => get().addNewIngredient(userId, ing.title, ing.unit)))
+                await Promise.all(DEFAULT_INGREDIENTS.map((ing) => get().addNewIngredient(userId, ing.title, ing.value ,ing.unit)))
                 set({ loading: false})
             } else {
                 set({ Ingredients: items, loading: false })
@@ -55,12 +64,12 @@ export const useIngredientsStore = create<IngredientsStore>()((set, get) => ({
         }
     },
 
-    addNewIngredient: async (userId, title, unit) => {
+    addNewIngredient: async (userId, title, value, unit) => {
         set({ loading: true, error: null});
         try {
             const colRef = collection(db, 'users', userId, 'ingredients') 
-            const docRef = await addDoc(colRef, { title, unit})
-            const newItem: IIngredient = { id: docRef.id, title, unit }
+            const docRef = await addDoc(colRef, { title, value, unit})
+            const newItem: IIngredient = { id: docRef.id, title, value, unit }
             set(state => ({ Ingredients: [...state.Ingredients, newItem], loading: false}))
         }  catch(err: unknown) {
             if(err instanceof FirebaseError) {

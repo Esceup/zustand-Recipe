@@ -12,7 +12,6 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
 
     const [title, setTitle] = useState('')
 
-
     const addNewSteps = () => {
         const newSteps: IStep = {
             id: generatedId(),
@@ -24,7 +23,11 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
         setTitle('')
     }
 
-    
+    const handleUpdateStep = (id: string, newTitle: string) => {
+        setSteps(steps.map(step => 
+            step.id === id ? {...step, title: newTitle} : step
+        ))
+    }
 
     const handleRemove = (id: string) => {
         setSteps(steps.filter(step => step.id !== id))
@@ -38,8 +41,12 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
            
            {steps?.map(step => 
             <li key={step.id}>
-                <textarea className="stepEditArea" id={step.id}>{step.title}</textarea>
-                <button className="btn btnSteps" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-xmark"></i></button>
+                <textarea 
+                    className="stepEditArea" 
+                    id={step.id} 
+                    value={step.title}
+                    onChange={(e) => handleUpdateStep(step.id, e.target.value)}>
+                </textarea>
                 <button className="btn btnSteps" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-xmark"></i></button>
             </li>
                 )}
@@ -48,7 +55,7 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
                     <textarea
                         className="newStepArea"
                         value={title}
-                        onChange={(event) => setTitle(event.target.value)}>{title}
+                        onChange={(event) => setTitle(event.target.value)}>
                     </textarea>
                     <button className="btn btnSteps" onClick={addNewSteps}><i className="fa-solid fa-plus"></i></button>
                 </li> 

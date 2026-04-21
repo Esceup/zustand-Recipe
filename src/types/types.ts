@@ -5,6 +5,7 @@ export interface IStep {
 export interface IIngredient {
     id: string;
     title: string;
+    value: string;
     unit: string;
 }
 
@@ -12,7 +13,7 @@ export interface IRecipe {
     id: string;
     title: string;
     desc: string;
-    ingredients: IIngredient[],
+    ingredients: IIngredient[];
     steps: IStep[];
 }
 export interface IRecipesForWeek {

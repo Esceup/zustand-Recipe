@@ -21,7 +21,7 @@ export const RecipesList = () => {
                 <button className="btn btnAddRecipeMain btn-gradient" onClick={openCreateModal}>Добавить рецепт</button>
             </div>
             <div >
-                <h3 className="searchLabel">Поиск</h3>
+                {/* <h3 className="searchLabel">Поиск</h3> */}
                 <div className="flexBlockInputAdd">
                     <input 
                     type="text"
