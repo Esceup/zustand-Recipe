@@ -8,7 +8,7 @@ interface StepsProps {
     setSteps: (steps: IStep[]) => void;
 }
 
-export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
+export const TextAreaSteps:FC<StepsProps> = ({ steps, setSteps}) => {
 
     const [title, setTitle] = useState('')
 
