@@ -37,7 +37,7 @@ export const ModalUserProfile:FC<UserProfileProps> = ({ showModal, setShowModal 
     return (
         <>
             <div className={`modalUserProfile ${showModal ? 'show' : ''} ` }>
-                <div className="d-flex j-center">
+                <div className="d-flex j-center titleAndBtnEdit">
                     <h3 className={`${editTitle ? 'd-none' : 'd-block'}`}>{user?.displayName || 'Имя не указано'}</h3>
                     <input className={`searchEditTitle ${editTitle ? 'd-inline' : 'd-none'}`} ref={inputRef} type="text" value={title ?? ''} onChange={(e) => setTitle(e.target.value)}/> 
                     <button className={`btn-reset white ${editTitle ? 'd-none' : 'd-inline'}`} onClick={handleEditTitle}><i className="fa-solid fa-pencil "></i></button>

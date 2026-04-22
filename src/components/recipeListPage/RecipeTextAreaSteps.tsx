@@ -12,7 +12,9 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
 
     const [title, setTitle] = useState('')
 
-    const addNewSteps = () => {
+    const addNewSteps = (event: React.FormEvent<HTMLElement>) => {
+        event.preventDefault()
+
         const newSteps: IStep = {
             id: generatedId(),
             title: title,
@@ -36,7 +38,6 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
     return (
        <>
         <h3>Пошаговый рецепт</h3>
-        <h4>1</h4>
         <ul className="stepsList">
            
            {steps?.map(step => 
@@ -47,10 +48,10 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
                     value={step.title}
                     onChange={(e) => handleUpdateStep(step.id, e.target.value)}>
                 </textarea>
-                <button className="btn btnSteps" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-xmark"></i></button>
+                <button className="btn btnSteps" onClick={() => handleRemove(step.id)}><i className="fa-solid fa-trash-can"></i></button>
             </li>
                 )}
-            {modalMode === 'edit' ?
+            
                 <li>
                     <textarea
                         className="newStepArea"
@@ -59,7 +60,7 @@ export const TextAreaSteps:FC<StepsProps> = ({ modalMode, steps, setSteps}) => {
                     </textarea>
                     <button className="btn btnSteps" onClick={addNewSteps}><i className="fa-solid fa-plus"></i></button>
                 </li> 
-            : ''}
+            
                   
         </ul>
        </>  

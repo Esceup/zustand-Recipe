@@ -2,12 +2,13 @@ import { useState } from "react"
 import { useRecipesStore } from "../../store/storeRecipes"
 import RecipeItem from "./RecipeItem"
 import { useStoreModal } from "../../store/storeModal"
+import { ModalCreateOrUpdateRecipe } from "../modal/ModalCreateOrUpdateRecipe"
 
 export const RecipesList = () => {
 
     const [title, setTitle] = useState('')
     const { recipesList, loading } = useRecipesStore()
-    const { openCreateModal } = useStoreModal()
+    const { openCreateModal, modalMode, editingRecipe } = useStoreModal()
 
     return (
         <>  
@@ -38,7 +39,8 @@ export const RecipesList = () => {
                 {recipesList?.filter(item => item.title.toLowerCase().includes(title.toLowerCase())).map((recipe) => (
                     <RecipeItem key={recipe.id} recipe={recipe}/>
                 ))}
-            </ul>          
+            </ul>         
+            <ModalCreateOrUpdateRecipe key={modalMode === 'edit' ? editingRecipe?.id : 'create'}/> 
         </>
     )
 }

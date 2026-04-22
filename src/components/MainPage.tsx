@@ -1,5 +1,3 @@
-
-import { ModalCreateOrUpdateRecipe } from "./modal/ModalCreateOrUpdateRecipe"
 import { useState } from "react"
 import { MenuInWeek } from "./menuWeekPage/MenuInWeek"
 import { Ingredients } from "./ingredientsPage/Ingredients"
@@ -37,7 +35,7 @@ export function MainPage() {
                 </button>
             </div>
             <ModalUserProfile showModal={showModal} setShowModal={setShowModal}/>
-            <ModalCreateOrUpdateRecipe />
+            
         </>
     )
 }

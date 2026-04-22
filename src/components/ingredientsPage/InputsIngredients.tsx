@@ -85,7 +85,7 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                         <option value="стакан">стакан</option>
                     </select>
                     
-                    <button className="btndelete" onClick={() => deleteIngredient(item.id)}>x</button>
+                    <button className="btndelete" onClick={() => deleteIngredient(item.id)}><i className="fa-solid fa-trash-can"></i></button>
                 </li>
             ))}
             </ul>

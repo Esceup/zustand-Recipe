@@ -81,8 +81,18 @@ export const MenuInWeek = () => {
 
                         const editMode = editingMenuId === item.id
                         
-                        const getAllIngredients = () => {
+                        const getAllIngredients = (item: IMenuWeek) => {
                             const allIngredients: {title: string, value: string, unit: string}[] = []
+                            {item.recipesForWeek?.forEach(includeItem => {
+                                    const recipe = recipesList?.find(r => r.title === includeItem.title)
+                                    if(recipe?.ingredients) {
+                                        recipe.ingredients.forEach(ing => {
+                                          allIngredients.push(ing)   
+                                        })
+                                    }
+                                })
+                            }
+                                return allIngredients.sort((a, b) => a.title.localeCompare(b.title))
 
                         }
 
@@ -101,12 +111,7 @@ export const MenuInWeek = () => {
                                 onChange={(e) => {                                    
                                     setTitleItemEdit(e.target.value)          
                                 }}/> 
-                            
-                            
-                            </h3>
-                               
-                            <div className="mb-10px">
-                                <button className="btn-reset" onClick={() => {                             
+                                <button className="btn-reset ml-5px" onClick={() => {                             
                                     if(editMode) {
                                         if(titleItemEdit === item.title) {
                                             setEditingMenuId(null)
@@ -130,6 +135,11 @@ export const MenuInWeek = () => {
                                 }}>
                                     <i className={`fa-solid ${editMode ? "fa-check" : "fa-pencil"} `}></i>
                                 </button> 
+                            
+                            </h3>
+                            
+                               
+                            <div className="mb-10px">
                                 <button 
                                     className="btn-reset btn-delete" 
                                     onClick={() => {
@@ -162,14 +172,10 @@ export const MenuInWeek = () => {
                             </ul> 
                             <h3>Продукты для рецептов</h3>
                             <ul className="list-reset listIncludeProducts">
-                                 {item.recipesForWeek?.map(includeItem => 
-                                    recipesList?.map((recipeItem) => 
-                                        recipeItem.title === includeItem.title ? 
-                                            recipeItem.ingredients.map((ing) => 
-                                               <li key={recipeItem.id}>{ing.title} - {ing.value} {ing.unit}</li>
-                                             ) : ''                          
-                                        )
-                                )}
+                                {getAllIngredients(item).map((ing, index) => 
+                                    <li key={index}>{index + 1}. {ing.title} - {ing.value} {ing.unit}</li>
+                                    )                            
+                                }
                             </ul>
                            
                                    

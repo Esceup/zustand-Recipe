@@ -18,7 +18,7 @@ export const Ingredients = () => {
     if(userId === undefined) return
     
     const handleNewIngredient = () => {        
-        if(title === '' && valueUnit === '')  {
+        if(title === '' || valueUnit === '')  {
             setError(true)
             return false
         }
@@ -45,14 +45,14 @@ export const Ingredients = () => {
             <div className="flexBlock mt-15px">
                 <input 
                     type="text" 
-                    className={`inputModal first  mb-5px input-reset ${error ? 'error' : ''} `}
+                    className={`inputModal first  mb-15px input-reset ${error ? 'error' : ''} `}
                     value={title}
                     placeholder="Наименование ингредиента"
                     onChange={(event) => setTitle(event.target.value)}
                 />
                 <input 
                     type="text" 
-                    className="inputModal mb-5px mr-15px input-reset"
+                    className={`inputModal mb-5px mr-15px mb-15px input-reset ${error ? 'error' : ''}`}
                     value={valueUnit}
                     placeholder="Значение"
                     onChange={(event) => setValueUnit(event.target.value)}
@@ -73,7 +73,7 @@ export const Ingredients = () => {
                 
                 <input 
                     type="text" 
-                    className={`inputModal first mb-15px input-reset ${error ? 'error' : ''} `}
+                    className={`inputModal first mb-15px input-reset `}
                     value={searchTitle}
                     placeholder="Поиск"
                     onChange={(event) => setSearchTitle(event.target.value)}
