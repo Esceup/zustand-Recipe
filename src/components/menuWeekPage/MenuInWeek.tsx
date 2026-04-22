@@ -82,18 +82,33 @@ export const MenuInWeek = () => {
                         const editMode = editingMenuId === item.id
                         
                         const getAllIngredients = (item: IMenuWeek) => {
-                            const allIngredients: {title: string, value: string, unit: string}[] = []
-                            {item.recipesForWeek?.forEach(includeItem => {
+                            const allIngredients = new Map<string, {title: string, valueAndUnit: string[]}>()
+                            
+                            item.recipesForWeek?.forEach(includeItem => {
                                     const recipe = recipesList?.find(r => r.title === includeItem.title)
                                     if(recipe?.ingredients) {
                                         recipe.ingredients.forEach(ing => {
-                                          allIngredients.push(ing)   
+                                            const key = ing.title.trim().toLowerCase()
+                                            const value = `${ing.value} ${ing.unit}`
+
+                                            if(allIngredients.has(key)) {
+                                                allIngredients.get(key)?.valueAndUnit.push(value)
+                                            } else {
+                                                allIngredients.set(key, {
+                                                    title: ing.title,
+                                                    valueAndUnit: [value]
+                                                })
+                                            }  
                                         })
                                     }
                                 })
-                            }
-                                return allIngredients.sort((a, b) => a.title.localeCompare(b.title))
-
+                            
+                                const result = Array.from(allIngredients.entries()).map(([id, data]) => ({
+                                    id,
+                                    title: data.title,
+                                    finaValue: data.valueAndUnit.join(', ')
+                                }))
+                                return result.sort((a, b) => a.title.localeCompare(b.title))
                         }
 
                         return (
@@ -173,7 +188,7 @@ export const MenuInWeek = () => {
                             <h3>Продукты для рецептов</h3>
                             <ul className="list-reset listIncludeProducts">
                                 {getAllIngredients(item).map((ing, index) => 
-                                    <li key={index}>{index + 1}. {ing.title} - {ing.value} {ing.unit}</li>
+                                    <li key={ing.id}>{index + 1}. {ing.title} - {ing.finaValue}</li>
                                     )                            
                                 }
                             </ul>

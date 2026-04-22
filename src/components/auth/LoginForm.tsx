@@ -27,7 +27,7 @@ const getRussianErrorMessage = (errorCode: string): string => {
 
 export const LoginForm = () => {
 
-    const [isRegister, setIsRegister] = useState(true)
+    const [isRegister, setIsRegister] = useState(false)
     const [title, setTitle] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -66,7 +66,7 @@ export const LoginForm = () => {
 
     return (
         <div className="LoginForm">
-            <h2>{isRegister ? 'Регистрация' : 'Авторизация1'}</h2>
+            <h2>{isRegister ? 'Регистрация' : 'Авторизация'}</h2>
             <form onSubmit={handleSubmit}>
                  {isRegister ? <div className="blockForLabel">
                     
