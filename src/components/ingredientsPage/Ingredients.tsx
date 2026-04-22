@@ -35,7 +35,7 @@ export const Ingredients = () => {
 
 
     return (
-          <>
+          <div className="ingredientsPage">
             <div className={`loaderFullBack ${loading ? 'loading' : ''}`}>
                 <div className='loader'></div>
             </div>
@@ -81,7 +81,7 @@ export const Ingredients = () => {
             <ul className={`listReset popularIngredientsListMain`}>
                 {Ingredients?.filter(filterItem => 
                     filterItem.title.toLowerCase().includes(searchTitle.toLowerCase())).sort((a, b) => a.title.localeCompare(b.title)).map((item) => 
-                    <li className="popularIngredientItem" key={item.id}>{item.title} 
+                    <li className="popularIngredientItem" key={item.id}>{item.title} - {item.value}{item.unit}
                         <span 
                             onClick={() => deleteIngredient(userId, item.id)} 
                             className="deleteIngredient">
@@ -93,6 +93,6 @@ export const Ingredients = () => {
             
            </div>
            <div onClick={() => setShow(false)} className={`backModal ${show ? 'active' : ''}`}></div>
-          </>
+          </div>
     )
 }

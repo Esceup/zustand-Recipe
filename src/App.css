@@ -577,6 +577,9 @@ select:hover {
   cursor: pointer;
   margin-bottom: 5px;
 }
+.ingredientsPage .popularIngredientsListMain .popularIngredientItem {
+  cursor: text;
+}
 .popularIngredientsListMain .menuIncludeItem {
   justify-content: center;
 }
