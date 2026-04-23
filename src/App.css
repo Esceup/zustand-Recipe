@@ -1,246 +1,246 @@
 #root {
-  position: relative;
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 20px 10px 100px 10px;
-  text-align: center;
-  background-color: #000;
+   position: relative;
+   width: 100%;
+   max-width: 1280px;
+   margin: 0 auto;
+   padding: 20px 10px 100px 10px;
+   text-align: center;
+   background-color: #000;
 }
 :root {
-  --gray: #242831;
+   --gray: #242831;
 }
 .list-reset {
-  list-style-type: none;
-  padding: 15px;
+   list-style-type: none;
+   padding: 15px;
 }
 .listIncludeProducts {
-  padding-top: 0;
+   padding-top: 0;
 }
 .btn-reset {
-  background-color: initial !important;
-  outline: none;
+   background-color: initial !important;
+   outline: none;
 }
 .btn-reset:focus,
 .btn-reset:active,
 .btn-reset:hover {
-  background-color: initial !important;
-  outline: none;
+   background-color: initial !important;
+   outline: none;
 }
 .modalOpen {
-  overflow: hidden;
+   overflow: hidden;
 }
 .ml-5px {
-  margin-left: 5px;
+   margin-left: 5px;
 }
 .mr-5px {
-  margin-right: 5px;
+   margin-right: 5px;
 }
 .mb-10px {
-  margin-bottom: 5px;
+   margin-bottom: 5px;
 }
 .ml-15px {
-  margin-left: 10px;
+   margin-left: 10px;
 }
 .ml-5px {
-  margin-left: 15px;
+   margin-left: 15px;
 }
 .mb-15px {
-  margin-bottom: 15px;
+   margin-bottom: 15px;
 }
 .mr-15px {
-  margin-right: 15px;
+   margin-right: 15px;
 }
 .mt-15px {
-  margin-top: 15px;
+   margin-top: 15px;
 }
 .ml-15 {
-  margin-left: 15px;
+   margin-left: 15px;
 }
 .mt-40px {
-  margin-top: 40px;
+   margin-top: 40px;
 }
 .j-center {
-  justify-content: center;
+   justify-content: center;
 }
 .searchEditTitle {
-  margin-top: 15px;
-  padding: 5px;
-  background: inherit;
-  color: white;
-  outline: none;
-  font-size: 19px;
-  border: none;
-  border-bottom: 1px solid #ffffff;
-  padding: 5px 10px;
+   margin-top: 15px;
+   padding: 5px;
+   background: inherit;
+   color: white;
+   outline: none;
+   font-size: 19px;
+   border: none;
+   border-bottom: 1px solid #ffffff;
+   padding: 5px 10px;
 }
 .listReset {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
+   padding: 0;
+   margin: 0;
+   list-style-type: none;
 }
 .searchInput {
-  max-width: 500px;
-  width: 100%;
+   max-width: 500px;
+   width: 100%;
 }
 .btnAllMenu i {
-  color: #7f7f7f;
-  font-size: 25px;
+   color: #7f7f7f;
+   font-size: 25px;
 }
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+   height: 6em;
+   padding: 1.5em;
+   will-change: filter;
+   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+   filter: drop-shadow(0 0 2em #646cffaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+   a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+   }
 }
 .card {
-  padding: 2em;
+   padding: 2em;
 }
 .read-the-docs {
-  color: #888;
+   color: #888;
 }
 .modalRecipe {
-  position: fixed;
-  z-index: 11;
-  max-width: 700px;
-  width: 90%;
-  margin: 0 auto;
-  padding: 15px;
-  /* padding-top: 65px; */
-  background-color: var(--gray);
-  border-radius: 15px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow-y: auto;
-  max-height: 80vh;
-  z-index: 31;
+   position: fixed;
+   z-index: 11;
+   max-width: 700px;
+   width: 90%;
+   margin: 0 auto;
+   padding: 15px;
+   /* padding-top: 65px; */
+   background-color: var(--gray);
+   border-radius: 15px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   overflow-y: auto;
+   max-height: 80vh;
+   z-index: 31;
 }
 .btnAddRecipeMain {
-  width: 100%;
-  padding: 10px !important;
-  border-radius: 15px;
+   width: 100%;
+   padding: 10px !important;
+   border-radius: 15px;
 }
 .modalUserProfile {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 90%;
-  height: 90%;
-  padding: 15px;
-  transform: translate(-50%, -50%);
-  z-index: 40;
-  background-color: #2f2f2f;
-  border-radius: 15px;
+   display: none;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 90%;
+   height: 90%;
+   padding: 15px;
+   transform: translate(-50%, -50%);
+   z-index: 40;
+   background-color: #2f2f2f;
+   border-radius: 15px;
 }
 .modalUserProfile.show {
-  display: block;
+   display: block;
 }
 .modalUserProfile h3 {
-  margin-top: 0;
+   margin-top: 0;
 }
 .modalUserProfile .titleAndBtnEdit {
-  margin-bottom: 15px;
+   margin-bottom: 15px;
 }
 .modalUserProfile .titleAndBtnEdit h3 {
-  margin-bottom: 0;
+   margin-bottom: 0;
 }
 .recipeList .recipeList {
-  min-height: 75px;
+   min-height: 75px;
 }
 .recipeList {
-  padding: 20px;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-  list-style-type: none;
-  transition: all 0.3s ease-in-out;
-  background: var(--gray);
-  border-radius: 15px;
+   padding: 20px;
+   display: grid;
+   gap: 20px;
+   grid-template-columns: repeat(3, 1fr);
+   list-style-type: none;
+   transition: all 0.3s ease-in-out;
+   background: var(--gray);
+   border-radius: 15px;
 }
 .headerRecipeItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 .recipeItemTitle {
-  font-size: 15px;
-  margin-left: 20px;
+   font-size: 15px;
+   margin-left: 20px;
 }
 .descItem {
-  margin-right: 5px;
+   margin-right: 5px;
 }
 .recipeItemProductsBlock {
-  margin-top: 10px;
-  padding: 15px;
-  border-radius: 15px;
-  background-color: var(--gray);
+   margin-top: 10px;
+   padding: 15px;
+   border-radius: 15px;
+   background-color: var(--gray);
 }
 .recipeItemProductsBlock h3 {
-  margin-top: 0;
+   margin-top: 0;
 }
 .recipeItem {
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0 20px;
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
-  background: #000;
-  border-radius: 15px;
-  color: white;
+   max-height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   padding: 0 20px;
+   transition: all 0.3s ease-in-out;
+   overflow: hidden;
+   background: #000;
+   border-radius: 15px;
+   color: white;
 }
 .recipeItem.active {
-  max-height: 50px;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
+   max-height: 50px;
+   overflow: hidden;
+   transition: all 0.3s ease-in-out;
 }
 .recipeItem .recipeList li {
-  border-bottom: 2px solid #4b4b4b;
+   border-bottom: 2px solid #4b4b4b;
 }
 
 .recipeItem i {
-  color: white;
+   color: white;
 }
 .descItem {
-  font-weight: bold;
-  text-align: left;
+   font-weight: bold;
+   text-align: left;
 }
 .flexBlock {
-  display: flex;
-  align-items: baseline;
-  margin-bottom: 15px;
+   display: flex;
+   align-items: baseline;
+   margin-bottom: 15px;
 }
 .spanUnit {
-  margin: 0 10px;
-  text-wrap: nowrap;
+   margin: 0 10px;
+   text-wrap: nowrap;
 }
 .btndelete {
-  padding: 3px 5px 2px 5px;
-  margin-left: 10px;
-  background: #e5e5e5;
-  color: #242831;
+   padding: 3px 5px 2px 5px;
+   margin-left: 10px;
+   background: #e5e5e5;
+   color: #242831;
 }
 /* .btnUpdate {
   position: absolute;
@@ -249,796 +249,796 @@
   bottom: 15px;
 } */
 .btnadd {
-  padding: 0px 7px 4px 7px;
-  margin-left: 10px;
+   padding: 0px 7px 4px 7px;
+   margin-left: 10px;
 }
 .inputEmail,
 .inputPass {
-  width: 100%;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid #898989;
-  padding: 5px;
-  padding-bottom: 10px;
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
+   width: 100%;
+   margin-bottom: 30px;
+   border: none;
+   border-bottom: 1px solid #898989;
+   padding: 5px;
+   padding-bottom: 10px;
+   font-size: 16px;
+   transition: all 0.3s ease-in-out;
 }
 /* .inputPass:invalid {
   transition: all 0.3s ease-in-out;
   border-bottom: 1px solid red !important;
 } */
 .LoginForm h2 {
-  margin-bottom: 60px;
+   margin-bottom: 60px;
 }
 .labelEmail,
 .labelPass {
-  position: absolute;
-  top: 9px;
-  left: 20px;
-  color: #ffffff;
+   position: absolute;
+   top: 9px;
+   left: 20px;
+   color: #ffffff;
 }
 .blockForLabel input ~ label {
-  transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
 }
 .blockForLabel input:focus ~ label,
 .blockForLabel input:not(:placeholder-shown) ~ label {
-  top: -30px;
-  transition: all 0.3s ease-in-out;
+   top: -30px;
+   transition: all 0.3s ease-in-out;
 }
 .blockForLabel {
-  position: relative;
+   position: relative;
 }
 .titleItemEdit {
-  display: none;
+   display: none;
 }
 .titleItemEdit.active {
-  display: inline-block;
+   display: inline-block;
 }
 .spanTitleItem {
-  display: none;
+   display: none;
 }
 .spanTitleItem.active {
-  display: inline-block;
+   display: inline-block;
 }
 .headerBlock .logoMain {
-  width: 20%;
-  position: absolute;
-  top: 15px;
-  left: 15px;
+   width: 20%;
+   position: absolute;
+   top: 15px;
+   left: 15px;
 }
 .headerBlock.loginForm .logoMain {
-  width: 65%;
-  position: relative;
-  top: initial;
-  left: initial;
+   width: 65%;
+   position: relative;
+   top: initial;
+   left: initial;
 }
 
 .headerBlock {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+   width: 100%;
+   display: flex;
+   justify-content: center;
 }
 .headerBlock {
-  width: 100%;
-  display: flex;
+   width: 100%;
+   display: flex;
 }
 #root .btnLogout {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  z-index: 31;
-  background: #000 !important;
+   position: absolute;
+   right: 15px;
+   top: 15px;
+   z-index: 31;
+   background: #000 !important;
 }
 .LoginForm {
-  width: 80%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+   width: 80%;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
 }
 .LoginForm .btnFlipRegister,
 .LoginForm .btnRegister {
-  width: 100%;
-  border-radius: 5px;
-  padding: 8px 0 11px 0;
+   width: 100%;
+   border-radius: 5px;
+   padding: 8px 0 11px 0;
 }
 .LoginForm .btnRegister {
-  margin-bottom: 15px;
+   margin-bottom: 15px;
 }
 .LoginForm .btnFlipRegister {
-  border: 1px solid #000;
-  background: #000000;
-  color: #c0c0c0;
+   border: 1px solid #000;
+   background: #000000;
+   color: #c0c0c0;
 }
 .modalMenuWeek {
-  position: absolute;
-  height: auto;
-  width: 90%;
-  max-width: 700px;
-  display: none;
-  top: 20px;
-  top: 20px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 7px;
-  background: #ffffff;
-  z-index: 20;
-  border-radius: 5px;
-  border: 2px solid #c9c9c9;
-  z-index: 20;
-  padding: 20px;
+   position: absolute;
+   height: auto;
+   width: 90%;
+   max-width: 700px;
+   display: none;
+   top: 20px;
+   top: 20px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   padding: 7px;
+   background: #ffffff;
+   z-index: 20;
+   border-radius: 5px;
+   border: 2px solid #c9c9c9;
+   z-index: 20;
+   padding: 20px;
 }
 .modalMenuWeek.active {
-  display: block;
+   display: block;
 }
 .labelModal {
-  text-wrap: nowrap;
-  margin-right: 10px;
+   text-wrap: nowrap;
+   margin-right: 10px;
 }
 .inputModal {
-  padding: 5px;
-  width: 100%;
+   padding: 5px;
+   width: 100%;
 }
 .inputModal.error {
-  border-bottom: 1px solid red;
+   border-bottom: 1px solid red;
 }
 .inputPass.error {
-  transition: all 0.3s ease-in-out;
-  border-bottom: 2px solid red !important;
+   transition: all 0.3s ease-in-out;
+   border-bottom: 2px solid red !important;
 }
 .popularIngredientsListBlock .inputModal {
-  margin-top: 5px;
+   margin-top: 5px;
 }
 .popularIngredientsListBlock input {
-  border: none;
-  border-bottom: 1px solid #000;
+   border: none;
+   border-bottom: 1px solid #000;
 }
 .inputModal.first {
-  margin-right: 10px;
+   margin-right: 10px;
 }
 .backModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(0 0 0 / 0.5);
-  z-index: 30;
+   display: none;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: rgb(0 0 0 / 0.5);
+   z-index: 30;
 }
 .backModal.active {
-  display: block;
+   display: block;
 }
 .ingredientsList {
-  padding: 0;
-  list-style-type: none;
-  font-size: 15px;
+   padding: 0;
+   list-style-type: none;
+   font-size: 15px;
 }
 .ingredientTitle {
-  font-weight: 600;
-  margin-right: auto;
+   font-weight: 600;
+   margin-right: auto;
 }
 .ingredientsList li {
-  display: flex;
-  width: 100%;
-  padding: 10px 0;
-  border-bottom: 1px solid #cecece;
+   display: flex;
+   width: 100%;
+   padding: 10px 0;
+   border-bottom: 1px solid #cecece;
 }
 .ingredientsList span {
-  font-weight: 600;
+   font-weight: 600;
 }
 .btnEdit {
-  margin-right: 15px;
+   margin-right: 15px;
 }
 .menuIncludeItem .deleteIngredient {
-  padding: 0;
+   padding: 0;
 }
 .menuIncludeItem {
-  display: flex;
-  justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
 }
 .btn {
-  background-color: initial;
-  color: white;
-  padding: 0px 7px 4px 7px;
-  z-index: 30;
-  border: none;
+   background-color: initial;
+   color: white;
+   padding: 0px 7px 4px 7px;
+   z-index: 30;
+   border: none;
 }
 .searchInput {
-  margin-right: 15px;
-  padding: 5px;
-  background: inherit;
-  color: white;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #000;
-  padding-left: 32px;
+   margin-right: 15px;
+   padding: 5px;
+   background: inherit;
+   color: white;
+   outline: none;
+   border: none;
+   border-bottom: 1px solid #000;
+   padding-left: 32px;
 }
 .notMenuWeekItem {
-  font-size: 14px;
-  color: #e34baf;
+   font-size: 14px;
+   color: #e34baf;
 }
 .searchLabel {
-  margin: 0 20px;
+   margin: 0 20px;
 }
 .btnClose {
-  position: absolute;
-  right: 15px;
-  top: 20px;
-  padding: 0px 7px 4px 7px;
+   position: absolute;
+   right: 15px;
+   top: 20px;
+   padding: 0px 7px 4px 7px;
 }
 .ingredientsItem {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+   position: relative;
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
 }
 .ingredientsItem .inputModal {
-  margin-right: 10px;
+   margin-right: 10px;
 }
 
 select {
-  width: 100%;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: #242831;
-  color: white;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  padding: 1px 15px 4px 12px;
-  font-size: 16px;
-  font-family: inherit;
-  cursor: pointer;
-  outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+   width: 100%;
+   appearance: none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   background-color: #242831;
+   color: white;
+   border: 1px solid #ffffff;
+   border-radius: 5px;
+   padding: 1px 15px 4px 12px;
+   font-size: 16px;
+   font-family: inherit;
+   cursor: pointer;
+   outline: none;
+   transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
 }
 
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+   background-repeat: no-repeat;
+   background-position: right 12px center;
+   background-size: 16px;
 }
 
 select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+   border-color: #007bff;
+   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 select:hover {
-  border-color: #888;
+   border-color: #888;
 }
 .ingredientsList {
-  width: 100%;
+   width: 100%;
 }
 .ingredientsList .ingredientsItem input:last-child {
-  width: 45%;
+   width: 45%;
 }
 .ingredientsList .ingredientsItem span {
-  white-space: nowrap;
-  margin: 0 10px;
-  color: white;
+   white-space: nowrap;
+   margin: 0 10px;
+   color: white;
 }
 .inputNewIngredient {
-  display: none;
+   display: none;
 }
 .inputNewIngredient.active {
-  display: block;
+   display: block;
 }
 .popularIngredientsToggle {
-  position: absolute;
+   position: absolute;
 }
 .popularIngredientsList {
-  display: none;
-  width: 100%;
-  position: absolute;
-  max-height: 400px;
-  max-width: 700px;
-  overflow: auto;
-  left: 0;
-  top: 20px;
-  gap: 5px;
-  grid-template-columns: 1fr 1fr 1fr;
-  list-style-type: none;
-  padding: 7px;
-  background: #ffffff;
-  z-index: 42;
-  border-radius: 5px;
-  border: 2px solid #c9c9c9;
+   display: none;
+   width: 100%;
+   position: absolute;
+   max-height: 400px;
+   max-width: 700px;
+   overflow: auto;
+   left: 0;
+   top: 20px;
+   gap: 5px;
+   grid-template-columns: 1fr 1fr 1fr;
+   list-style-type: none;
+   padding: 7px;
+   background: #ffffff;
+   z-index: 42;
+   border-radius: 5px;
+   border: 2px solid #c9c9c9;
 }
 .btnAddNewIngredient {
-  margin-top: 15px;
-  width: 100%;
-  border-radius: 5px;
-  padding: 4px;
-  padding-bottom: 6px;
+   margin-top: 15px;
+   width: 100%;
+   border-radius: 5px;
+   padding: 4px;
+   padding-bottom: 6px;
 }
 .popularIngredientsListMain {
-  position: relative;
-  column-count: 2;
-  column-gap: 20px;
-  max-height: 100%;
-  max-width: 700px;
-  top: 0px;
-  gap: 5px;
-  list-style-type: none;
-  padding: 15px;
-  border-radius: 15px;
-  overflow: auto;
-  background: #000;
-  z-index: 20;
+   position: relative;
+   column-count: 2;
+   column-gap: 20px;
+   max-height: 100%;
+   max-width: 700px;
+   top: 0px;
+   gap: 5px;
+   list-style-type: none;
+   padding: 15px;
+   border-radius: 15px;
+   overflow: auto;
+   background: #000;
+   z-index: 20;
 }
 .popularIngredientsListMain li {
-  min-height: 25px;
-  break-inside: avoid;
-  page-break-inside: avoid;
-  width: 100%;
-  border: 2px solid #373737;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  margin-bottom: 5px;
+   min-height: 25px;
+   break-inside: avoid;
+   page-break-inside: avoid;
+   width: 100%;
+   border: 2px solid #373737;
+   border-radius: 5px;
+   color: white;
+   cursor: pointer;
+   margin-bottom: 5px;
 }
 .ingredientsPage .popularIngredientsListMain .popularIngredientItem {
-  cursor: text;
+   cursor: text;
 }
 .popularIngredientsListMain .menuIncludeItem {
-  justify-content: center;
+   justify-content: center;
 }
 .popularIngredientsList li {
-  margin-bottom: 5px;
-  padding: 0px 6px;
-  background-color: #f3f3f3;
-  border-radius: 5px;
-  border: 2px solid #cecece;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+   margin-bottom: 5px;
+   padding: 0px 6px;
+   background-color: #f3f3f3;
+   border-radius: 5px;
+   border: 2px solid #cecece;
+   cursor: pointer;
+   transition: all 0.3s ease-in-out;
 }
 .popularIngredientsList li:hover {
-  background-color: #606060;
-  color: white;
-  transition: all 0.3s ease-in-out;
+   background-color: #606060;
+   color: white;
+   transition: all 0.3s ease-in-out;
 }
 .popularIngredientsListMain.active {
-  display: grid;
+   display: grid;
 }
 .popularIngredientsList.active {
-  display: block;
+   display: block;
 }
 .popularIngredientsListBlock {
-  padding: 15px;
-  width: 100%;
-  max-width: 700px;
-  top: 20px;
-  top: 20px;
-  top: 50%;
-  left: 50%;
-  background: #ffffff;
-  z-index: 20;
-  border-radius: 15px;
-  z-index: 20;
-  background: var(--gray);
+   padding: 15px;
+   width: 100%;
+   max-width: 700px;
+   top: 20px;
+   top: 20px;
+   top: 50%;
+   left: 50%;
+   background: #ffffff;
+   z-index: 20;
+   border-radius: 15px;
+   z-index: 20;
+   background: var(--gray);
 }
 .popularIngredientsListBlock.active {
-  display: block;
+   display: block;
 }
 .popularIngredientItem {
-  text-wrap: nowrap;
-  position: relative;
-  padding: 0 15px;
+   text-wrap: nowrap;
+   position: relative;
+   padding: 0 15px;
 }
 .deleteIngredient {
-  position: absolute;
-  padding: 0px 6px;
-  right: 10px;
-  margin-left: 10px;
-  cursor: pointer;
+   position: absolute;
+   padding: 0px 6px;
+   right: 10px;
+   margin-left: 10px;
+   cursor: pointer;
 }
 .btnIngredientMain {
-  margin-right: 10px;
+   margin-right: 10px;
 }
 .btnBlockUpdateDelete {
-  margin-top: 15px;
-  margin-bottom: 10px;
+   margin-top: 15px;
+   margin-bottom: 10px;
 }
 .labelMenuWeekAdd {
-  margin-right: 10px;
+   margin-right: 10px;
 }
 .modalUserProfileBack {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 30;
-  background-color: rgb(0 0 0 / 0.5);
+   display: none;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   z-index: 30;
+   background-color: rgb(0 0 0 / 0.5);
 }
 .modalUserProfileBack.show {
-  display: block;
+   display: block;
 }
 .blockForLabel .input-reset {
-  padding: 15px;
-  border-radius: 15px;
-  width: 100%;
-  padding-left: 32px;
-  background: var(--gray);
-  border: none;
-  color: white;
-  outline: none;
-  /* padding-top: 3px; */
-  border-bottom: 1px solid #000;
+   padding: 15px;
+   border-radius: 15px;
+   width: 100%;
+   padding-left: 32px;
+   background: var(--gray);
+   border: none;
+   color: white;
+   outline: none;
+   /* padding-top: 3px; */
+   border-bottom: 1px solid #000;
 }
 .inputModal::placeholder {
-  color: white;
-  opacity: 0.8;
+   color: white;
+   opacity: 0.8;
 }
 .flexBlockInputAdd {
-  display: flex;
-  position: relative;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  padding: 7px 15px;
-  background-color: var(--gray);
+   display: flex;
+   position: relative;
+   margin-bottom: 15px;
+   border-radius: 10px;
+   padding: 7px 15px;
+   background-color: var(--gray);
 }
 .flexBlockInputAdd .searchInput {
-  max-width: 100%;
-  width: 100%;
+   max-width: 100%;
+   width: 100%;
 }
 
 .flexBlockInputAdd i {
-  color: white;
+   color: white;
 }
 .menuWeekItemTitle {
-  margin-bottom: 5px;
-  padding-right: 30px;
+   margin-bottom: 5px;
+   padding-right: 30px;
 }
 .menuWeekItemTitle .input-reset {
-  display: none;
+   display: none;
 }
 .menuWeekItemTitle .input-reset.active {
-  display: inline-block;
-  width: auto;
-  text-align: center;
-  padding: 3px;
-  margin: 0px;
-  border-bottom: 1px solid #ffffff;
+   display: inline-block;
+   width: auto;
+   text-align: center;
+   padding: 3px;
+   margin: 0px;
+   border-bottom: 1px solid #ffffff;
 }
 .input-reset {
-  margin-right: 10px;
-  width: 100%;
-  padding-left: 32px;
-  background: inherit;
-  border: none;
-  color: white;
-  outline: none;
-  padding-top: 3px;
-  border-bottom: 1px solid #000;
+   margin-right: 10px;
+   width: 100%;
+   padding-left: 32px;
+   background: inherit;
+   border: none;
+   color: white;
+   outline: none;
+   padding-top: 3px;
+   border-bottom: 1px solid #000;
 }
 .inputMenuWeekAdd {
-  margin-right: 10px;
-  width: 100%;
-  padding-left: 32px;
-  background: inherit;
-  border: none;
-  color: white;
-  outline: none;
-  padding-top: 3px;
-  border-bottom: 1px solid #000;
+   margin-right: 10px;
+   width: 100%;
+   padding-left: 32px;
+   background: inherit;
+   border: none;
+   color: white;
+   outline: none;
+   padding-top: 3px;
+   border-bottom: 1px solid #000;
 }
 .btn-gradient {
-  background: linear-gradient(135deg, #bd1ec9 0%, #ff6b9d 100%);
+   background: linear-gradient(135deg, #bd1ec9 0%, #ff6b9d 100%);
 }
 .btn-gradient-blue {
-  background: linear-gradient(135deg, #431ec9 0%, #ab6bff 100%) !important;
-  color: white !important;
+   background: linear-gradient(135deg, #431ec9 0%, #ab6bff 100%) !important;
+   color: white !important;
 }
 .tabsBlock .btn {
-  border: 1px solid #fff;
+   border: 1px solid #fff;
 }
 .tabsBlock .btn:first-child {
-  margin-right: 10px;
+   margin-right: 10px;
 }
 .btnPopularIngredients {
-  background-color: #e5e5e5;
-  padding: 2px 5px 2px 5px;
-  border-radius: 5px;
-  margin-right: 10px;
-  cursor: pointer;
+   background-color: #e5e5e5;
+   padding: 2px 5px 2px 5px;
+   border-radius: 5px;
+   margin-right: 10px;
+   cursor: pointer;
 }
 .newStepArea {
-  width: 100%;
+   width: 100%;
 }
 .stepsList {
-  padding: 0;
+   padding: 0;
 }
 .stepsList li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
 }
 .stepsList li textarea {
-  margin-right: 10px;
-  height: 51px;
+   margin-right: 10px;
+   height: 51px;
 }
 .stepEditArea {
-  width: 100%;
+   width: 100%;
 }
 .tabsBlock {
-  background-color: #000000;
-  padding: 10px 0;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 30;
-  border-top: 1px solid white;
+   background-color: #000000;
+   padding: 10px 0;
+   display: flex;
+   width: 100%;
+   justify-content: center;
+   position: fixed;
+   left: 0;
+   top: 0;
+   z-index: 30;
+   border-top: 1px solid white;
 }
 .searchInputAbsolute {
-  position: absolute;
-  left: 23px;
-  top: 50%;
-  transform: translate(-0%, -50%);
+   position: absolute;
+   left: 23px;
+   top: 50%;
+   transform: translate(-0%, -50%);
 }
 .btnAllMenu {
-  margin-right: 10px;
-  background-color: inherit;
-  border: none !important;
-  padding: 5px;
+   margin-right: 10px;
+   background-color: inherit;
+   border: none !important;
+   padding: 5px;
 }
 .btnAllMenu.active {
-  outline: none;
-  color: white;
+   outline: none;
+   color: white;
 }
 .btnAllMenu .underTitleTabs {
-  color: #a5a5a5;
+   color: #a5a5a5;
 }
 .btnAllMenu.active i,
 .btnAllMenu.active .underTitleTabs {
-  color: white;
+   color: white;
 }
 .underTitleTabs {
-  font-size: 14px;
+   font-size: 14px;
 }
 .modalMenuWeekBack {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(0 0 0 / 0.5);
-  z-index: 39;
+   display: none;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: rgb(0 0 0 / 0.5);
+   z-index: 39;
 }
 .d-none {
-  display: none;
+   display: none;
 }
 .d-inline {
-  display: inline;
+   display: inline;
 }
 .d-block {
-  display: block;
+   display: block;
 }
 .d-flex {
-  display: flex;
+   display: flex;
 }
 .white i {
-  color: white;
+   color: white;
 }
 .modalUserProfile button.white {
-  margin-left: 5px;
+   margin-left: 5px;
 }
 .p-btn-normal {
-  padding: 7px 14px;
+   padding: 7px 14px;
 }
 .border-top-white {
-  margin-top: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top: 1px solid white;
+   margin-top: 5px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   border-top: 1px solid white;
 }
 .modalMenuWeekBack.active {
-  display: block;
+   display: block;
 }
 .menuWeek .recipeList .recipeItem {
-  position: relative;
-  justify-content: initial;
+   position: relative;
+   justify-content: initial;
 }
 .menuWeek .recipeItem .btn-delete {
-  position: absolute;
-  top: 24px;
-  right: 20px;
-  padding: 0;
+   position: absolute;
+   top: 24px;
+   right: 20px;
+   padding: 0;
 }
 .menuWeek .recipeItem .btn-delete i {
-  color: #ff6b9d;
-  font-size: 20px;
+   color: #ff6b9d;
+   font-size: 20px;
 }
 .menuWeek .recipeList .recipeList {
-  gap: 10px;
+   gap: 10px;
 }
 .menuWeek .recipeList .recipeList li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-bottom: 10px;
 }
 .menuWeek .recipeList .recipeList li:nth-last-child(1) {
-  border-bottom: 1px solid #fff;
+   border-bottom: 1px solid #fff;
 }
 .menuWeek .recipeList .recipeList li i {
-  font-size: 6px;
-  margin-right: 7px;
-  margin-top: 3px;
+   font-size: 6px;
+   margin-right: 7px;
+   margin-top: 3px;
 }
 .menuWeek .recipeList .recipeList {
-  grid-template-columns: repeat(1, 1fr);
+   grid-template-columns: repeat(1, 1fr);
 }
 
 .modalMenuWeek {
-  position: absolute;
-  height: auto;
-  width: 90%;
-  max-width: 700px;
-  display: none;
-  top: 20px;
-  top: 20px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 7px;
-  background: #1d2027;
-  z-index: 20;
-  border-radius: 15px;
-  border: 2px solid #c9c9c9;
-  z-index: 40;
-  padding: 20px;
+   position: absolute;
+   height: auto;
+   width: 90%;
+   max-width: 700px;
+   display: none;
+   top: 20px;
+   top: 20px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   padding: 7px;
+   background: #1d2027;
+   z-index: 20;
+   border-radius: 15px;
+   border: 2px solid #c9c9c9;
+   z-index: 40;
+   padding: 20px;
 }
 .modalMenuWeek.active {
-  display: block;
+   display: block;
 }
 .headerBlock .logoMain {
-  display: none;
+   display: none;
 }
 
 .loaderFullBack {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(0 0 0 / 0.5);
-  z-index: 41;
+   display: none;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: rgb(0 0 0 / 0.5);
+   z-index: 41;
 }
 .loaderFullBack.loading {
-  display: block;
+   display: block;
 }
 .loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 48px;
-  height: 48px;
-  display: inline-block;
-  border: 4px solid #6ebeff;
-  box-sizing: border-box;
-  animation: fill 2s linear infinite alternate;
-  color: rgba(51, 122, 183, 0.9);
-  border-radius: 0 0 4px 4px;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 48px;
+   height: 48px;
+   display: inline-block;
+   border: 4px solid #6ebeff;
+   box-sizing: border-box;
+   animation: fill 2s linear infinite alternate;
+   color: rgba(51, 122, 183, 0.9);
+   border-radius: 0 0 4px 4px;
 }
 
 .loader::after {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 4px solid #6ebeff;
-  width: 20px;
-  height: 25px;
-  border-radius: 0 4px 4px 0;
+   content: '';
+   box-sizing: border-box;
+   position: absolute;
+   left: 100%;
+   top: 50%;
+   transform: translateY(-50%);
+   border: 4px solid #6ebeff;
+   width: 20px;
+   height: 25px;
+   border-radius: 0 4px 4px 0;
 }
 .blockForSelect {
-  justify-content: left;
-  display: flex;
-  margin: 10px 0px;
+   justify-content: left;
+   display: flex;
+   margin: 10px 0px;
 }
 @keyframes fill {
-  0% {
-    box-shadow: 0 0 inset;
-  }
+   0% {
+      box-shadow: 0 0 inset;
+   }
 
-  100% {
-    box-shadow: 0 -48px inset;
-  }
+   100% {
+      box-shadow: 0 -48px inset;
+   }
 }
 
 @media (min-width: 1024px) {
-  .popularIngredientsListBlock {
-    padding: 30px;
-  }
+   .popularIngredientsListBlock {
+      padding: 30px;
+   }
 
-  .popularIngredientsListBlock,
-  .popularIngredientsListMain {
-    max-width: none;
-  }
+   .popularIngredientsListBlock,
+   .popularIngredientsListMain {
+      max-width: none;
+   }
 }
 @media (min-width: 769px) {
-  h1 {
-    padding-top: 60px;
-  }
-  select {
-    margin-right: 10px;
-  }
-  .blockForSelect {
-    padding-left: 27px;
-  }
-  select {
-    width: auto;
-  }
+   h1 {
+      padding-top: 60px;
+   }
+   select {
+      margin-right: 10px;
+   }
+   .blockForSelect {
+      padding-left: 27px;
+   }
+   select {
+      width: auto;
+   }
 }
 
 @media (max-width: 992px) {
-  .recipeList {
-    grid-template-columns: 1fr 1fr;
-  }
-  .menuWeek .recipeList .recipeList {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  #root {
-    padding: 20px 25px 100px 25px;
-  }
+   .recipeList {
+      grid-template-columns: 1fr 1fr;
+   }
+   .menuWeek .recipeList .recipeList {
+      grid-template-columns: repeat(1, 1fr);
+   }
+   #root {
+      padding: 20px 25px 100px 25px;
+   }
 }
 
 @media (max-width: 768px) {
-  .recipeList {
-    grid-template-columns: 1fr;
-  }
-  .flexBlock {
-    display: block;
-  }
-  .labelModal {
-    margin-right: 0;
-  }
-  .spanUnit {
-    display: none;
-  }
-  .modalRecipe {
-    position: fixed;
-    top: 10%;
-    left: 5%;
-    transform: translate(0px, 0px);
-  }
-  .btnIngredientMain {
-    margin-right: 10px;
-  }
-  .tabsBlock {
-    bottom: 0;
-    top: auto;
-  }
+   .recipeList {
+      grid-template-columns: 1fr;
+   }
+   .flexBlock {
+      display: block;
+   }
+   .labelModal {
+      margin-right: 0;
+   }
+   .spanUnit {
+      display: none;
+   }
+   .modalRecipe {
+      position: fixed;
+      top: 10%;
+      left: 5%;
+      transform: translate(0px, 0px);
+   }
+   .btnIngredientMain {
+      margin-right: 10px;
+   }
+   .tabsBlock {
+      bottom: 0;
+      top: auto;
+   }
 }
 
 @media (max-width: 500px) {
-  .btnAddRecipeMain {
-    margin-left: 0px;
-  }
-  .headerBlock .logoMain {
-    display: block;
-  }
-  .popularIngredientsListMain {
-    column-count: auto;
-    column-gap: 0px;
-  }
-  .popularIngredientsListMain li {
-    margin-bottom: 5px;
-  }
+   .btnAddRecipeMain {
+      margin-left: 0px;
+   }
+   .headerBlock .logoMain {
+      display: block;
+   }
+   .popularIngredientsListMain {
+      column-count: auto;
+      column-gap: 0px;
+   }
+   .popularIngredientsListMain li {
+      margin-bottom: 5px;
+   }
 }
