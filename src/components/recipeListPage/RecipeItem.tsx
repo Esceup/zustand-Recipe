@@ -41,9 +41,14 @@ const RecipeItem:FC<ItemProps> = ({ recipe }) => {
                 
                 <div className="recipeItemProductsBlock">
                     <h3>Продукты</h3> 
-                    <ul className="ingredientsList">{recipe.ingredients?.map((item) => (
+                    <ul className="ingredientsList">
+                        {recipe.ingredients?.length ? (
+                             recipe.ingredients.map((item) => (
                         <li key={item.id}><div className="ingredientTitle">{item.title}</div><div className="ingredientUnit">{item.value} {item.unit}</div></li>
-                    ))}
+                    ))
+                        ) : (<div>Пока пусто</div>)
+
+                       }
                 </ul>
                 </div>
                 <div><h2>Пошаговый рецепт:</h2></div>

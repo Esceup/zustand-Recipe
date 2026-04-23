@@ -12,11 +12,7 @@ export const MenuInWeek = () => {
 
     const refInput = useRef<HTMLInputElement>(null)
     const [show, setShow] = useState(false)
-    const [menuItemProp, menuItemPropSet] = useState<IMenuWeek>({ 
-        id: '', 
-        title: '', 
-        recipesForWeek: [],
-    })  
+    const [menuItemId, setMenuItemId] = useState<string>('')
     const [titleItemEdit, setTitleItemEdit] = useState('')
     const [title, setTitle] = useState('')
     const [titleSearch, setTitleSearch] = useState('')
@@ -84,8 +80,9 @@ export const MenuInWeek = () => {
                         const getAllIngredients = (item: IMenuWeek) => {
                             const allIngredients = new Map<string, {title: string, valueAndUnit: string[]}>()
                             
-                            item.recipesForWeek?.forEach(includeItem => {
-                                    const recipe = recipesList?.find(r => r.title === includeItem.title)
+                            item.recipesForWeek?.sort((a, b) => a.title.localeCompare(b.title))
+                            .forEach(includeItem => {
+                                    const recipe = recipesList?.find(r => r.id === includeItem.id)
                                     if(recipe?.ingredients) {
                                         recipe.ingredients.forEach(ing => {
                                             const key = ing.title.trim().toLowerCase()
@@ -126,14 +123,14 @@ export const MenuInWeek = () => {
                                 onChange={(e) => {                                    
                                     setTitleItemEdit(e.target.value)          
                                 }}/> 
-                                <button className="btn-reset ml-5px" onClick={() => {                             
+                                <button className="btn-reset " onClick={() => {                             
                                     if(editMode) {
                                         if(titleItemEdit === item.title) {
                                             setEditingMenuId(null)
                                             return
                                         }
                                         if(titleItemEdit.length < 1 || titleItemEdit.length > 25) {
-                                            alert('Введите хоть один символ и не больше 25')
+                                            alert('Введите хоть один символ и не более 25')
                                             return
                                         }
                                         
@@ -158,6 +155,7 @@ export const MenuInWeek = () => {
                                 <button 
                                     className="btn-reset btn-delete" 
                                     onClick={() => {
+                                       
                                         const isDelete = confirm('Точно удалить?')
                                         if(!isDelete) return
                                         deleteMenu(userId, item.id)
@@ -166,19 +164,19 @@ export const MenuInWeek = () => {
                                 </button> 
                             </div>  
 
-                            <ul className="recipeList mb-15px">
-                               
-                                {item.recipesForWeek?.map(includeItem => 
-                                    recipesList?.map((recipeItem) => 
-                                        recipeItem.title === includeItem.title ? 
-                                            <li key={recipeItem.id}>{recipeItem.title}</li> : ''
-                                            
-                                        )
-                                    )
+                            <ul className="recipeList mb-15px">                               
+                                {item.recipesForWeek?.map(includeItem =>  {
+                                    const recipe = recipesList?.find(r => r.id === includeItem.id)
+
+                                        return recipe ? (
+                                            <li key={recipe.id}>{recipe.title}</li>
+                                        ) : null
+                                    })
+                                    
                                 }
                             <button onClick={() => {
+                                    setMenuItemId(item.id)
                                     setShow(true)
-                                    menuItemPropSet(item)
                                 }} 
                                 className="btn-reset btnAddRecipeForWeek">
                                     <i className="fa-solid fa-plus"></i>
@@ -199,7 +197,7 @@ export const MenuInWeek = () => {
                     }
             )}
 
-            <ModalMenuWeek show={show} setShow={setShow} menuItemProp={menuItemProp}/>
+            <ModalMenuWeek show={show} setShow={setShow} menuItemId={menuItemId} />
              
             </ul>          
             ) : (<div className="notMenuWeekItem">Создайте меню на неделю</div>)}

@@ -65,7 +65,6 @@ export const Ingredients = () => {
                     <option value="шт">шт</option>
                     <option value="ст.л">ст.л</option>
                     <option value="ч.л">ч.л</option>
-                    <option value="стакан">стакан</option>
                 </select>
                 </div>
                 <button className="btn btnAddNewIngredient btn-gradient" onClick={handleNewIngredient}>Добавить</button>

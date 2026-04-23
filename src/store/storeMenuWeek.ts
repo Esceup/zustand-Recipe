@@ -150,6 +150,6 @@ export const useMenuWeekStore = create<MenuWeekStore>((set, get) => ({
             }
         }
       
-    }
+    },
 
 }))

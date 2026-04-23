@@ -167,7 +167,7 @@
   min-height: 75px;
 }
 .recipeList {
-  padding: 10px;
+  padding: 20px;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(3, 1fr);
@@ -428,7 +428,7 @@ display: none;
   margin-right: 15px;
 }
 .menuIncludeItem .deleteIngredient{
-  top: -2px;
+  padding: 0;
 }
 .menuIncludeItem {
     display: flex;
@@ -483,7 +483,7 @@ select {
   color: white;
   border: 1px solid #ffffff;
   border-radius: 5px;
-  padding: 1px 31px 4px 12px;
+  padding: 1px 15px 4px 12px;
   font-size: 16px;
   font-family: inherit;
   cursor: pointer;
@@ -540,7 +540,7 @@ select:hover {
   list-style-type: none;
   padding: 7px;
   background: #ffffff;
-  z-index: 20;
+  z-index: 42;
   border-radius: 5px;
   border: 2px solid #c9c9c9;
 }
@@ -690,6 +690,7 @@ select:hover {
 }
 .menuWeekItemTitle {
   margin-bottom: 5px;
+  padding-right: 30px;
 }
 .menuWeekItemTitle .input-reset {
   display: none;
@@ -845,8 +846,9 @@ select:hover {
 }
 .menuWeek .recipeItem .btn-delete {
   position: absolute;
-  top: 20px;
-  right: 10px;
+  top: 24px;
+  right: 20px;
+  padding: 0;
 }
 .menuWeek .recipeItem .btn-delete i{
   color: #ff6b9d;

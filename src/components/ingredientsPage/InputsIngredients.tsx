@@ -82,7 +82,6 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                         <option value="шт">шт</option>
                         <option value="ст.л">ст.л</option>
                         <option value="ч.л">ч.л</option>
-                        <option value="стакан">стакан</option>
                     </select>
                     
                     <button className="btndelete" onClick={() => deleteIngredient(item.id)}><i className="fa-solid fa-trash-can"></i></button>
@@ -100,7 +99,7 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                     
                 />                     
                 <ul id="popularIngredientsList" className={`popularIngredientsList ${show ? 'active': ''}`}>
-                    {Ingredients?.map((item) => 
+                    {Ingredients?.sort((a, b) => a.title.localeCompare(b.title)).map((item) => 
                         <li 
                             key={item.id} 
                             onClick={() => {
@@ -111,7 +110,6 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                             }}
                         >{item.title}</li>
                     )}
-                    
                 </ul>
         
                 <span className="btnPopularIngredients" onClick={() => setShow(show ? false : true)}>
@@ -131,7 +129,6 @@ export const InputIngredients:FC<InputIngredients> = ({ ingredients, setIngredie
                     <option value="шт">шт</option>
                     <option value="ст.л">ст.л</option>
                     <option value="ч.л">ч.л</option>
-                    <option value="стакан">стакан</option>
                 </select>
                 <button className="btn btnadd" onClick={addIngredient}><i className="fa-solid fa-plus"></i></button>
             </div>          
