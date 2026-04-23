@@ -1,5 +1,5 @@
 #root {
-  position:relative;
+  position: relative;
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
@@ -8,11 +8,11 @@
   background-color: #000;
 }
 :root {
-    --gray: #242831;
+  --gray: #242831;
 }
 .list-reset {
   list-style-type: none;
-  padding: 15px
+  padding: 15px;
 }
 .listIncludeProducts {
   padding-top: 0;
@@ -21,7 +21,9 @@
   background-color: initial !important;
   outline: none;
 }
-.btn-reset:focus, .btn-reset:active, .btn-reset:hover  {
+.btn-reset:focus,
+.btn-reset:active,
+.btn-reset:hover {
   background-color: initial !important;
   outline: none;
 }
@@ -58,7 +60,7 @@
 .mt-40px {
   margin-top: 40px;
 }
-.j-center{
+.j-center {
   justify-content: center;
 }
 .searchEditTitle {
@@ -198,16 +200,16 @@
   margin-top: 0;
 }
 .recipeItem {
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0 20px;
-    transition: all 0.3s ease-in-out;
-    overflow: hidden;
-    background: #000;
-    border-radius: 15px;
-    color: white;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 20px;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  background: #000;
+  border-radius: 15px;
+  color: white;
 }
 .recipeItem.active {
   max-height: 50px;
@@ -215,11 +217,11 @@
   transition: all 0.3s ease-in-out;
 }
 .recipeItem .recipeList li {
-    border-bottom: 2px solid #4b4b4b;
+  border-bottom: 2px solid #4b4b4b;
 }
 
 .recipeItem i {
-  color: white
+  color: white;
 }
 .descItem {
   font-weight: bold;
@@ -250,7 +252,8 @@
   padding: 0px 7px 4px 7px;
   margin-left: 10px;
 }
-.inputEmail, .inputPass {
+.inputEmail,
+.inputPass {
   width: 100%;
   margin-bottom: 30px;
   border: none;
@@ -267,13 +270,14 @@
 .LoginForm h2 {
   margin-bottom: 60px;
 }
-.labelEmail, .labelPass {
+.labelEmail,
+.labelPass {
   position: absolute;
   top: 9px;
   left: 20px;
   color: #ffffff;
 }
-.blockForLabel input~label {
+.blockForLabel input ~ label {
   transition: all 0.3s ease-in-out;
 }
 .blockForLabel input:focus ~ label,
@@ -281,7 +285,7 @@
   top: -30px;
   transition: all 0.3s ease-in-out;
 }
- .blockForLabel {
+.blockForLabel {
   position: relative;
 }
 .titleItemEdit {
@@ -331,9 +335,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
-.LoginForm .btnFlipRegister, .LoginForm .btnRegister {
+.LoginForm .btnFlipRegister,
+.LoginForm .btnRegister {
   width: 100%;
   border-radius: 5px;
   padding: 8px 0 11px 0;
@@ -351,7 +355,7 @@
   height: auto;
   width: 90%;
   max-width: 700px;
-display: none;
+  display: none;
   top: 20px;
   top: 20px;
   top: 50%;
@@ -383,7 +387,7 @@ display: none;
   transition: all 0.3s ease-in-out;
   border-bottom: 2px solid red !important;
 }
-.popularIngredientsListBlock .inputModal{
+.popularIngredientsListBlock .inputModal {
   margin-top: 5px;
 }
 .popularIngredientsListBlock input {
@@ -427,12 +431,12 @@ display: none;
 .btnEdit {
   margin-right: 15px;
 }
-.menuIncludeItem .deleteIngredient{
+.menuIncludeItem .deleteIngredient {
   padding: 0;
 }
 .menuIncludeItem {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 .btn {
   background-color: initial;
@@ -459,11 +463,11 @@ display: none;
   margin: 0 20px;
 }
 .btnClose {
-    position: absolute;
-    right: 15px;
-    top: 20px;
-    padding: 0px 7px 4px 7px;
-  }
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  padding: 0px 7px 4px 7px;
+}
 .ingredientsItem {
   position: relative;
   display: flex;
@@ -488,7 +492,9 @@ select {
   font-family: inherit;
   cursor: pointer;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 select {
@@ -515,7 +521,7 @@ select:hover {
 .ingredientsList .ingredientsItem span {
   white-space: nowrap;
   margin: 0 10px;
-  color: white
+  color: white;
 }
 .inputNewIngredient {
   display: none;
@@ -584,14 +590,14 @@ select:hover {
   justify-content: center;
 }
 .popularIngredientsList li {
-    margin-bottom: 5px;
-    padding: 0px 6px;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    border: 2px solid #cecece;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
+  margin-bottom: 5px;
+  padding: 0px 6px;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  border: 2px solid #cecece;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
 .popularIngredientsList li:hover {
   background-color: #606060;
   color: white;
@@ -601,7 +607,7 @@ select:hover {
   display: grid;
 }
 .popularIngredientsList.active {
-    display: block;
+  display: block;
 }
 .popularIngredientsListBlock {
   padding: 15px;
@@ -641,7 +647,6 @@ select:hover {
 }
 .labelMenuWeekAdd {
   margin-right: 10px;
-
 }
 .modalUserProfileBack {
   display: none;
@@ -657,16 +662,16 @@ select:hover {
   display: block;
 }
 .blockForLabel .input-reset {
-    padding: 15px;
-    border-radius: 15px;
-    width: 100%;
-    padding-left: 32px;
-    background: var(--gray);
-    border: none;
-    color: white;
-    outline: none;
-    /* padding-top: 3px; */
-    border-bottom: 1px solid #000;
+  padding: 15px;
+  border-radius: 15px;
+  width: 100%;
+  padding-left: 32px;
+  background: var(--gray);
+  border: none;
+  color: white;
+  outline: none;
+  /* padding-top: 3px; */
+  border-bottom: 1px solid #000;
 }
 .inputModal::placeholder {
   color: white;
@@ -686,7 +691,7 @@ select:hover {
 }
 
 .flexBlockInputAdd i {
-  color: white
+  color: white;
 }
 .menuWeekItemTitle {
   margin-bottom: 5px;
@@ -729,57 +734,57 @@ select:hover {
   background: linear-gradient(135deg, #bd1ec9 0%, #ff6b9d 100%);
 }
 .btn-gradient-blue {
-    background: linear-gradient(135deg, #431ec9 0%, #ab6bff 100%) !important;
-    color: white !important;
+  background: linear-gradient(135deg, #431ec9 0%, #ab6bff 100%) !important;
+  color: white !important;
 }
 .tabsBlock .btn {
-  border: 1px solid #fff
+  border: 1px solid #fff;
 }
 .tabsBlock .btn:first-child {
   margin-right: 10px;
 }
-.btnPopularIngredients  {
-   background-color: #e5e5e5;
-   padding: 2px 5px 2px 5px;
-   border-radius: 5px;
-   margin-right: 10px;
-   cursor: pointer;
- }
- .newStepArea {
+.btnPopularIngredients {
+  background-color: #e5e5e5;
+  padding: 2px 5px 2px 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.newStepArea {
   width: 100%;
- }
- .stepsList {
+}
+.stepsList {
   padding: 0;
- }
- .stepsList li{
+}
+.stepsList li {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
- }
- .stepsList li textarea{
-   margin-right: 10px;
-   height: 51px;
- }
- .stepEditArea {
+}
+.stepsList li textarea {
+  margin-right: 10px;
+  height: 51px;
+}
+.stepEditArea {
   width: 100%;
- }
- .tabsBlock {
-    background-color: #000000;
-    padding: 10px 0;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 30;
-    border-top: 1px solid white;
+}
+.tabsBlock {
+  background-color: #000000;
+  padding: 10px 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  border-top: 1px solid white;
 }
 .searchInputAbsolute {
   position: absolute;
   left: 23px;
   top: 50%;
-  transform: translate(-0%, -50%)
+  transform: translate(-0%, -50%);
 }
 .btnAllMenu {
   margin-right: 10px;
@@ -794,21 +799,22 @@ select:hover {
 .btnAllMenu .underTitleTabs {
   color: #a5a5a5;
 }
-.btnAllMenu.active i, .btnAllMenu.active .underTitleTabs{
+.btnAllMenu.active i,
+.btnAllMenu.active .underTitleTabs {
   color: white;
 }
 .underTitleTabs {
   font-size: 14px;
 }
 .modalMenuWeekBack {
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgb(0 0 0 / 0.5);
-    z-index: 39;
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(0 0 0 / 0.5);
+  z-index: 39;
 }
 .d-none {
   display: none;
@@ -835,7 +841,7 @@ select:hover {
   margin-top: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-top: 1px solid white
+  border-top: 1px solid white;
 }
 .modalMenuWeekBack.active {
   display: block;
@@ -850,12 +856,12 @@ select:hover {
   right: 20px;
   padding: 0;
 }
-.menuWeek .recipeItem .btn-delete i{
+.menuWeek .recipeItem .btn-delete i {
   color: #ff6b9d;
   font-size: 20px;
 }
 .menuWeek .recipeList .recipeList {
-  gap: 10px
+  gap: 10px;
 }
 .menuWeek .recipeList .recipeList li {
   display: flex;
@@ -895,7 +901,7 @@ select:hover {
   padding: 20px;
 }
 .modalMenuWeek.active {
-  display: block
+  display: block;
 }
 .headerBlock .logoMain {
   display: none;
@@ -956,18 +962,19 @@ select:hover {
   }
 }
 
- @media(min-width: 1024px) {
-    .popularIngredientsListBlock {
-      padding: 30px;
-    }
-    
-    .popularIngredientsListBlock, .popularIngredientsListMain {
-      max-width:none;
-    }
- }
-@media(min-width: 769px) {
+@media (min-width: 1024px) {
+  .popularIngredientsListBlock {
+    padding: 30px;
+  }
+
+  .popularIngredientsListBlock,
+  .popularIngredientsListMain {
+    max-width: none;
+  }
+}
+@media (min-width: 769px) {
   h1 {
-      padding-top: 60px;
+    padding-top: 60px;
   }
   select {
     margin-right: 10px;
@@ -980,20 +987,19 @@ select:hover {
   }
 }
 
-
- @media(max-width: 992px) {
-   .recipeList {
-     grid-template-columns: 1fr 1fr;
-   }
-    .menuWeek .recipeList .recipeList {
-      grid-template-columns: repeat(1, 1fr);
-    }
-    #root {
-      padding: 20px 25px 100px 25px;
-    }
+@media (max-width: 992px) {
+  .recipeList {
+    grid-template-columns: 1fr 1fr;
+  }
+  .menuWeek .recipeList .recipeList {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  #root {
+    padding: 20px 25px 100px 25px;
+  }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .recipeList {
     grid-template-columns: 1fr;
   }
@@ -1012,28 +1018,27 @@ select:hover {
     left: 5%;
     transform: translate(0px, 0px);
   }
-    .btnIngredientMain {
-      margin-right: 10px;
-    }
-    .tabsBlock {
-      bottom: 0;
-      top: auto;
-    }
-  
+  .btnIngredientMain {
+    margin-right: 10px;
+  }
+  .tabsBlock {
+    bottom: 0;
+    top: auto;
+  }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
   .btnAddRecipeMain {
     margin-left: 0px;
   }
-    .headerBlock .logoMain {
-      display: block;
-    }
-    .popularIngredientsListMain {
-      column-count: auto;
-      column-gap: 0px;
-    }
-    .popularIngredientsListMain li {
-      margin-bottom: 5px;
-    }
+  .headerBlock .logoMain {
+    display: block;
+  }
+  .popularIngredientsListMain {
+    column-count: auto;
+    column-gap: 0px;
+  }
+  .popularIngredientsListMain li {
+    margin-bottom: 5px;
+  }
 }
