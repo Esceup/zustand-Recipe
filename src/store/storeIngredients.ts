@@ -29,78 +29,84 @@ const DEFAULT_INGREDIENTS: Omit<IIngredient, 'id'>[] = [
    { title: 'Молоко', value: '70', unit: 'мл' },
    { title: 'Сметана', value: '1 ', unit: 'ст.л' },
 ];
-export const useIngredientsStore = create<IngredientsStore>()((set, get) => ({
-   loading: false,
-   error: null,
-   Ingredients: [],
+export const useIngredientsStore = create<IngredientsStore>()((set, get) => {
+   const fetchPromise: Promise<void> | null = null;
 
-   fetchIngredient: async (userId) => {
-      set({ loading: true, error: null });
-      try {
-         const colRef = collection(db, 'users', userId, 'ingredients');
-         const snapshot = await getDocs(colRef);
-         const items = snapshot.docs.map((doc) => {
-            const data = doc.data();
-            return {
-               id: doc.id,
-               title: data.title ?? '',
-               value: data.value ?? '',
-               unit: data.unit ?? 'кг',
-            } as IIngredient;
-         });
+   return {
+      loading: false,
+      error: null,
+      Ingredients: [],
 
-         if (items.length === 0) {
-            await Promise.all(
-               DEFAULT_INGREDIENTS.map((ing) =>
-                  get().addNewIngredient(userId, ing.title, ing.value, ing.unit)
-               )
-            );
-            set({ loading: false });
-         } else {
-            set({ Ingredients: items, loading: false });
+      fetchIngredient: async (userId) => {
+         if (fetchPromise) return fetchPromise;
+
+         set({ loading: true, error: null });
+         try {
+            const colRef = collection(db, 'users', userId, 'ingredients');
+            const snapshot = await getDocs(colRef);
+            const items = snapshot.docs.map((doc) => {
+               const data = doc.data();
+               return {
+                  id: doc.id,
+                  title: data.title ?? '',
+                  value: data.value ?? '',
+                  unit: data.unit ?? 'кг',
+               } as IIngredient;
+            });
+
+            if (items.length === 0) {
+               await Promise.all(
+                  DEFAULT_INGREDIENTS.map((ing) =>
+                     get().addNewIngredient(userId, ing.title, ing.value, ing.unit)
+                  )
+               );
+               set({ loading: false });
+            } else {
+               set({ Ingredients: items, loading: false });
+            }
+         } catch (err: unknown) {
+            if (err instanceof FirebaseError) {
+               set({ loading: false, error: err.message });
+               alert(err);
+            }
          }
-      } catch (err: unknown) {
-         if (err instanceof FirebaseError) {
-            set({ loading: false, error: err.message });
-            alert(err);
-         }
-      }
-   },
+      },
 
-   addNewIngredient: async (userId, title, value, unit) => {
-      set({ loading: true, error: null });
-      try {
-         const colRef = collection(db, 'users', userId, 'ingredients');
-         const docRef = await addDoc(colRef, { title, value, unit });
-         const newItem: IIngredient = { id: docRef.id, title, value, unit };
-         set((state) => ({ Ingredients: [...state.Ingredients, newItem], loading: false }));
-      } catch (err: unknown) {
-         if (err instanceof FirebaseError) {
-            set({ loading: false, error: err.message });
-            alert(err);
+      addNewIngredient: async (userId, title, value, unit) => {
+         set({ loading: true, error: null });
+         try {
+            const colRef = collection(db, 'users', userId, 'ingredients');
+            const docRef = await addDoc(colRef, { title, value, unit });
+            const newItem: IIngredient = { id: docRef.id, title, value, unit };
+            set((state) => ({ Ingredients: [...state.Ingredients, newItem], loading: false }));
+         } catch (err: unknown) {
+            if (err instanceof FirebaseError) {
+               set({ loading: false, error: err.message });
+               alert(err);
+            }
          }
-      }
-   },
+      },
 
-   searchIngredient: (title) => {
-      const lowerTitle = title.toLowerCase();
-      return get().Ingredients.filter((item) => item.title.toLowerCase().includes(lowerTitle));
-   },
+      searchIngredient: (title) => {
+         const lowerTitle = title.toLowerCase();
+         return get().Ingredients.filter((item) => item.title.toLowerCase().includes(lowerTitle));
+      },
 
-   deleteIngredient: async (userId, id) => {
-      set({ loading: true, error: null });
-      try {
-         const docRef = doc(db, 'users', userId, 'ingredients', id);
-         await deleteDoc(docRef);
-         set((state) => ({
-            Ingredients: state.Ingredients.filter((ing) => ing.id !== id),
-            loading: false,
-         }));
-      } catch (err: unknown) {
-         if (err instanceof FirebaseError) {
-            set({ loading: false, error: err.message });
-            alert(err);
+      deleteIngredient: async (userId, id) => {
+         set({ loading: true, error: null });
+         try {
+            const docRef = doc(db, 'users', userId, 'ingredients', id);
+            await deleteDoc(docRef);
+            set((state) => ({
+               Ingredients: state.Ingredients.filter((ing) => ing.id !== id),
+               loading: false,
+            }));
+         } catch (err: unknown) {
+            if (err instanceof FirebaseError) {
+               set({ loading: false, error: err.message });
+               alert(err);
+            }
          }
-      }
-   },
-}));
+      },
+   };
+});

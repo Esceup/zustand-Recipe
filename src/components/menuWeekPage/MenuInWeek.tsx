@@ -10,7 +10,6 @@ export const MenuInWeek = () => {
    const refInput = useRef<HTMLInputElement>(null);
    const [show, setShow] = useState(false);
    const [menuItemId, setMenuItemId] = useState<string>('');
-   const [titleItemEdit, setTitleItemEdit] = useState('');
    const [title, setTitle] = useState('');
    const [titleSearch, setTitleSearch] = useState('');
    const {
@@ -19,6 +18,7 @@ export const MenuInWeek = () => {
       deleteMenu,
       editTitleMenu,
       loading,
+      editingTitle,
       editingMenuId,
       setEditingMenuId,
    } = useMenuWeekStore();
@@ -111,7 +111,7 @@ export const MenuInWeek = () => {
                               ([id, data]) => ({
                                  id,
                                  title: data.title,
-                                 finaValue: data.valueAndUnit.join(', '),
+                                 finalValue: data.valueAndUnit.join(', '),
                               })
                            );
                            return result.sort((a, b) => a.title.localeCompare(b.title));
@@ -127,35 +127,31 @@ export const MenuInWeek = () => {
                                  </span>
 
                                  <input
-                                    className={`input-reset titleItemEdit ${!editMode ? '' : 'active'}`}
+                                    className={`input-reset titleItemEdit ${editMode ? 'editing' : ''}`}
                                     type="text"
-                                    value={titleItemEdit}
+                                    value={editMode ? editingTitle : item.title}
                                     ref={refInput}
                                     onChange={(e) => {
-                                       setTitleItemEdit(e.target.value);
+                                       setEditingMenuId(item.id, e.target.value);
                                     }}
                                  />
                                  <button
                                     className="btn-reset "
                                     onClick={() => {
-                                       if (editMode) {
-                                          if (titleItemEdit === item.title) {
+                                       if (editingMenuId === item.id) {
+                                          if (editingTitle === item.title) {
                                              setEditingMenuId(null);
                                              return;
                                           }
-                                          if (
-                                             titleItemEdit.length < 1 ||
-                                             titleItemEdit.length > 25
-                                          ) {
+                                          if (editingTitle.length < 1 || editingTitle.length > 25) {
                                              alert('Введите хоть один символ и не более 25');
                                              return;
                                           }
 
-                                          editTitleMenu(userId, item.id, titleItemEdit);
+                                          editTitleMenu(userId, item.id, editingTitle);
                                           setEditingMenuId(null);
                                        } else {
-                                          setTitleItemEdit(item.title);
-                                          setEditingMenuId(item.id);
+                                          setEditingMenuId(item.id, item.title);
 
                                           setTimeout(() => {
                                              refInput.current?.focus();
@@ -204,7 +200,7 @@ export const MenuInWeek = () => {
                               <ul className="list-reset listIncludeProducts">
                                  {getAllIngredients(item).map((ing, index) => (
                                     <li key={ing.id}>
-                                       {index + 1}. {ing.title} - {ing.finaValue}
+                                       {index + 1}. {ing.title} - {ing.finalValue}
                                     </li>
                                  ))}
                               </ul>

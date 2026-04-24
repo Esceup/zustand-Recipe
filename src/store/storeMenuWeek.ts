@@ -8,8 +8,9 @@ interface MenuWeekStore {
    loading: boolean;
    error: string | null;
    menuWeek: IMenuWeek[];
+   editingTitle: string;
    editingMenuId: string | null;
-   setEditingMenuId: (id: string | null) => void;
+   setEditingMenuId: (id: string | null, title?: string) => void;
    fetchMenuWeek: (userId: string) => Promise<void>;
    addNewMenu: (userId: string, title: string) => Promise<void>;
    addExistedRecipe: (
@@ -31,8 +32,9 @@ export const useMenuWeekStore = create<MenuWeekStore>((set, get) => ({
    loading: false,
    error: null,
    menuWeek: [],
+   editingTitle: '',
    editingMenuId: null,
-   setEditingMenuId: (id) => set({ editingMenuId: id }),
+   setEditingMenuId: (id, title = '') => set({ editingMenuId: id, editingTitle: title }),
    fetchMenuWeek: async (userId) => {
       set({ loading: true, error: null });
       try {

@@ -291,8 +291,8 @@
 .titleItemEdit {
    display: none;
 }
-.titleItemEdit.active {
-   display: inline-block;
+.titleItemEdit.editing {
+   display: inline-block !important;
 }
 .spanTitleItem {
    display: none;
@@ -356,8 +356,6 @@
    width: 90%;
    max-width: 700px;
    display: none;
-   top: 20px;
-   top: 20px;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
@@ -700,7 +698,7 @@ select:hover {
 .menuWeekItemTitle .input-reset {
    display: none;
 }
-.menuWeekItemTitle .input-reset.active {
+.menuWeekItemTitle .input-reset.editing {
    display: inline-block;
    width: auto;
    text-align: center;

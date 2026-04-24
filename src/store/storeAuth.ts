@@ -4,19 +4,16 @@ import {
    signInWithEmailAndPassword,
    createUserWithEmailAndPassword,
    signOut,
-   onAuthStateChanged,
    updateProfile,
 } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 import { FirebaseError } from 'firebase/app';
-import { useRecipesStore } from './storeRecipes';
-import { useIngredientsStore } from './storeIngredients';
-import { useMenuWeekStore } from './storeMenuWeek';
-
 interface AuthState {
    user: User | null;
    loading: boolean;
    error: string | null;
+   setUser: (user: User | null) => void;
+   setLoading: (loading: boolean) => void;
    login: (email: string, password: string) => Promise<void>;
    register: (email: string, password: string, displayName?: string) => Promise<void>;
    logout: () => Promise<void>;
@@ -24,19 +21,6 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => {
-   onAuthStateChanged(auth, (user) => {
-      set({ user, loading: false });
-      if (user) {
-         useRecipesStore.getState().fetchRecipe(user.uid);
-         useIngredientsStore.getState().fetchIngredient(user.uid);
-         useMenuWeekStore.getState().fetchMenuWeek(user.uid);
-      } else {
-         useRecipesStore.setState({ recipesList: [], loading: false, error: null });
-         useIngredientsStore.setState({ Ingredients: [], loading: false, error: null });
-         useMenuWeekStore.setState({ menuWeek: [], loading: false, error: null });
-      }
-   });
-
    const checkValidError = (err: unknown) => {
       const message = err instanceof FirebaseError ? err.message : 'Неизвестная ошибка';
 
@@ -48,6 +32,8 @@ export const useAuthStore = create<AuthState>((set) => {
       user: null,
       loading: true,
       error: null,
+      setUser: (user) => set({ user, loading: false }),
+      setLoading: (loading) => set({ loading }),
 
       login: async (email, password) => {
          set({ loading: true, error: null });
