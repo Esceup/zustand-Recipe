@@ -5,7 +5,7 @@ import { RecipesList } from './recipeListPage/RecipesList';
 import { ModalUserProfile } from './modal/ModalUserProfile';
 
 export function MainPage() {
-   const [tabs, setTabs] = useState('MenuInWeek');
+   const [tabs, setTabs] = useState<'AllMenu' | 'MenuInWeek' | 'Ingredients'>('MenuInWeek');
    const [showModal, setShowModal] = useState(false);
 
    return (

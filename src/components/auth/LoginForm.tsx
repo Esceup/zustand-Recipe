@@ -1,37 +1,21 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useAuthStore } from '../../store/storeAuth';
 import { FirebaseError } from 'firebase/app';
 
-const getRussianErrorMessage = (errorCode: string): string => {
-   switch (errorCode) {
-      case 'auth/email-already-in-use':
-         return 'Пользователь с таким email уже существует';
-      case 'auth/invalid-email':
-         return 'Некорректный формат email';
-      case 'auth/weak-password':
-         return 'Пароль слишком слабый (минимум 6 символов)';
-      case 'auth/user-not-found':
-         return 'Пользователь с таким email не найден';
-      case 'auth/wrong-password':
-         return 'Неверный пароль';
-      case 'auth/invalid-credential':
-         return 'Неверный email или пароль';
-      case 'auth/too-many-requests':
-         return 'Слишком много неудачных попыток. Попробуйте позже';
-      case 'auth/network-request-failed':
-         return 'Ошибка сети. Проверьте подключение';
-      default:
-         return `Ошибка: ${errorCode}`;
-   }
-};
-
 export const LoginForm = () => {
-   const [isRegister, setIsRegister] = useState(false);
    const [title, setTitle] = useState('');
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
-   const { register, login } = useAuthStore();
+   const { register, login, error, setError, isRegister, setIsRegister } = useAuthStore();
    const [lengthValue, setLengthValue] = useState(true);
+
+   const toggleMode = useCallback(() => {
+      setIsRegister(!useAuthStore.getState().isRegister);
+      setError(null);
+      setTitle('');
+      setEmail('');
+      setPassword('');
+   }, [setIsRegister, setError]);
 
    const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       setPassword(e.target.value);
@@ -41,21 +25,20 @@ export const LoginForm = () => {
 
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
-
+      setError(null);
       const trimmerEmail = email.trim();
       const trimmerPassword = password.trim();
 
       try {
          if (isRegister) {
             await register(trimmerEmail, trimmerPassword, title);
+            setIsRegister(!useAuthStore.getState().isRegister);
          } else {
             await login(trimmerEmail, trimmerPassword);
          }
       } catch (error: unknown) {
          if (error instanceof FirebaseError) {
-            const russianMessage = getRussianErrorMessage(error.code);
-            console.error(russianMessage);
-            alert(russianMessage);
+            console.log(error);
          } else {
             alert('Некорректные данные');
          }
@@ -113,6 +96,7 @@ export const LoginForm = () => {
                   Пароль*
                </label>
             </div>
+            {error && <div className="errorLogin">{error}</div>}
 
             <div>
                <button className="btn btnRegister btn-gradient" type="submit">
@@ -120,7 +104,12 @@ export const LoginForm = () => {
                </button>
             </div>
 
-            <button onClick={() => setIsRegister(!isRegister)} className="btn btnFlipRegister">
+            <button
+               onClick={() => {
+                  toggleMode();
+               }}
+               className="btn btnFlipRegister"
+            >
                {isRegister ? 'Войти' : 'Регистрация'}
             </button>
          </form>

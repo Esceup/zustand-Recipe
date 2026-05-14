@@ -11,7 +11,10 @@ import { FirebaseError } from 'firebase/app';
 interface AuthState {
    user: User | null;
    loading: boolean;
+   isRegister: boolean;
+   setIsRegister: (isRegister: boolean) => void;
    error: string | null;
+   setError: (error: string | null) => void;
    setUser: (user: User | null) => void;
    setLoading: (loading: boolean) => void;
    login: (email: string, password: string) => Promise<void>;
@@ -20,10 +23,27 @@ interface AuthState {
    updateUserDisplayName: (newDisplayName: string) => Promise<void>;
 }
 
+const firebaseErrorMessage: Record<string, string> = {
+   'auth/email-already-in-use': 'Пользователь с таким email уже существует',
+   'auth/invalid-email': 'Некорректный формат email',
+   'auth/weak-password': 'Пароль слишком слабый (минимум 6 символов)',
+   'auth/user-not-found': 'Пользователь с таким email не найден',
+   'auth/wrong-password': 'Неверный пароль',
+   'auth/invalid-credential': 'Неверный email или пароль',
+   'auth/too-many-requests': 'Слишком много неудачных попыток. Попробуйте позже',
+   'auth/network-request-failed': 'Ошибка сети. Проверьте подключение',
+};
+
+const getRussianErrorMessage = (error: unknown): string => {
+   if (error instanceof FirebaseError) {
+      return firebaseErrorMessage[error.code] ?? `Ошибка: ${error.code}`;
+   }
+   return 'Неизвестная ошибка';
+};
+
 export const useAuthStore = create<AuthState>((set) => {
    const checkValidError = (err: unknown) => {
-      const message = err instanceof FirebaseError ? err.message : 'Неизвестная ошибка';
-
+      const message = getRussianErrorMessage(err);
       set({ error: message, loading: false });
       throw err;
    };
@@ -31,7 +51,10 @@ export const useAuthStore = create<AuthState>((set) => {
    return {
       user: null,
       loading: true,
+      isRegister: false,
+      setIsRegister: (isRegister) => set({ isRegister }),
       error: null,
+      setError: (error) => set({ error }),
       setUser: (user) => set({ user, loading: false }),
       setLoading: (loading) => set({ loading }),
 

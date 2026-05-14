@@ -378,6 +378,11 @@
    padding: 5px;
    width: 100%;
 }
+.errorLogin {
+   color: red;
+   position: relative;
+   top: -18px;
+}
 .inputModal.error {
    border-bottom: 1px solid red;
 }

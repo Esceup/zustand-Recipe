@@ -8,9 +8,28 @@ import { auth } from './lib/firebase';
 import { useRecipesStore } from './store/storeRecipes';
 import { useIngredientsStore } from './store/storeIngredients';
 import { useMenuWeekStore } from './store/storeMenuWeek';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+   const { user, loading } = useAuthStore();
+
+   if (loading) return <div className="loader"></div>;
+   if (!user) return <Navigate to="/login" replace />;
+
+   return <>{children}</>;
+};
+
+const PublicRoute = ({ children }: { children: React.ReactNode }) => {
+   const { user, loading } = useAuthStore();
+
+   if (loading) return <div className="loader"></div>;
+   if (user) return <Navigate to="/" replace />;
+
+   return <>{children}</>;
+};
 
 function App() {
-   const { user, loading, setUser, setLoading } = useAuthStore();
+   const { setUser, setLoading } = useAuthStore();
 
    useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -31,14 +50,33 @@ function App() {
          setLoading(false);
       });
 
-      return () => {
-         unsubscribe();
-      };
+      return () => unsubscribe();
    }, [setUser, setLoading]);
 
-   if (loading) return <div className="loader"></div>;
+   return (
+      <BrowserRouter>
+         <Routes>
+            <Route
+               path="/login"
+               element={
+                  <PublicRoute>
+                     <LoginForm />
+                  </PublicRoute>
+               }
+            />
 
-   return <>{user ? <MainPage /> : <LoginForm />}</>;
+            <Route
+               path="/"
+               element={
+                  <ProtectedRoute>
+                     <MainPage />
+                  </ProtectedRoute>
+               }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+         </Routes>
+      </BrowserRouter>
+   );
 }
 
 export default App;

@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useIngredientsStore } from '../../store/storeIngredients';
 import { useAuthStore } from '../../store/storeAuth';
+
+const units = ['кг', 'гр', 'мл', 'шт', 'ст.л', 'ч.л'] as const;
+type Unit = (typeof units)[number];
 
 export const Ingredients = () => {
    const { Ingredients, addNewIngredient, deleteIngredient, loading } = useIngredientsStore();
@@ -8,26 +11,29 @@ export const Ingredients = () => {
    const [title, setTitle] = useState('');
    const [valueUnit, setValueUnit] = useState('');
    const [searchTitle, setSearchTitle] = useState('');
-   const [selectedUnit, setSelectedUnit] = useState('кг');
+   const [selectedUnit, setSelectedUnit] = useState<Unit>('кг');
    const [error, setError] = useState(false);
 
-   const userId = useAuthStore((state) => state.user?.uid);
-   if (userId === undefined) return;
+   const filteredIngredients = useMemo(() => {
+      if (!Ingredients) return [];
+      return Ingredients?.filter((filterItem) =>
+         filterItem.title.toLowerCase().includes(searchTitle.toLowerCase())
+      ).sort((a, b) => a.title.localeCompare(b.title));
+   }, [searchTitle, Ingredients]);
 
-   const handleNewIngredient = () => {
+   const userId = useAuthStore((state) => state.user!.uid);
+   const handleNewIngredient = useCallback(() => {
       if (title === '' || valueUnit === '') {
          setError(true);
          return false;
       }
 
-      setError(title ? false : true);
       addNewIngredient(userId, title, valueUnit, selectedUnit);
       setTitle('');
       setValueUnit('');
-   };
-
+   }, [title, valueUnit, selectedUnit, userId, addNewIngredient]);
    const handleChangeUnit = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      setSelectedUnit(event.target.value);
+      setSelectedUnit(event.target.value as Unit);
    };
 
    return (
@@ -36,7 +42,6 @@ export const Ingredients = () => {
             <div className="loader"></div>
          </div>
          <h2>Ингредиенты</h2>
-         {/* <img src="src\assets\11.jpg" alt="" />   */}
          <div className={`popularIngredientsListBlock ${show ? 'active' : ''}`}>
             <div className="flexBlock mt-15px">
                <input
@@ -55,12 +60,11 @@ export const Ingredients = () => {
                />
                <div className="blockForSelect">
                   <select value={selectedUnit} onChange={handleChangeUnit}>
-                     <option value="кг">кг</option>
-                     <option value="гр">гр</option>
-                     <option value="мл">мл</option>
-                     <option value="шт">шт</option>
-                     <option value="ст.л">ст.л</option>
-                     <option value="ч.л">ч.л</option>
+                     {units.map((unit) => (
+                        <option key={unit} value={unit}>
+                           {unit}
+                        </option>
+                     ))}
                   </select>
                </div>
                <button
@@ -79,14 +83,10 @@ export const Ingredients = () => {
                onChange={(event) => setSearchTitle(event.target.value)}
             />
             <ul className={`listReset popularIngredientsListMain`}>
-               {Ingredients?.filter((filterItem) =>
-                  filterItem.title.toLowerCase().includes(searchTitle.toLowerCase())
-               )
-                  .sort((a, b) => a.title.localeCompare(b.title))
-                  .map((item) => (
+               {filteredIngredients.length ? (
+                  filteredIngredients.map((item) => (
                      <li className="popularIngredientItem" key={item.id}>
-                        {item.title} - {item.value}
-                        {item.unit}
+                        {item.title} - {item.value} {item.unit}
                         <span
                            onClick={() => deleteIngredient(userId, item.id)}
                            className="deleteIngredient"
@@ -94,7 +94,10 @@ export const Ingredients = () => {
                            <i className="fa-solid fa-trash-can"></i>
                         </span>
                      </li>
-                  ))}
+                  ))
+               ) : (
+                  <li>Ничего не найдено</li>
+               )}
             </ul>
          </div>
          <div onClick={() => setShow(false)} className={`backModal ${show ? 'active' : ''}`}></div>

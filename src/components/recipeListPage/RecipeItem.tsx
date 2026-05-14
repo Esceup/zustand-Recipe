@@ -14,11 +14,10 @@ const RecipeItem: FC<ItemProps> = ({ recipe }) => {
    const removeRecipe = useRecipesStore((state) => state.removeRecipe);
    const { openEditModal } = useStoreModal();
 
-   const userId = useAuthStore((state) => state.user?.uid);
+   const userId = useAuthStore((state) => state.user!.uid);
    const loading = useAuthStore((state) => state.loading);
 
    const handleRemove = async () => {
-      if (userId === undefined) return;
       try {
          await removeRecipe(userId, recipe.id);
       } catch (err: unknown) {

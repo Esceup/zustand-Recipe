@@ -15,7 +15,7 @@ export const ModalCreateOrUpdateRecipe = () => {
    const [ingredients, setIngredients] = useState<IIngredient[]>(editingRecipe?.ingredients ?? []);
    const [steps, setSteps] = useState<IStep[]>(editingRecipe?.steps ?? []);
 
-   const userId = useAuthStore((state) => state.user?.uid);
+   const userId = useAuthStore((state) => state.user!.uid);
 
    const resetForm = () => {
       setTitle('');
@@ -25,7 +25,6 @@ export const ModalCreateOrUpdateRecipe = () => {
    };
 
    const handleSubmit = async (event: FormEvent) => {
-      if (userId === undefined) return;
       event.preventDefault();
 
       if (!title.trim()) {
