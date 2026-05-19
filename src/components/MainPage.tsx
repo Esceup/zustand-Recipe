@@ -23,7 +23,7 @@ export function MainPage() {
             ''
          )}
 
-         <div className="tabsBlock">
+         <nav className="tabsBlock">
             <button
                onClick={() => setTabs('MenuInWeek')}
                className={`btn btnAllMenu ${tabs === 'MenuInWeek' ? 'active' : ''}`}
@@ -47,7 +47,7 @@ export function MainPage() {
                <i className="fa-solid fa-carrot "></i>
                <div className="underTitleTabs">Ингредиенты</div>
             </button>
-         </div>
+         </nav>
          <ModalUserProfile showModal={showModal} setShowModal={setShowModal} />
       </>
    );

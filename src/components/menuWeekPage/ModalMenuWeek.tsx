@@ -45,14 +45,15 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemI
                         .map((recipe) => (
                            <li className="popularIngredientItem menuIncludeItem" key={recipe.id}>
                               {recipe.title}
-                              <span
-                                 className=" deleteIngredient"
+                              <button
+                                 className="deleteIngredient"
+                                 aria-label={`Удалить ${recipe.title} из этого меню`}
                                  onClick={() =>
                                     deleteExistedMenuItem(userId, currentMenu.id, recipe.id)
                                  }
                               >
-                                 <i className="fa-solid fa-trash-can"></i>
-                              </span>
+                                 <i className="fa-solid fa-trash-can" aria-hidden="true"></i>
+                              </button>
                            </li>
                         ))}
                   </ul>
@@ -66,14 +67,16 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemI
                {recipesList
                   ?.sort((a, b) => a.title.localeCompare(b.title))
                   .map((item) => (
-                     <li
-                        onClick={() =>
-                           addExistedRecipe(userId, currentMenu.id, item.id, item.title)
-                        }
-                        className="popularIngredientItem"
-                        key={item.id}
-                     >
-                        {item.title}
+                     <li className="popularIngredientItem" key={item.id}>
+                        <button
+                           className="resetBtn"
+                           onClick={() =>
+                              addExistedRecipe(userId, currentMenu.id, item.id, item.title)
+                           }
+                           aria-label={`Добавить рецепт ${item.title} в это меню`}
+                        >
+                           {item.title}
+                        </button>
                      </li>
                   ))}
             </ul>

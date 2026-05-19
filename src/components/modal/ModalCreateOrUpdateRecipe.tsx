@@ -87,11 +87,7 @@ export const ModalCreateOrUpdateRecipe = () => {
 
                   <InputIngredients ingredients={ingredients} setIngredients={setIngredients} />
                   <TextAreaSteps steps={steps} setSteps={setSteps} />
-                  <button
-                     onClick={handleSubmit}
-                     type="submit"
-                     className="btn btnUpdate btn-gradient"
-                  >
+                  <button type="submit" className="btn btnUpdate btn-gradient">
                      {modalMode === 'edit' ? 'Сохранить' : 'Добавить'}
                   </button>
                </form>

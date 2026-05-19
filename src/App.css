@@ -74,6 +74,10 @@
    border-bottom: 1px solid #ffffff;
    padding: 5px 10px;
 }
+.resetBtn {
+   background-color: inherit;
+   color: white;
+}
 .listReset {
    padding: 0;
    margin: 0;
@@ -439,6 +443,15 @@
 }
 .btnEdit {
    margin-right: 15px;
+}
+.listReset.popularIngredientsListMain .deleteIngredient {
+   right: 0; 
+}
+
+.popularIngredientsListMain .deleteIngredient {
+   background-color: inherit;
+   color: white;
+   
 }
 .menuIncludeItem .deleteIngredient {
    padding: 0;

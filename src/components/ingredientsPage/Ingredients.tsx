@@ -69,6 +69,7 @@ export const Ingredients = () => {
                </div>
                <button
                   className="btn btnAddNewIngredient btn-gradient"
+                  aria-label="Добавить новый ингредиент"
                   onClick={handleNewIngredient}
                >
                   Добавить
@@ -87,12 +88,13 @@ export const Ingredients = () => {
                   filteredIngredients.map((item) => (
                      <li className="popularIngredientItem" key={item.id}>
                         {item.title} - {item.value} {item.unit}
-                        <span
+                        <button
                            onClick={() => deleteIngredient(userId, item.id)}
                            className="deleteIngredient"
+                           aria-label={`Удалить ингредиент ${item.title}`}
                         >
                            <i className="fa-solid fa-trash-can"></i>
-                        </span>
+                        </button>
                      </li>
                   ))
                ) : (

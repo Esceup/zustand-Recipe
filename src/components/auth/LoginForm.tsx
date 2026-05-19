@@ -63,6 +63,7 @@ export const LoginForm = () => {
                   id="email"
                   type="email"
                   placeholder=" "
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="inputEmail input-reset"
@@ -77,6 +78,7 @@ export const LoginForm = () => {
                   id="password"
                   type="password"
                   placeholder=" "
+                  autoComplete="current-password"
                   value={password}
                   onChange={handleChangeInput}
                   className={`inputPass input-reset ${lengthValue ? '' : 'error'}`}
@@ -87,7 +89,11 @@ export const LoginForm = () => {
                   Пароль*
                </label>
             </div>
-            {error && <div className="errorLogin">{error}</div>}
+            {error && (
+               <div className="errorLogin" role="alert" aria-live="assertive">
+                  {error}
+               </div>
+            )}
 
             <div>
                <button className="btn btnRegister btn-gradient" type="submit">
@@ -99,6 +105,7 @@ export const LoginForm = () => {
                onClick={() => {
                   toggleMode();
                }}
+               type="button"
                className="btn btnFlipRegister"
             >
                {isRegister ? 'Войти' : 'Регистрация'}

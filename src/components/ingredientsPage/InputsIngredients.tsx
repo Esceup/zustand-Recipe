@@ -108,23 +108,28 @@ export const InputIngredients: FC<InputIngredients> = ({ ingredients, setIngredi
                className={`popularIngredientsList ${show ? 'active' : ''}`}
             >
                {sortedIngredients.map((item) => (
-                  <li
-                     key={item.id}
-                     onClick={() => {
-                        setTitle(item.title);
-                        setValueUnit(item.value);
-                        setSelectedUnit(item.unit as Unit);
-                        setShow(false);
-                     }}
-                  >
-                     {item.title}
+                  <li key={item.id}>
+                     <button
+                        onClick={() => {
+                           setTitle(item.title);
+                           setValueUnit(item.value);
+                           setSelectedUnit(item.unit as Unit);
+                           setShow(false);
+                        }}
+                     >
+                        {item.title}
+                     </button>
                   </li>
                ))}
             </ul>
 
-            <span className="btnPopularIngredients" onClick={() => setShow(show ? false : true)}>
-               <i className="fa-solid fa-carrot "></i>
-            </span>
+            <button
+               className="btnPopularIngredients"
+               onClick={() => setShow(show ? false : true)}
+               aria-label="Выпадающий список всех ингредиентов"
+            >
+               <i className="fa-solid fa-carrot" aria-hidden="true"></i>
+            </button>
             <input
                type="text"
                className="inputModal"
@@ -139,8 +144,13 @@ export const InputIngredients: FC<InputIngredients> = ({ ingredients, setIngredi
                   </option>
                ))}
             </select>
-            <button type="button" className="btn btnadd" onClick={addIngredient}>
-               <i className="fa-solid fa-plus"></i>
+            <button
+               type="button"
+               className="btn btnadd"
+               onClick={addIngredient}
+               aria-label="Добавить ингредиент к меню"
+            >
+               <i className="fa-solid fa-plus" aria-hidden="true"></i>
             </button>
          </div>
       </>
