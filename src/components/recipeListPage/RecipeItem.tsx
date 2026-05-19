@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react';
+import { memo, useState, type FC } from 'react';
 import { useRecipesStore } from '../../store/storeRecipes';
 import type { IRecipe } from '../../types/types';
 
@@ -9,7 +9,7 @@ interface ItemProps {
    recipe: IRecipe;
 }
 
-const RecipeItem: FC<ItemProps> = ({ recipe }) => {
+const RecipeItem: FC<ItemProps> = memo(({ recipe }) => {
    const [active, setActive] = useState(true);
    const removeRecipe = useRecipesStore((state) => state.removeRecipe);
    const { openEditModal } = useStoreModal();
@@ -89,6 +89,6 @@ const RecipeItem: FC<ItemProps> = ({ recipe }) => {
          </li>
       </>
    );
-};
+});
 
 export default RecipeItem;

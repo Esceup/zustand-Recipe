@@ -1,4 +1,4 @@
-import { useState, useRef, type FC } from 'react';
+import { useState, useRef, type FC, useEffect } from 'react';
 import { useAuthStore } from '../../store/storeAuth';
 
 interface UserProfileProps {
@@ -12,13 +12,15 @@ export const ModalUserProfile: FC<UserProfileProps> = ({ showModal, setShowModal
    const [editTitle, setEditTitle] = useState(false);
    const inputRef = useRef<HTMLInputElement>(null);
 
+   useEffect(() => {
+      if (editTitle && inputRef.current) {
+         inputRef.current?.focus();
+      }
+   }, [editTitle]);
+
    const handleEditTitle = () => {
       setEditTitle(true);
       setTitle(user?.displayName ?? '');
-
-      setTimeout(() => {
-         inputRef.current?.focus();
-      }, 0);
    };
 
    const handleSaveTitle = async () => {

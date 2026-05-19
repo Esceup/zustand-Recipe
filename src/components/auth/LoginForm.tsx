@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { useAuthStore } from '../../store/storeAuth';
-import { FirebaseError } from 'firebase/app';
 
 export const LoginForm = () => {
    const [title, setTitle] = useState('');
@@ -29,19 +28,11 @@ export const LoginForm = () => {
       const trimmerEmail = email.trim();
       const trimmerPassword = password.trim();
 
-      try {
-         if (isRegister) {
-            await register(trimmerEmail, trimmerPassword, title);
-            setIsRegister(!useAuthStore.getState().isRegister);
-         } else {
-            await login(trimmerEmail, trimmerPassword);
-         }
-      } catch (error: unknown) {
-         if (error instanceof FirebaseError) {
-            console.log(error);
-         } else {
-            alert('Некорректные данные');
-         }
+      if (isRegister) {
+         await register(trimmerEmail, trimmerPassword, title);
+         setIsRegister(!useAuthStore.getState().isRegister);
+      } else {
+         await login(trimmerEmail, trimmerPassword);
       }
    };
 

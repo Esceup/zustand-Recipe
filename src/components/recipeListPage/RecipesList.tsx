@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRecipesStore } from '../../store/storeRecipes';
 import RecipeItem from './RecipeItem';
 import { useStoreModal } from '../../store/storeModal';
@@ -9,6 +9,12 @@ export const RecipesList = () => {
    const { recipesList, loading } = useRecipesStore();
    const { openCreateModal, modalMode, editingRecipe } = useStoreModal();
 
+   const recipesFiltered = useMemo(() => {
+      if (!recipesList.length) return [];
+      const search = title.trim().toLowerCase();
+      if (!search) return recipesList;
+      return recipesList?.filter((item) => item.title.toLowerCase().includes(search));
+   }, [recipesList, title]);
    return (
       <>
          <div className={`loaderFullBack ${loading ? 'loading' : '1'}`}>
@@ -23,7 +29,6 @@ export const RecipesList = () => {
             </button>
          </div>
          <div>
-            {/* <h3 className="searchLabel">Поиск</h3> */}
             <div className="flexBlockInputAdd">
                <input
                   type="text"
@@ -36,11 +41,9 @@ export const RecipesList = () => {
          </div>
 
          <ul className="recipeList">
-            {recipesList
-               ?.filter((item) => item.title.toLowerCase().includes(title.toLowerCase()))
-               .map((recipe) => (
-                  <RecipeItem key={recipe.id} recipe={recipe} />
-               ))}
+            {recipesFiltered.map((recipe) => (
+               <RecipeItem key={recipe.id} recipe={recipe} />
+            ))}
          </ul>
          <ModalCreateOrUpdateRecipe key={modalMode === 'edit' ? editingRecipe?.id : 'create'} />
       </>

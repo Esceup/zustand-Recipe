@@ -19,7 +19,8 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemI
    const currentMenu = menuWeek.find((item) => item.id === menuItemId);
    if (!currentMenu) return null;
 
-   const includesRecipes = currentMenu.recipesForWeek.filter((recipe) =>
+   const recipesForWeek = currentMenu.recipesForWeek || [];
+   const includesRecipes = recipesForWeek.filter((recipe) =>
       recipesList?.some((r) => r.id === recipe.id)
    );
 
@@ -39,7 +40,7 @@ export const ModalMenuWeek: FC<ModalMenuWeekProps> = ({ show, setShow, menuItemI
                <>
                   <h3>Уже в этом меню</h3>
                   <ul className="popularIngredientsListMain">
-                     {includesRecipes
+                     {[...includesRecipes]
                         .sort((a, b) => a.title.localeCompare(b.title))
                         .map((recipe) => (
                            <li className="popularIngredientItem menuIncludeItem" key={recipe.id}>

@@ -21,7 +21,6 @@ export const InputIngredients: FC<InputIngredients> = ({ ingredients, setIngredi
 
    const sortedIngredients = useMemo(() => {
       if (!Ingredients) return [];
-      console.log(1);
       return [...Ingredients]?.sort((a, b) => a.title.localeCompare(b.title));
    }, [Ingredients]);
 
@@ -140,7 +139,7 @@ export const InputIngredients: FC<InputIngredients> = ({ ingredients, setIngredi
                   </option>
                ))}
             </select>
-            <button className="btn btnadd" onClick={addIngredient}>
+            <button type="button" className="btn btnadd" onClick={addIngredient}>
                <i className="fa-solid fa-plus"></i>
             </button>
          </div>

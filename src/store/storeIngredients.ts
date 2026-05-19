@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { IIngredient } from '../types/types';
-import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, writeBatch } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import { FirebaseError } from 'firebase/app';
 interface IngredientsStore {
@@ -56,12 +56,19 @@ export const useIngredientsStore = create<IngredientsStore>()((set, get) => {
                });
 
                if (items.length === 0) {
-                  await Promise.all(
-                     DEFAULT_INGREDIENTS.map((ing) =>
-                        get().addNewIngredient(userId, ing.title, ing.value, ing.unit)
-                     )
-                  );
-                  set({ loading: false });
+                  const batch = writeBatch(db);
+                  DEFAULT_INGREDIENTS.forEach((ing) => {
+                     const newDocRef = doc(colRef);
+                     batch.set(newDocRef, { title: ing.title, value: ing.value, unit: ing.unit });
+                  });
+                  await batch.commit();
+                  const newSnapShot = await getDocs(colRef);
+                  const newItems = newSnapShot.docs.map((docSnap) => ({
+                     id: docSnap.id,
+                     ...docSnap.data(),
+                  })) as IIngredient[];
+
+                  set({ Ingredients: newItems, loading: false });
                } else {
                   set({ Ingredients: items, loading: false });
                }

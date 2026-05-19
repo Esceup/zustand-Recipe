@@ -5,7 +5,7 @@ import { RecipesList } from './recipeListPage/RecipesList';
 import { ModalUserProfile } from './modal/ModalUserProfile';
 
 export function MainPage() {
-   const [tabs, setTabs] = useState<'AllMenu' | 'MenuInWeek' | 'Ingredients'>('MenuInWeek');
+   const [tabs, setTabs] = useState<'MenuInWeek' | 'RecipesList' | 'Ingredients'>('MenuInWeek');
    const [showModal, setShowModal] = useState(false);
 
    return (
@@ -13,7 +13,7 @@ export function MainPage() {
          <button className="btn btnLogout" onClick={() => setShowModal(!showModal)}>
             <i className="fa-solid fa-gear"></i>
          </button>
-         {tabs === 'AllMenu' ? (
+         {tabs === 'RecipesList' ? (
             <RecipesList />
          ) : tabs === 'MenuInWeek' ? (
             <MenuInWeek />
@@ -34,8 +34,8 @@ export function MainPage() {
                </div>
             </button>
             <button
-               onClick={() => setTabs('AllMenu')}
-               className={`btn btnAllMenu ${tabs === 'AllMenu' ? 'active' : ''}`}
+               onClick={() => setTabs('RecipesList')}
+               className={`btn btnAllMenu ${tabs === 'RecipesList' ? 'active' : ''}`}
             >
                <i className="fa-solid fa-list"></i>
                <div className="underTitleTabs">Список рецептов</div>
